@@ -90,6 +90,7 @@ typedef struct s_data
 	t_mouse			mouse;
 	int				floor_color[3];
 	int				ceiling_color[3];
+	int				player_pos[2];
 	mlx_texture_t	*north_texture;
 	mlx_texture_t	*south_texture;
 	mlx_texture_t	*west_texture;
@@ -113,6 +114,9 @@ int		ft_get_east_texture(t_data *info, char *line);
 int		ft_parsing_error(char *message);
 int		ft_parse_scene_description(t_data *info, char *file);
 int		ft_parse_map(t_data *info, int fd, char **line);
+void	ft_find_player(t_data *info);
+int		ft_is_player(char c);
+int		ft_flood_fill(t_data *info, int x, int y);
 void	ft_free_data(t_data **info);
 void	ft_free_array(char **arr);
 

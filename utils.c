@@ -63,3 +63,21 @@ void	ft_free_array(char **arr)
 		arr = NULL;
 	}
 }
+
+int	ft_parsing_error(char *message)
+{
+	write(2, "Error\ninvalid scene description\n", 32);
+	if (message)
+	{
+		ft_putstr_fd(message, 2);
+		write(2, "\n", 1);
+	}
+	return (1);
+}
+
+int	ft_is_player(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}

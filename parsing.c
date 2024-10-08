@@ -12,15 +12,50 @@
 
 #include "Cub3d.h"
 
-int	ft_parsing_error(char *message)
+int	ft_flood_fill(t_data *info, int x, int y)
 {
-	write(2, "Error\ninvalid scene description\n", 32);
-	if (message)
+	if (y == 0 || y == info->map_height || x == 0 || info->map[y][x] == '\0')
 	{
-		ft_putstr_fd(message, 2);
-		write(2, "\n", 1);
+		ft_parsing_error("map not surrounded by walls");
+		return (1);
 	}
-	return (1);
+	if (!ft_is_player(info->map[y][x]))
+		info->map[y][x] = '.';
+	if (info->map[y + 1][x] != '1' && info->map[y + 1][x] != '.' && \
+		!ft_is_player(info->map[y + 1][x]) && ft_flood_fill(info, x, y + 1))
+		return (1);
+	if (info->map[y - 1][x] != '1' && info->map[y - 1][x] != '.' && \
+		!ft_is_player(info->map[y - 1][x]) && ft_flood_fill(info, x, y - 1))
+		return (1);
+	if (info->map[y][x + 1] != '1' && info->map[y][x + 1] != '.' && \
+		!ft_is_player(info->map[y][x + 1]) && ft_flood_fill(info, x + 1, y))
+		return (1);
+	if (info->map[y][x - 1] != '1' && info->map[y][x - 1] != '.' && \
+		!ft_is_player(info->map[y][x - 1]) && ft_flood_fill(info, x - 1, y))
+		return (1);
+	return (0);
+}
+
+void	ft_find_player(t_data *info)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (info->map[y][x] != 'N' && info->map[y][x] != 'S' && \
+			info->map[y][x] != 'E' && info->map[y][x] != 'W')
+	{
+		if (info->map[y][x] != '\0')
+			x++;
+		else
+		{
+			x = 0;
+			y++;
+		}
+	}
+	info->player_pos[0] = y;
+	info->player_pos[1] = x;
 }
 
 int	ft_get_elements(t_data *info, char *line, int *elements)
@@ -44,6 +79,9 @@ int	ft_get_elements(t_data *info, char *line, int *elements)
 	*elements = -1;
 	return (1);
 }
+
+/*Check that scene description file contains only the info needed and
+	that they're in the right order*/
 
 int	ft_parse_colors_and_textures(t_data *info, int fd)
 {

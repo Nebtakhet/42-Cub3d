@@ -25,17 +25,17 @@ int	ft_get_map(t_data *info, char *map_str)
 	}
 	while (i < info->map_height)
 	{
-		printf("%s\n", map_str + gnl_strchr_index(map_str, '\n'));
 		info->map[i] = gnl_strldup(map_str, gnl_strchr_index(map_str, '\n'));
 		if (!info->map[i])
 		{
 			perror("ft_get_map");
 			return (1);
 		}
-		map_str = map_str + gnl_strchr_index(map_str, '\n');
+		map_str += gnl_strchr_index(map_str, '\n') + 1;
 		i++;
 	}
 	info->map[i] = NULL;
+	ft_find_player(info);
 	return (0);
 }
 
@@ -54,31 +54,31 @@ int	ft_check_map_end(char *map_str)
 	return (1);
 }
 
-int	ft_check_map_content(t_data *info, char *map_str)
+int	ft_check_map_content(t_data *info, char *map)
 {
-	int	width;
+	int	player;
 
-	width = 0;
-	while (*map_str)
+	player = 0;
+	while (*map)
 	{	
-		if (*map_str != '0' && *map_str != '1' && *map_str != 'N' && \
-			*map_str != 'S' && *map_str != 'E' && *map_str != 'W' && \
-			*map_str != ' ' && *map_str != '\n' && \
+		if (*map != '0' && *map != '1' && *map != 'N' && *map != 'S' && \
+			*map != 'E' && *map != 'W' && *map != ' ' && *map != '\n' && \
 			ft_parsing_error("invalid map content"))
 			return (1);
-		if (*map_str == '\n')
-		{
+		if (*map == '\n')
 			info->map_height++;
-			if (width > info->map_width)
-				info->map_width = width;
-			width = -1;
-			if (*(map_str + 1) == '\n')
-				break ;
-		}
-		width++;
-		map_str++;
+		if (*map == '\n' && *(map + 1) == '\n')
+			break ;
+		if ((*map == 'N' || *map == 'S' || *map == 'E' || *map == 'W') && \
+			++player > 1)
+			break ;
+		map++;
 	}
-	if (ft_check_map_end(map_str))
+	if (player == 0)
+		ft_parsing_error("no player found");
+	if (player > 1)
+		ft_parsing_error("multiple players found");
+	if (player != 1 || ft_check_map_end(map))
 		return (1);
 	return (0);
 }
@@ -120,7 +120,8 @@ int	ft_parse_map(t_data *info, int fd, char **line)
 		return (1);
 	}
 	if (ft_get_map_str(fd, &map_str) || ft_check_map_content(info, map_str) \
-		|| ft_get_map(info, map_str))
+		|| ft_get_map(info, map_str) || \
+		ft_flood_fill(info, info->player_pos[1], info->player_pos[0]))
 	{
 		if (map_str)
 			free(map_str);
