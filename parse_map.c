@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvallin <nvallin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:59:55 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/07 17:09:47 by nvallin          ###   ########.fr       */
+/*   Updated: 2024/10/08 14:34:22 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_get_map(t_data *info, char *map_str)
 	}
 	while (i < info->map_height)
 	{
-		printf("%s\n",  map_str + gnl_strchr_index(map_str, '\n'));
+		printf("%s\n", map_str + gnl_strchr_index(map_str, '\n'));
 		info->map[i] = gnl_strldup(map_str, gnl_strchr_index(map_str, '\n'));
 		if (!info->map[i])
 		{

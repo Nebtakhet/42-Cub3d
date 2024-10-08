@@ -6,12 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:02:22 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 14:19:48 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:35:41 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
-
 
 void	ft_free_data(t_data **info)
 {
@@ -81,4 +80,3 @@ int	handle_args(int argc, char **argv, t_data *info)
 	ft_free_data(&info);
 	return (0);
 }
-
