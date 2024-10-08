@@ -1,46 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 15:08:18 by cesasanc         ###   ########.fr       */
+/*   Created: 2024/10/08 14:45:24 by cesasanc          #+#    #+#             */
+/*   Updated: 2024/10/08 14:53:40 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-void	calculate_img(t_data *data)
-{
-	t_img	img;
-
-	img.x = 0;
-	while (img.x < WIDTH)
-	{
-		img.y = 0;
-		while (img.y < HEIGHT)
-		{
-			mlx_put_pixel(data->img, img.x, img.y, data->palette[12]);
-			img.y++;
-		}
-		img.x++;		
-	}	
-}
-
-void	render(void *param)
+void	close_program(void *param)
 {
 	t_data	*data;
 
 	data = (t_data *)param;
-	if (data->renderer.frames < FRAME_WAIT)
+	if (data->mlx)
 	{
-		data->renderer.frames++;
-		return ;
+		mlx_close_window(data->mlx);
+		mlx_terminate(data->mlx);
 	}
-	data->renderer.frames = 0;
-	if (data->renderer.changed)
-		calculate_img(data);
-	data->renderer.changed = false;
+	exit(EXIT_SUCCESS);
 }

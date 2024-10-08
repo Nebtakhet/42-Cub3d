@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 14:34:40 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/08 15:03:26 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,19 @@
 # include <string.h>
 # include "MLX42/include/MLX42/MLX42.h"
 
-# define HEIGHT 800
-# define WIDTH 800
+# define HEIGHT 1920
+# define WIDTH 1920
 # define ITER 69
 # define FRAME_WAIT 5
+
+
+typedef struct s_img
+{
+	int		x;
+	int		y;
+	double	x0;
+	double	y0;
+}				t_img;
 
 typedef struct s_cords
 {
@@ -66,23 +75,19 @@ typedef struct s_mouse
 	int32_t	y;
 }				t_mouse;
 
-typedef struct s_win
-{
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	u_int32_t	iter;
-	t_cords		x;
-	t_cords		y;
-	t_complex	complex;
-	u_int32_t	palette[ITER];
-	t_color		color;
-	t_renderer	renderer;
-	t_zoom		zoom;
-	t_mouse		mouse;
-}				t_win;
-
 typedef struct s_data
 {
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	u_int32_t		iter;
+	t_cords			x;
+	t_cords			y;
+	t_complex		complex;
+	u_int32_t		palette[ITER];
+	t_color			color;
+	t_renderer		renderer;
+	t_zoom			zoom;
+	t_mouse			mouse;
 	int				floor_color[3];
 	int				ceiling_color[3];
 	mlx_texture_t	*north_texture;
@@ -111,12 +116,17 @@ int		ft_parse_map(t_data *info, int fd, char **line);
 void	ft_free_data(t_data **info);
 void	ft_free_array(char **arr);
 
-void	init_color_palette(t_win *win);
-void	get_layout(t_win *win);
-void	win_init(t_win *win);
+void	init_color_palette(t_data *win);
+void	get_layout(t_data *win);
+void	win_init(t_data *win);
 
 /* Rendering */
 
 void	render(void *param);
+
+/* Hooks */
+
+void	close_program(void *param);
+
 
 #endif

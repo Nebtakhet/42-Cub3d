@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:22:01 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/08 14:34:48 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:54:39 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 int	main(int argc, char **argv)
 {
-	t_win	win;
-	t_data	info;
+	t_data	data;
 
-	handle_args(argc, argv, &info);
-	win_init(&win);
-	mlx_loop_hook(win.mlx, &render, &win);
-	mlx_image_to_window(win.mlx, win.img, 0, 0);
-	mlx_loop(win.mlx);
-	mlx_terminate(win.mlx);
+	handle_args(argc, argv, &data);
+	win_init(&data);
+	mlx_loop_hook(data.mlx, &render, &data);
+//	mlx_key_hook(data.mlx, &key_hook, &data);
+//	mlx_mouse_hook(data.mlx, &mouse_hook, &data);
+//	mlx_scroll_hook(data.mlx, &scroll_hook, &data);
+	mlx_close_hook(data.mlx, &close_program, &data);
+	mlx_image_to_window(data.mlx, data.img, 0, 0);
+	mlx_loop(data.mlx);
+	mlx_terminate(data.mlx);
 	return (0);
 }
