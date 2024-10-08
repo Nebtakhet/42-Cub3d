@@ -1,64 +1,36 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/06 11:47:56 by mmeier            #+#    #+#              #
-#    Updated: 2024/10/07 12:10:25 by cesasanc         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CFILES = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
+		 ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
+		 ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c \
+		 ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
+		 ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
+		 ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
+		 ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+		 ft_printf.c put_functions.c put_functions2.c ft_lstnew_bonus.c \
+		 ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c \
+		 ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c \
+		 ft_lstiter_bonus.c ft_lstmap_bonus.c get_next_line.c get_next_line_utils.c
 
-NAME = Cub3d
+
+OFILES = $(CFILES:.c=.o)
+
 CC = cc
-FLAGS = -Wall -Wextra -Werror
-MLX42 = ./MLX42/build/libmlx42.a
 
-SRC_DIR = ./
-OBJ_DIR = ./obj/
+CFLAGS = -Wall -Wextra -Werror
 
-FILES = main.c 
-
-MLX42FLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
-
-INCLUDES = -I$(SRC_DIR) -I./include
-		
-OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
-
+NAME = libft.a
 
 all: $(NAME)
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+$(NAME): $(OFILES)
+	$(CC) $(CFLAGS) -c $(CFILES)
+	ar -rcs $(NAME) $(OFILES)
 
-$(NAME): $(OBJ_FILES) $(MLX42)
-	@echo "Compiling Cub3d..."
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) $(MLX42) $(MLX42FLAGS)
-	@echo "\033[32m Cub3d has been built successfully!\033[0m"
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)Cub3d.h | $(OBJ_DIR)
-	@echo "Compiling $< to $@"
-	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
-
-$(MLX42): 
-	@if [ ! -d "./MLX42" ]; then \
-		git clone git@github.com:codam-coding-college/MLX42.git MLX42; \
-	fi
-	@if [ ! -f "$(MLX42)" ]; then \
-		cd MLX42 && cmake -B build && cmake --build build -j4; \
-	fi
-
-fsanitize: 
-	$(CC) -o $(NAME) $(OBJ_FILES) $(MLX42) $(MLX42FLAGS) -g -fsanitize=address -static-libsan
-	
 clean:
-	rm -rf $(OBJ_DIR) $(OBJ_FILES:.o=.dSYM)
-	rm -rf MLX42
-	
+	rm -f $(OFILES)
+
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re: fclean $(NAME)
 
 .PHONY: all clean fclean re
