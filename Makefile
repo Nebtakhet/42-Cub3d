@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 11:47:56 by mmeier            #+#    #+#              #
-#    Updated: 2024/10/07 12:10:25 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/10/08 13:19:37 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ FLAGS = -Wall -Wextra -Werror
 MLX42 = ./MLX42/build/libmlx42.a
 
 SRC_DIR = ./
-OBJ_DIR = ./obj/
+OBJ_DIR	= ./obj/
+LIBFT	= ./libft/
 
 FILES = main.c 
 
@@ -31,10 +32,12 @@ all: $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)textures
 
-$(NAME): $(OBJ_FILES) $(MLX42)
+$(NAME): $(OBJ_FILES) $(MLX42) $(LIBFT)
+	make -C $(LIBFT) > /dev/null
 	@echo "Compiling Cub3d..."
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) $(MLX42) $(MLX42FLAGS)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) $(MLX42) $(MLX42FLAGS)
 	@echo "\033[32m Cub3d has been built successfully!\033[0m"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)Cub3d.h | $(OBJ_DIR)
@@ -50,13 +53,15 @@ $(MLX42):
 	fi
 
 fsanitize: 
-	$(CC) -o $(NAME) $(OBJ_FILES) $(MLX42) $(MLX42FLAGS) -g -fsanitize=address -static-libsan
+	$(CC) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) $(MLX42) $(MLX42FLAGS) -g -fsanitize=address -static-libsan
 	
 clean:
+	make clean -C $(LIBFT)
 	rm -rf $(OBJ_DIR) $(OBJ_FILES:.o=.dSYM)
 	rm -rf MLX42
 	
 fclean: clean
+	make clean -C $(LIBFT)
 	rm -f $(NAME)
 
 re: fclean all
