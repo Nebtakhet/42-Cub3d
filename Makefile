@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/10/08 13:50:35 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/10/08 14:27:44 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,14 @@ OBJ_DIR	= ./obj/
 LIBFT	= ./libft/
 
 FILES = main.c \
+		map_init.c \
+		win_init.c \
 		colors.c \
 		parse_map.c \
 		parsing.c \
 		textures.c \
 		utils.c \
+		render.c \
 
 MLX42FLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 INCLUDES = -I$(SRC_DIR) -I./include

@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 15:22:01 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/08 14:23:09 by cesasanc         ###   ########.fr       */
+/*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
+/*   Updated: 2024/10/08 14:28:22 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-int	main(int argc, char **argv)
+void	render(void *param)
 {
-	t_win	win;
-	t_data	info;
+	t_win	*win;
 
-	handle_args(argc, argv, &info);
-	win_init(&win);
-	mlx_loop_hook(win.mlx, &render, &win);
-	
-	mlx_image_to_window(win.mlx, win.img, 0, 0);
-	mlx_loop(win.mlx);
-	mlx_terminate(win.mlx);
-	return (0);
+	win = (t_win *)param;
+	if (win->renderer.frames < FRAME_WAIT)
+	{
+		win->renderer.frames++;
+		return ;
+	}
+	win->renderer.frames = 0;
+//	if (win->renderer.changed)
+		//calculate_img(win);
+	win->renderer.changed = false;
 }

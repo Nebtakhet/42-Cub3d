@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 13:47:43 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:28:00 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ typedef struct s_data
 	int				map_width;
 }	t_data;
 
+/* Initialization*/
+
+int		handle_args(int argc, char **argv, t_data *info);
+
+
 int		ft_altoi(const char *str, int len);
 int		ft_get_floor_color(t_data *info, char *f_color);
 int		ft_get_ceiling_color(t_data *info, char *c_color);
@@ -106,5 +111,15 @@ int		ft_parse_scene_description(t_data *info, char *file);
 int		ft_parse_map(t_data *info, int fd, char **line);
 void	ft_free_data(t_data **info);
 void	ft_free_array(char **arr);
+
+
+void	init_color_palette(t_win *win);
+void	get_layout(t_win *win);
+void	win_init(t_win *win);
+
+
+/* Rendering */
+
+void	render(void *param);
 
 #endif
