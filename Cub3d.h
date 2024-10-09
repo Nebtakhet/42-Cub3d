@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/09 12:07:02 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:13:34 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,27 @@ typedef struct s_mouse
 	int32_t	y;
 }				t_mouse;
 
+typedef struct s_player
+{
+	char	dir;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	bool	moved;
+	int		move_x;
+	int		move_y
+	int		rotate;
+}				t_player;
+
+
 typedef struct s_data
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
+	t_player		player;
 	u_int32_t		iter;
 	t_cords			x;
 	t_cords			y;
