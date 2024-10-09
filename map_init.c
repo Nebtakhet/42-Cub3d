@@ -77,23 +77,23 @@ int	ft_get_map_str(int fd, char **map_str)
 	return (0);
 }
 
-int	handle_args(int argc, char **argv, t_data *info)
+t_data	*handle_args(int argc, char **argv, t_data *info)
 {
 	if (argc != 2)
 	{
 		write(2, "Please run cub3d with one scene description file\n", 49);
-		return (1);
+		return (NULL);
 	}
 	if (ft_strncmp((argv[1] + (ft_strlen(argv[1]) - 4)), ".cub", 5))
 	{
 		write(2, "Error\nScene description file of type .cub wanted\n", 49);
-		return (1);
+		return (NULL);
 	}
 	info = ft_init_data();
 	if (!info)
-		return (1);
+		return (NULL);
 	if (ft_parse_scene_description(info, argv[1]))
-		return (1);
+		return (NULL);
 	printf("floor RGB: %d,%d,%d\nceiling RGB: %d,%d,%d\nmap W: %d, H: %d\n",\
 		info->floor_color[0], info->floor_color[1], info->floor_color[2], \
 		info->ceiling_color[0], info->ceiling_color[1], info->ceiling_color[2], \
@@ -101,6 +101,6 @@ int	handle_args(int argc, char **argv, t_data *info)
 	int	i = 0;
 	while (info->map[i] != NULL)
 		printf("%s\n", info->map[i++]);
-	ft_free_data(&info);
-	return (0);
+	//ft_free_data(&info);
+	return (info);
 }

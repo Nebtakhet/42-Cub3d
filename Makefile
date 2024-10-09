@@ -25,6 +25,7 @@ FILES 	= main.c \
 		win_init.c \
 		colors.c \
 		parse_map.c \
+		minimap.c \
 		parsing.c \
 		textures.c \
 		utils.c \
