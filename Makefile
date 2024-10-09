@@ -6,21 +6,21 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/10/08 14:46:22 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/10/08 21:02:02 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Cub3d
-CC = cc
+NAME	= Cub3d
+CC 		= cc
 
-FLAGS = -Wall -Wextra -Werror
-MLX42 = ./MLX42/build/libmlx42.a
+FLAGS 	= -Wall -Wextra -Werror
+MLX42 	= ./MLX42/build/libmlx42.a
 
 SRC_DIR = ./
 OBJ_DIR	= ./obj/
 LIBFT	= ./libft/
 
-FILES = main.c \
+FILES 	= main.c \
 		map_init.c \
 		win_init.c \
 		colors.c \
@@ -54,20 +54,20 @@ $(MLX42):
 
 $(NAME): $(MLX42) $(LIBFT)/libft.a $(OBJ_FILES) 
 	@echo "Compiling Cub3d..."
-	@$(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) $(MLX42FLAGS)
+	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) $(MLX42FLAGS)
 	@echo "\033[32m Cub3d has been built successfully!\033[0m"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)Cub3d.h | $(OBJ_DIR)
 	@echo "Compiling $< to $@"
-	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
-fsanitize: 
-	$(CC) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) $(MLX42FLAGS) -g -fsanitize=address -static-libsan
+fsanitize: $(MLX42) $(LIBFT)/libft.a $(OBJ_FILES)
+	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) $(MLX42FLAGS) \
+		-g -fsanitize=address -static-libasan
 	
 clean:
 	make clean -C $(LIBFT)
 	rm -rf $(OBJ_DIR) $(OBJ_FILES:.o=.dSYM)
-	rm -rf MLX42
 	
 fclean: clean
 	make fclean -C $(LIBFT)

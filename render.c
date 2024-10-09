@@ -6,12 +6,14 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 15:08:18 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/08 20:02:44 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
+/* Function to calculate the image to be rendered, placing the corresponding
+pixel color in the image */
 void	calculate_img(t_data *data)
 {
 	t_img	img;
@@ -25,10 +27,12 @@ void	calculate_img(t_data *data)
 			mlx_put_pixel(data->img, img.x, img.y, data->palette[12]);
 			img.y++;
 		}
-		img.x++;		
-	}	
+		img.x++;
+	}
 }
 
+/* Function to render the image. It will only render if the frames are greater
+than the frame wait */
 void	render(void *param)
 {
 	t_data	*data;

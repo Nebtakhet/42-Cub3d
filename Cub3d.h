@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 15:03:26 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/08 20:53:46 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void	render(void *param);
 
 /* Hooks */
 
+void	key_hook(mlx_key_data_t key_data, void *param);
 void	close_program(void *param);
 
 

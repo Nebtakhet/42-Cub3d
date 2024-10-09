@@ -22,8 +22,8 @@ NAME = libft.a
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	$(CC) $(CFLAGS) -c $(CFILES)
-	ar -rcs $(NAME) $(OFILES)
+	@ $(CC) $(CFLAGS) -c $(CFILES)
+	@ ar -rcs $(NAME) $(OFILES)
 
 clean:
 	rm -f $(OFILES)
