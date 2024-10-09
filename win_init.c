@@ -6,12 +6,14 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:08:12 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 14:56:25 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/08 20:04:22 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
+/* Function to initialize the color palette. It will create a gradient of colors
+from black to white */
 void	init_color_palette(t_data *data)
 {
 	double	t;
@@ -33,6 +35,9 @@ void	init_color_palette(t_data *data)
 	}
 }
 
+/* Function to initialize the layout of the window. It will set the zoom factor
+to 1.0, the color of the palette to a greenish color and the frames to wait to
+5 */
 void	get_layout(t_data *data)
 {
 	data->zoom.factor = 1.0;
@@ -43,6 +48,8 @@ void	get_layout(t_data *data)
 	data->renderer.changed = true;
 }
 
+/* Function to initialize the window. It will get the layout of the window, set
+the color palette and initialize the mlx instance */
 void	win_init(t_data *data)
 {
 	get_layout(data);

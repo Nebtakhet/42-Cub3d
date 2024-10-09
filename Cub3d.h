@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 15:03:26 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:07:02 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,11 @@ typedef struct s_data
 	int				map_width;
 }	t_data;
 
+/* Utils */
+
+void	print_error(char *str);
+void	clean_exit(t_data *data, int status);
+
 /* Initialization*/
 
 int		handle_args(int argc, char **argv, t_data *info);
@@ -132,6 +137,7 @@ void	render(void *param);
 
 /* Hooks */
 
+void	key_hook(mlx_key_data_t key_data, void *param);
 void	close_program(void *param);
 
 

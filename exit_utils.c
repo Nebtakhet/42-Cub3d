@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 14:45:24 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 20:52:54 by cesasanc         ###   ########.fr       */
+/*   Created: 2024/10/09 11:44:15 by cesasanc          #+#    #+#             */
+/*   Updated: 2024/10/09 12:06:06 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-void	key_hook(mlx_key_data_t key_data, void *param)
+void	print_error(char *str)
 {
-	t_data	*data;
-
-	data = (t_data *)param;
-	if (key_data.key == MLX_KEY_ESCAPE)
-		mlx_close_window(data->mlx);
-	data->renderer.changed = true;
+	if (str)
+	{
+		ft_putstr_fd("Cub3d Error: ", STDERR_FILENO);
+		ft_putstr_fd(str, STDERR_FILENO);
+	}
+	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
-/* Function to close the window and terminate the mlx instance */
-void	close_program(void *param)
+void	clean_exit(t_data *data, int status)
 {
-	t_data	*data;
-
-	data = (t_data *)param;
+	if (!data)
+		exit(status);
+	if (data->img)
+	{
+		mlx_delete_image(data->mlx, data->img);
+		free(data->img);
+	}
 	if (data->mlx)
 	{
 		mlx_close_window(data->mlx);
 		mlx_terminate(data->mlx);
+		free(data->mlx);
 	}
-	exit(EXIT_SUCCESS);
+	free(data);
+	exit(status);
 }
