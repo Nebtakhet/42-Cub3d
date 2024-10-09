@@ -81,3 +81,12 @@ int	ft_is_player(char c)
 		return (1);
 	return (0);
 }
+
+int	ft_is_valid_content(char c)
+{
+	if (c == '0' || c == '1' || c == ' ' || c == '\n' || \
+		c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	ft_parsing_error("invalid map content");
+	return (0);
+}

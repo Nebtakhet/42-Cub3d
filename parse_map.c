@@ -15,32 +15,35 @@
 int	ft_get_map(t_data *info, char *map_str)
 {
 	int	i;
+	int	len;
 
-	i = 0;
+	i = -1;
 	info->map = malloc((info->map_height + 1) * sizeof(char *));
-	if (!info->map)
+	while (info->map && ++i < info->map_height)
 	{
-		perror("ft_get_map");
-		return (1);
-	}
-	while (i < info->map_height)
-	{
-		info->map[i] = gnl_strldup(map_str, gnl_strchr_index(map_str, '\n'));
+		len = gnl_strchr_index(map_str, '\n');
+		info->map[i] = gnl_strldup(map_str, len);
 		if (!info->map[i])
-		{
-			perror("ft_get_map");
-			return (1);
-		}
-		map_str += gnl_strchr_index(map_str, '\n') + 1;
-		i++;
+			break ;
+		map_str += (len + 1);
 	}
-	info->map[i] = NULL;
-	ft_find_player(info);
-	return (0);
+	if (i == info->map_height)
+	{
+		info->map[i] = NULL;
+		ft_find_player(info);
+		return (0);
+	}
+	perror("ft_get_map");
+	return (1);
 }
 
-int	ft_check_map_end(char *map_str)
-{
+int	ft_check_map_end(char *map_str, int player_count)
+{	
+	if (player_count == 0)
+	{
+		ft_parsing_error("no player found");
+		return (1);
+	}
 	while (*map_str == '\n')
 		map_str++;
 	if (*map_str == '\0')
@@ -54,56 +57,46 @@ int	ft_check_map_end(char *map_str)
 	return (1);
 }
 
+int	ft_check_player(t_data *info, int *player_count, int x)
+{	
+	*player_count += 1;
+	if (*player_count == 1)
+	{
+		info->player_pos[0] = info->map_height;
+		info->player_pos[1] = x;
+		return (0);
+	}	
+	if (*player_count > 1)
+		ft_parsing_error("multiple players found");
+	return (1);
+}
+
 int	ft_check_map_content(t_data *info, char *map)
 {
 	int	player;
+	int	width;
 
+	width = 0;
 	player = 0;
 	while (*map)
-	{	
-		if (*map != '0' && *map != '1' && *map != 'N' && *map != 'S' && \
-			*map != 'E' && *map != 'W' && *map != ' ' && *map != '\n' && \
-			ft_parsing_error("invalid map content"))
+	{
+		if (width > info->map_width)
+			info->map_width = width;
+		if (!ft_is_valid_content(*map))
 			return (1);
 		if (*map == '\n')
-			info->map_height++;
-		if (*map == '\n' && *(map + 1) == '\n')
-			break ;
-		if ((*map == 'N' || *map == 'S' || *map == 'E' || *map == 'W') && \
-			++player > 1)
-			break ;
-		map++;
-	}
-	if (player == 0)
-		ft_parsing_error("no player found");
-	if (player > 1)
-		ft_parsing_error("multiple players found");
-	if (player != 1 || ft_check_map_end(map))
-		return (1);
-	return (0);
-}
-
-int	ft_get_map_str(int fd, char **map_str)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	while (line)
-	{
-		*map_str = gnl_strjoin(*map_str, line);
-		free(line);
-		if (!*map_str)
 		{
-			perror("ft_parse_map");
-			return (1);
+			width = -1;
+			info->map_height++;
+			if (*(map + 1) == '\n')
+				break ;
 		}
-		line = get_next_line(fd);
+		if (ft_is_player(*map++) && ft_check_player(info, &player, width))
+			return (1);
+		width++;
 	}
-	if (!*map_str)
-	{
-		ft_parsing_error("missing map");
+	if (ft_check_map_end(map, player))
 		return (1);
-	}
 	return (0);
 }
 

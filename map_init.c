@@ -53,6 +53,30 @@ t_data	*ft_init_data(void)
 	return (info);
 }
 
+int	ft_get_map_str(int fd, char **map_str)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		*map_str = gnl_strjoin(*map_str, line);
+		free(line);
+		if (!*map_str)
+		{
+			perror("ft_parse_map");
+			return (1);
+		}
+		line = get_next_line(fd);
+	}
+	if (!*map_str)
+	{
+		ft_parsing_error("missing map");
+		return (1);
+	}
+	return (0);
+}
+
 int	handle_args(int argc, char **argv, t_data *info)
 {
 	if (argc != 2)
