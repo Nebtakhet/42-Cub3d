@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/10/08 21:02:02 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/10/09 12:07:18 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ FILES 	= main.c \
 		utils.c \
 		render.c \
 		hooks.c \
+		exit_utils.c  \
 
 MLX42FLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 INCLUDES = -I$(SRC_DIR) -I./include
@@ -63,7 +64,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)Cub3d.h | $(OBJ_DIR)
 
 fsanitize: $(MLX42) $(LIBFT)/libft.a $(OBJ_FILES)
 	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) $(MLX42FLAGS) \
-		-g -fsanitize=address -static-libasan
+		-g -fsanitize=address -static-libsan
 	
 clean:
 	make clean -C $(LIBFT)

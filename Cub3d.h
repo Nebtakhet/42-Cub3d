@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 20:53:46 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:07:02 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,11 @@ typedef struct s_data
 	int				map_height;
 	int				map_width;
 }	t_data;
+
+/* Utils */
+
+void	print_error(char *str);
+void	clean_exit(t_data *data, int status);
 
 /* Initialization*/
 
