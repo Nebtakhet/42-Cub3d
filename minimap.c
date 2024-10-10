@@ -20,58 +20,62 @@ void	ft_minimap_hook(void *param)
 
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
-		if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
+		if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
+			|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == '1' \
+			&& y > -3))
 		{
 			data->mini_player->instances[0].y -= 1;
 			y--;
-		}
-		if (y <= -16)
-		{
-			y = 0;
-			if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
+			if (y == -8 && data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
+			{
 				data->player_pos[0] -= 1;
+				y = 8;
+			}				
 		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 	{
-		if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
+		if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
+			(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' && \
+			y < 3))
 		{
 			data->mini_player->instances[0].y += 1;
 			y++;
-		}
-		if (y >= 16)
-		{
-			y = 0;
-			if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
+			if (y == 8 && data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
+			{
 				data->player_pos[0] += 1;
+				y = -8;
+			}
 		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 	{
-		if (data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
+		if (data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1' || \
+			(data->map[data->player_pos[0]][data->player_pos[1] - 1] == '1' \
+			&& x > -3))
 		{
 			data->mini_player->instances[0].x -= 1;
 			x--;
-		}
-		if (x <= -16)
-		{
-			x = 0;
-			if (data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
+			if (x == -8 && data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
+			{
 				data->player_pos[1] -= 1;
+				x = 8;
+			}	
 		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 	{
-		if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
+		if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
+			(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
+			&& x < 3))
 		{
 			data->mini_player->instances[0].x += 1;
 			x++;
-		}
-		if (x >= 16)
-		{
-			x = 0;
-			if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
+			if (x == 8 && data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
+			{
 				data->player_pos[1] += 1;
+				x = -8;
+			}
 		}		
 	}
 }

@@ -95,6 +95,8 @@ typedef struct s_data
 	mlx_texture_t	*south_texture;
 	mlx_texture_t	*west_texture;
 	mlx_texture_t	*east_texture;
+	mlx_texture_t	*mini_p;
+	mlx_image_t		*mini_player;
 	char			**map;
 	int				map_height;
 	int				map_width;
@@ -107,7 +109,7 @@ void	clean_exit(t_data *data, int status);
 
 /* Initialization*/
 
-int		handle_args(int argc, char **argv, t_data *info);
+t_data		*handle_args(int argc, char **argv, t_data *info);
 
 int		ft_altoi(const char *str, int len);
 int		ft_get_floor_color(t_data *info, char *f_color);
@@ -130,6 +132,8 @@ void	ft_free_array(char **arr);
 void	init_color_palette(t_data *win);
 void	get_layout(t_data *win);
 void	win_init(t_data *win);
+void	ft_draw_minimap(t_data *data);
+int		ft_draw_player_to_minimap(t_data *data);
 
 /* Rendering */
 
@@ -139,6 +143,7 @@ void	render(void *param);
 
 void	key_hook(mlx_key_data_t key_data, void *param);
 void	close_program(void *param);
+void	ft_minimap_hook(void *param);
 
 
 #endif
