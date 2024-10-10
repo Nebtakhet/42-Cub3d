@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/10 13:09:32 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/10 14:36:11 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIDTH 1920
 # define ITER 69
 # define FRAME_WAIT 5
-
+# define PI 3.14159265358979323846
 
 typedef struct s_img
 {
@@ -77,17 +77,20 @@ typedef struct s_mouse
 
 typedef struct s_player
 {
-	char	dir;
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	bool	moved;
-	int		move_x;
-	int		move_y;
-	int		rotate;
+	mlx_texture_t	*mini_p;
+	mlx_image_t		*mini_player;
+	char			dir;
+	double			angle;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	bool			moved;
+	int				move_x;
+	int				move_y;
+	int				rotate;
 }				t_player;
 
 typedef struct t_ray
@@ -148,7 +151,7 @@ void	clean_exit(t_data *data, int status);
 
 /* Initialization*/
 
-int		handle_args(int argc, char **argv, t_data *info);
+t_data	*handle_args(int argc, char **argv, t_data *info);
 
 int		ft_altoi(const char *str, int len);
 int		ft_get_floor_color(t_data *info, char *f_color);
@@ -172,6 +175,11 @@ void	init_color_palette(t_data *win);
 void	get_layout(t_data *win);
 void	win_init(t_data *win);
 
+void	ft_draw_minimap(t_data *data);
+void	ft_minimap_hook(void *param);
+int		ft_draw_player_to_minimap(t_data *data);
+
+
 /* Rendering */
 
 void	render(void *param);
@@ -180,6 +188,5 @@ void	render(void *param);
 
 void	key_hook(mlx_key_data_t key_data, void *param);
 void	close_program(void *param);
-
 
 #endif

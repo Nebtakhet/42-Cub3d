@@ -37,6 +37,6 @@ void	clean_exit(t_data *data, int status)
 		mlx_terminate(data->mlx);
 		free(data->mlx);
 	}
-	free(data);
+	ft_free_data(&data);
 	exit(status);
 }
