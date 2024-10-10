@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:26:48 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/10 14:18:41 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/10 14:33:17 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_minimap_hook(void *param)
 			{
 				data->player_pos[0] -= 1;
 				y = 8;
-			}				
+			}
 		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
@@ -60,7 +60,7 @@ void	ft_minimap_hook(void *param)
 			{
 				data->player_pos[1] -= 1;
 				x = 8;
-			}	
+			}
 		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
@@ -76,24 +76,21 @@ void	ft_minimap_hook(void *param)
 				data->player_pos[1] += 1;
 				x = -8;
 			}
-		}		
+		}
 	}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
 		data->player.angle -= 0.1;
 		if (data->player.angle < 0)
 			data->player.angle += 2 * PI;
-		
 		data->player.dir_x = cos(data->player.angle) * 5;
 		data->player.dir_y = sin(data->player.angle) * 5;
 	}
-
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
 		data->player.angle += 0.1;
 		if (data->player.angle > 2 * PI)
 			data->player.angle -= 2 * PI;
-		
 		data->player.dir_x = cos(data->player.angle) * 5;
 		data->player.dir_y = sin(data->player.angle) * 5;
 	}
@@ -117,7 +114,7 @@ int	ft_draw_player_to_minimap(t_data *data)
 
 void	ft_draw_minimap(t_data *data)
 {
-    mlx_image_t* img;	
+    mlx_image_t* img;
 	int	y;
 	int	x;
 	int	i;
