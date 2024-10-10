@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:26:48 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/10 14:33:17 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/10 15:54:36 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_minimap_hook(void *param)
 
 int	ft_draw_player_to_minimap(t_data *data)
 {
-	data->player.mini_p = mlx_load_png("./textures/mossy.png");
+	data->player.mini_p = mlx_load_png("./textures/charizard.png");
 	if (!data->player.mini_p)
 		return (1);
 	data->player.mini_player = mlx_texture_to_image(data->mlx, data->player.mini_p);
