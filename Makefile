@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/10/09 12:07:18 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/10/10 14:12:20 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,8 @@ $(MLX42):
 
 $(NAME): $(MLX42) $(LIBFT)/libft.a $(OBJ_FILES) 
 	@echo "Compiling Cub3d..."
-	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) $(MLX42FLAGS)
+	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) \
+		$(MLX42FLAGS) -lm
 	@echo "\033[32m Cub3d has been built successfully!\033[0m"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)Cub3d.h | $(OBJ_DIR)
@@ -64,8 +65,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)Cub3d.h | $(OBJ_DIR)
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 fsanitize: $(MLX42) $(LIBFT)/libft.a $(OBJ_FILES)
-	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) $(MLX42FLAGS) \
-		-g -fsanitize=address -static-libsan
+	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) \
+		$(MLX42FLAGS) -g -fsanitize=address -static-libsan -lm
 	
 clean:
 	make clean -C $(LIBFT)

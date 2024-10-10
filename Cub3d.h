@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/09 12:07:02 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/10 14:15:25 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIDTH 1920
 # define ITER 69
 # define FRAME_WAIT 5
-
+# define PI 3.14159265358979323846
 
 typedef struct s_img
 {
@@ -75,10 +75,54 @@ typedef struct s_mouse
 	int32_t	y;
 }				t_mouse;
 
+typedef struct s_player
+{
+	mlx_texture_t	*mini_p;
+	mlx_image_t		*mini_player;
+	char			dir;
+	double			angle;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	bool			moved;
+	int				move_x;
+	int				move_y;
+	int				rotate;
+}				t_player;
+
+typedef struct t_ray
+{
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	int			map_x;
+	int			map_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			step_x;
+	int			step_y;
+	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	double		wall_x;
+	int			tex_x;
+	int			tex_y;
+	double		step;
+	double		tex_pos;
+}				t_ray;
+
 typedef struct s_data
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
+	t_player		player;
 	u_int32_t		iter;
 	t_cords			x;
 	t_cords			y;
@@ -95,8 +139,6 @@ typedef struct s_data
 	mlx_texture_t	*south_texture;
 	mlx_texture_t	*west_texture;
 	mlx_texture_t	*east_texture;
-	mlx_texture_t	*mini_p;
-	mlx_image_t		*mini_player;
 	char			**map;
 	int				map_height;
 	int				map_width;
@@ -109,7 +151,7 @@ void	clean_exit(t_data *data, int status);
 
 /* Initialization*/
 
-t_data		*handle_args(int argc, char **argv, t_data *info);
+t_data	*handle_args(int argc, char **argv, t_data *info);
 
 int		ft_altoi(const char *str, int len);
 int		ft_get_floor_color(t_data *info, char *f_color);
@@ -132,8 +174,11 @@ void	ft_free_array(char **arr);
 void	init_color_palette(t_data *win);
 void	get_layout(t_data *win);
 void	win_init(t_data *win);
+
 void	ft_draw_minimap(t_data *data);
+void	ft_minimap_hook(void *param);
 int		ft_draw_player_to_minimap(t_data *data);
+
 
 /* Rendering */
 
@@ -143,7 +188,5 @@ void	render(void *param);
 
 void	key_hook(mlx_key_data_t key_data, void *param);
 void	close_program(void *param);
-void	ft_minimap_hook(void *param);
-
 
 #endif

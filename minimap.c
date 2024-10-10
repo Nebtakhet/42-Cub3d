@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvallin <nvallin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:26:48 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/09 13:27:04 by nvallin          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:18:41 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_minimap_hook(void *param)
 			|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == '1' \
 			&& y > -3))
 		{
-			data->mini_player->instances[0].y -= 1;
+			data->player.mini_player->instances[0].y -= 1;
 			y--;
 			if (y == -8 && data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
 			{
@@ -39,7 +39,7 @@ void	ft_minimap_hook(void *param)
 			(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' && \
 			y < 3))
 		{
-			data->mini_player->instances[0].y += 1;
+			data->player.mini_player->instances[0].y += 1;
 			y++;
 			if (y == 8 && data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
 			{
@@ -54,7 +54,7 @@ void	ft_minimap_hook(void *param)
 			(data->map[data->player_pos[0]][data->player_pos[1] - 1] == '1' \
 			&& x > -3))
 		{
-			data->mini_player->instances[0].x -= 1;
+			data->player.mini_player->instances[0].x -= 1;
 			x--;
 			if (x == -8 && data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
 			{
@@ -69,7 +69,7 @@ void	ft_minimap_hook(void *param)
 			(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
 			&& x < 3))
 		{
-			data->mini_player->instances[0].x += 1;
+			data->player.mini_player->instances[0].x += 1;
 			x++;
 			if (x == 8 && data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
 			{
@@ -78,19 +78,38 @@ void	ft_minimap_hook(void *param)
 			}
 		}		
 	}
+		if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+	{
+		data->player.angle -= 0.1;
+		if (data->player.angle < 0)
+			data->player.angle += 2 * PI;
+		
+		data->player.dir_x = cos(data->player.angle) * 5;
+		data->player.dir_y = sin(data->player.angle) * 5;
+	}
+
+	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
+	{
+		data->player.angle += 0.1;
+		if (data->player.angle > 2 * PI)
+			data->player.angle -= 2 * PI;
+		
+		data->player.dir_x = cos(data->player.angle) * 5;
+		data->player.dir_y = sin(data->player.angle) * 5;
+	}
 }
 
 int	ft_draw_player_to_minimap(t_data *data)
 {
-	data->mini_p = mlx_load_png("./textures/mossy.png");
-	if (!data->mini_p)
+	data->player.mini_p = mlx_load_png("./textures/mossy.png");
+	if (!data->player.mini_p)
 		return (1);
-	data->mini_player = mlx_texture_to_image(data->mlx, data->mini_p);
-	if (!data->mini_player)
+	data->player.mini_player = mlx_texture_to_image(data->mlx, data->player.mini_p);
+	if (!data->player.mini_player)
 		return (1);
-	if (!mlx_resize_image(data->mini_player, 16, 16))
+	if (!mlx_resize_image(data->player.mini_player, 16, 16))
 		return (1);
-	if (mlx_image_to_window(data->mlx, data->mini_player, \
+	if (mlx_image_to_window(data->mlx, data->player.mini_player, \
 		data->player_pos[1] * 16 + 20, data->player_pos[0] * 16 + 20) == -1)
 		return (1);
 	return (0);
