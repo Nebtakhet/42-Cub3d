@@ -18,64 +18,316 @@ void	ft_minimap_hook(void *param)
 	static int	x = 0;
 	static int	y = 0;
 
+	// if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+	// {
+	// 	if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
+	// 		|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == '1' \
+	// 		&& y > -3))
+	// 	{
+	// 		data->player.mini_player->instances[0].y -= 1;
+	// 		y--;
+	// 		if (y == -8 && data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
+	// 		{
+	// 			data->player_pos[0] -= 1;
+	// 			y = 8;
+	// 		}
+	// 	}
+	// }
+	// if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+	// {
+	// 	if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
+	// 		(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' && \
+	// 		y < 3))
+	// 	{
+	// 		data->player.mini_player->instances[0].y += 1;
+	// 		y++;
+	// 		if (y == 8 && data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
+	// 		{
+	// 			data->player_pos[0] += 1;
+	// 			y = -8;
+	// 		}
+	// 	}
+	// }
+	// if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+	// {
+	// 	if (data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1' || \
+	// 		(data->map[data->player_pos[0]][data->player_pos[1] - 1] == '1' \
+	// 		&& x > -3))
+	// 	{
+	// 		data->player.mini_player->instances[0].x -= 1;
+	// 		x--;
+	// 		if (x == -8 && data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
+	// 		{
+	// 			data->player_pos[1] -= 1;
+	// 			x = 8;
+	// 		}
+	// 	}
+	// }
+	// if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+	// {
+	// 	if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
+	// 		(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
+	// 		&& x < 3))
+	// 	{
+	// 		data->player.mini_player->instances[0].x += 1;
+	// 		x++;
+	// 		if (x == 8 && data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
+	// 		{
+	// 			data->player_pos[1] += 1;
+	// 			x = -8;
+	// 		}
+	// 	}
+	// }
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
-		if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
-			|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == '1' \
-			&& y > -3))
+		if ((roundf(data->player.mini_player->instances[0].y + sin(data->player.angle)) > data->player.mini_player->instances[0].y))
 		{
-			data->player.mini_player->instances[0].y -= 1;
-			y--;
-			if (y == -8 && data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
+			if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
+				(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' \
+				&& y < 3))
 			{
-				data->player_pos[0] -= 1;
-				y = 8;
+				y += (roundf(data->player.mini_player->instances[0].y + sin(data->player.angle) - data->player.mini_player->instances[0].y));
+				data->player.mini_player->instances[0].y = roundf(data->player.mini_player->instances[0].y + sin(data->player.angle));
+				if (y >= 8 && data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
+				{
+					data->player_pos[0] += 1;
+					y = -8;
+				}
 			}
+		}
+		else if (roundf(data->player.mini_player->instances[0].y + sin(data->player.angle) < data->player.mini_player->instances[0].y))
+		{
+			if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
+	 		|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == '1' \
+			&& y > -3))
+			{
+				data->player.mini_player->instances[0].y = roundf(data->player.mini_player->instances[0].y + sin(data->player.angle));
+				y -= (data->player.mini_player->instances[0].y - (roundf(data->player.mini_player->instances[0].y + sin(data->player.angle))));
+				if (y <= -8 && data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
+				{
+					data->player_pos[0] -= 1;
+					y = 8;
+				}
+			}			
+		}
+		if ((roundf(data->player.mini_player->instances[0].x + cos(data->player.angle))) > data->player.mini_player->instances[0].x)
+		{
+			if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
+				(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
+				&& x < 3))
+			{
+				x += (roundf(data->player.mini_player->instances[0].x + cos(data->player.angle)) - data->player.mini_player->instances[0].x);
+				data->player.mini_player->instances[0].x = roundf(data->player.mini_player->instances[0].x + cos(data->player.angle));	
+				if (x == 8 && data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
+				{
+					data->player_pos[1] += 1;
+					x = -8; 
+				}
+			}
+		}
+		else if ((roundf(data->player.mini_player->instances[0].x + cos(data->player.angle))) < data->player.mini_player->instances[0].x)
+		{
+			if (data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1' || \
+			(data->map[data->player_pos[0]][data->player_pos[1] - 1] == '1' \
+			&& x > -3))
+			{
+				data->player.mini_player->instances[0].x = roundf(data->player.mini_player->instances[0].x + cos(data->player.angle));
+				x -=  (data->player.mini_player->instances[0].x - (roundf(data->player.mini_player->instances[0].x + cos(data->player.angle))));
+				if (x == -8 && data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
+				{
+					data->player_pos[1] -= 1;
+					x = 8;
+				}
+			}	
 		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 	{
-		if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
-			(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' && \
-			y < 3))
+		if ((roundf(data->player.mini_player->instances[0].y + -sin(data->player.angle)) > data->player.mini_player->instances[0].y))
 		{
-			data->player.mini_player->instances[0].y += 1;
-			y++;
-			if (y == 8 && data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
+			if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
+				(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' \
+				&& y < 3))
 			{
-				data->player_pos[0] += 1;
-				y = -8;
+				y += (roundf(data->player.mini_player->instances[0].y + -sin(data->player.angle) - data->player.mini_player->instances[0].y));
+				data->player.mini_player->instances[0].y = roundf(data->player.mini_player->instances[0].y + -sin(data->player.angle));
+				if (y >= 8 && data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
+				{
+					data->player_pos[0] += 1;
+					y = -8;
+				}
 			}
+		}
+		else if (roundf(data->player.mini_player->instances[0].y + -sin(data->player.angle) < data->player.mini_player->instances[0].y))
+		{
+			if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
+	 		|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == '1' \
+			&& y > -3))
+			{
+				data->player.mini_player->instances[0].y = roundf(data->player.mini_player->instances[0].y + -sin(data->player.angle));
+				y -= (data->player.mini_player->instances[0].y - (roundf(data->player.mini_player->instances[0].y + -sin(data->player.angle))));
+				if (y <= -8 && data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
+				{
+					data->player_pos[0] -= 1;
+					y = 8;
+				}
+			}			
+		}
+		if ((roundf(data->player.mini_player->instances[0].x + -cos(data->player.angle))) > data->player.mini_player->instances[0].x)
+		{
+			if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
+				(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
+				&& x < 3))
+			{
+				x += (roundf(data->player.mini_player->instances[0].x + -cos(data->player.angle)) - data->player.mini_player->instances[0].x);
+				data->player.mini_player->instances[0].x = roundf(data->player.mini_player->instances[0].x + -cos(data->player.angle));	
+				if (x == 8 && data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
+				{
+					data->player_pos[1] += 1;
+					x = -8; 
+				}
+			}
+		}
+		else if ((roundf(data->player.mini_player->instances[0].x + -cos(data->player.angle))) < data->player.mini_player->instances[0].x)
+		{
+			if (data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1' || \
+			(data->map[data->player_pos[0]][data->player_pos[1] - 1] == '1' \
+			&& x > -3))
+			{
+				data->player.mini_player->instances[0].x = roundf(data->player.mini_player->instances[0].x + -cos(data->player.angle));
+				x -=  (data->player.mini_player->instances[0].x - (roundf(data->player.mini_player->instances[0].x + -cos(data->player.angle))));
+				if (x == -8 && data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
+				{
+					data->player_pos[1] -= 1;
+					x = 8;
+				}
+			}	
 		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 	{
-		if (data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1' || \
+		if ((roundf(data->player.mini_player->instances[0].y + -cos(data->player.angle)) > data->player.mini_player->instances[0].y))
+		{
+			if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
+				(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' \
+				&& y < 3))
+			{
+				y += (roundf(data->player.mini_player->instances[0].y + -cos(data->player.angle) - data->player.mini_player->instances[0].y));
+				data->player.mini_player->instances[0].y = roundf(data->player.mini_player->instances[0].y + -cos(data->player.angle));
+				if (y >= 8 && data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
+				{
+					data->player_pos[0] += 1;
+					y = -8;
+				}
+			}
+		}
+		else if (roundf(data->player.mini_player->instances[0].y + -cos(data->player.angle) < data->player.mini_player->instances[0].y))
+		{
+			if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
+	 		|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == '1' \
+			&& y > -3))
+			{
+				data->player.mini_player->instances[0].y = roundf(data->player.mini_player->instances[0].y + -cos(data->player.angle));
+				y -= (data->player.mini_player->instances[0].y - (roundf(data->player.mini_player->instances[0].y + -cos(data->player.angle))));
+				if (y <= -8 && data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
+				{
+					data->player_pos[0] -= 1;
+					y = 8;
+				}
+			}			
+		}
+		if ((roundf(data->player.mini_player->instances[0].x + sin(data->player.angle))) > data->player.mini_player->instances[0].x)
+		{
+			if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
+				(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
+				&& x < 3))
+			{
+				x += (roundf(data->player.mini_player->instances[0].x + sin(data->player.angle)) - data->player.mini_player->instances[0].x);
+				data->player.mini_player->instances[0].x = roundf(data->player.mini_player->instances[0].x + sin(data->player.angle));	
+				if (x == 8 && data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
+				{
+					data->player_pos[1] += 1;
+					x = -8; 
+				}
+			}
+		}
+		else if ((roundf(data->player.mini_player->instances[0].x + sin(data->player.angle))) < data->player.mini_player->instances[0].x)
+		{
+			if (data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1' || \
 			(data->map[data->player_pos[0]][data->player_pos[1] - 1] == '1' \
 			&& x > -3))
-		{
-			data->player.mini_player->instances[0].x -= 1;
-			x--;
-			if (x == -8 && data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
 			{
-				data->player_pos[1] -= 1;
-				x = 8;
-			}
+				data->player.mini_player->instances[0].x = roundf(data->player.mini_player->instances[0].x + sin(data->player.angle));
+				x -=  (data->player.mini_player->instances[0].x - (roundf(data->player.mini_player->instances[0].x + sin(data->player.angle))));
+				if (x == -8 && data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
+				{
+					data->player_pos[1] -= 1;
+					x = 8;
+				}
+			}	
 		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 	{
-		if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
-			(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
-			&& x < 3))
+		if ((roundf(data->player.mini_player->instances[0].y + cos(data->player.angle)) > data->player.mini_player->instances[0].y))
 		{
-			data->player.mini_player->instances[0].x += 1;
-			x++;
-			if (x == 8 && data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
+			if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
+				(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' \
+				&& y < 3))
 			{
-				data->player_pos[1] += 1;
-				x = -8;
+				y += (roundf(data->player.mini_player->instances[0].y + cos(data->player.angle) - data->player.mini_player->instances[0].y));
+				data->player.mini_player->instances[0].y = roundf(data->player.mini_player->instances[0].y + cos(data->player.angle));
+				if (y >= 8 && data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
+				{
+					data->player_pos[0] += 1;
+					y = -8;
+				}
 			}
+		}
+		else if (roundf(data->player.mini_player->instances[0].y + cos(data->player.angle) < data->player.mini_player->instances[0].y))
+		{
+			if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
+	 		|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == '1' \
+			&& y > -3))
+			{
+				data->player.mini_player->instances[0].y = roundf(data->player.mini_player->instances[0].y + cos(data->player.angle));
+				y -= (data->player.mini_player->instances[0].y - (roundf(data->player.mini_player->instances[0].y + cos(data->player.angle))));
+				if (y <= -8 && data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
+				{
+					data->player_pos[0] -= 1;
+					y = 8;
+				}
+			}			
+		}
+		if ((roundf(data->player.mini_player->instances[0].x + -sin(data->player.angle))) > data->player.mini_player->instances[0].x)
+		{
+			if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
+				(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
+				&& x < 3))
+			{
+				x += (roundf(data->player.mini_player->instances[0].x + -sin(data->player.angle)) - data->player.mini_player->instances[0].x);
+				data->player.mini_player->instances[0].x = roundf(data->player.mini_player->instances[0].x + -sin(data->player.angle));	
+				if (x == 8 && data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
+				{
+					data->player_pos[1] += 1;
+					x = -8; 
+				}
+			}
+		}
+		else if ((roundf(data->player.mini_player->instances[0].x + -sin(data->player.angle))) < data->player.mini_player->instances[0].x)
+		{
+			if (data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1' || \
+			(data->map[data->player_pos[0]][data->player_pos[1] - 1] == '1' \
+			&& x > -3))
+			{
+				data->player.mini_player->instances[0].x = roundf(data->player.mini_player->instances[0].x + -sin(data->player.angle));
+				x -=  (data->player.mini_player->instances[0].x - (roundf(data->player.mini_player->instances[0].x + -sin(data->player.angle))));
+				if (x == -8 && data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
+				{
+					data->player_pos[1] -= 1;
+					x = 8;
+				}
+			}	
 		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
