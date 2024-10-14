@@ -142,6 +142,8 @@ typedef struct s_data
 	char			**map;
 	int				map_height;
 	int				map_width;
+	mlx_image_t		*map_floor;
+	mlx_image_t		*map_wall;
 }	t_data;
 
 /* Utils */
@@ -175,9 +177,10 @@ void	init_color_palette(t_data *win);
 void	get_layout(t_data *win);
 void	win_init(t_data *win);
 
-void	ft_draw_minimap(t_data *data);
-void	ft_minimap_hook(void *param);
+int		ft_draw_minimap(t_data *data);
 int		ft_draw_player_to_minimap(t_data *data);
+void	ft_move_player(t_data *data);
+void	ft_rotate_player(t_data *data, char direction);
 
 
 /* Rendering */
@@ -188,5 +191,7 @@ void	render(void *param);
 
 void	key_hook(mlx_key_data_t key_data, void *param);
 void	close_program(void *param);
+void	ft_move_hook(void *param);
+void	cursor_hook(double xpos, double ypos, void *param);
 
 #endif
