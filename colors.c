@@ -12,6 +12,12 @@
 
 #include "Cub3d.h"
 
+// 'Encodes' four individual bytes into an int.
+int get_rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}
+
 int	ft_get_floor_color(t_data *info, char *f_color)
 {
 	int	i;

@@ -23,12 +23,12 @@ void	cursor_hook(double xpos, double ypos, void *param)
 	if (last_pos == -1)
 		last_pos = xpos;
 	data = param;
-	if (xpos - last_pos > 20)
+	if (xpos - last_pos > 40)
 	{
 		ft_rotate_player(data, 'r');
 		last_pos = xpos;
 	}
-	else if (xpos - last_pos < -20)
+	else if (xpos - last_pos < -40)
 	{
 		ft_rotate_player(data, 'l');
 		last_pos = xpos;

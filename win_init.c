@@ -48,6 +48,27 @@ void	get_layout(t_data *data)
 	data->renderer.changed = true;
 }
 
+void	draw_ceiling_and_floor(t_data *data)
+{
+	int	x;
+	int y;
+
+	y = -1;
+	while (++y < HEIGHT / 2)
+	{
+		x = -1;
+		while (++x < WIDTH)
+			mlx_put_pixel(data->img, x, y, data->ceiling_rgba);
+	}
+	y--;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+			mlx_put_pixel(data->img, x, y, data->floor_rgba);
+	}	
+}
+
 /* Function to initialize the window. It will get the layout of the window, set
 the color palette and initialize the mlx instance */
 void	win_init(t_data *data)
@@ -61,5 +82,6 @@ void	win_init(t_data *data)
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->img)
 		exit(EXIT_FAILURE);
+	draw_ceiling_and_floor(data);
 	return ;
 }

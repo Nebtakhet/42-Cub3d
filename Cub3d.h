@@ -134,6 +134,8 @@ typedef struct s_data
 	t_mouse			mouse;
 	int				floor_color[3];
 	int				ceiling_color[3];
+	int				floor_rgba;
+	int				ceiling_rgba;
 	int				player_pos[2];
 	mlx_texture_t	*north_texture;
 	mlx_texture_t	*south_texture;
@@ -150,6 +152,7 @@ typedef struct s_data
 
 void	print_error(char *str);
 void	clean_exit(t_data *data, int status);
+int 	get_rgba(int r, int g, int b, int a);
 
 /* Initialization*/
 

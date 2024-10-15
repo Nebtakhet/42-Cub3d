@@ -21,10 +21,10 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (1);
 	win_init(data);
-	mlx_loop_hook(data->mlx, &render, data);
+//	mlx_loop_hook(data->mlx, &render, data);
 	mlx_key_hook(data->mlx, &key_hook, data);
 	mlx_set_mouse_pos(data->mlx, WIDTH / 2, HEIGHT / 2);
-//	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
+	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	mlx_cursor_hook(data->mlx, &cursor_hook, data);
 //	mlx_scroll_hook(data->mlx, &scroll_hook, data);
 	mlx_close_hook(data->mlx, &close_program, data);
