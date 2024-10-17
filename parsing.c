@@ -128,6 +128,10 @@ int	ft_parse_scene_description(t_data *info, char *file)
 		close(fd);
 		return (1);
 	}
+	info->floor_rgba = get_rgba(info->floor_color[0], info->floor_color[1], \
+								info->floor_color[2], 255);
+	info->ceiling_rgba = get_rgba(info->ceiling_color[0], info->ceiling_color[1], \
+								info->ceiling_color[2], 255);
 	close(fd);
 	return (0);
 }

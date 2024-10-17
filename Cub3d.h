@@ -130,6 +130,8 @@ typedef struct s_data
 	t_mouse			mouse;
 	int				floor_color[3];
 	int				ceiling_color[3];
+	int				floor_rgba;
+	int				ceiling_rgba;
 	int				player_pos[2];
 	mlx_texture_t	*north_texture;
 	mlx_texture_t	*south_texture;
@@ -138,12 +140,15 @@ typedef struct s_data
 	char			**map;
 	int				map_height;
 	int				map_width;
+	mlx_image_t		*map_floor;
+	mlx_image_t		*map_wall;
 }	t_data;
 
 /* Utils */
 
 void	print_error(char *str);
 void	clean_exit(t_data *data, int status);
+int 	get_rgba(int r, int g, int b, int a);
 
 /* Initialization*/
 
@@ -171,14 +176,17 @@ void	init_color_palette(t_data *win);
 void	get_layout(t_data *win);
 void	win_init(t_data *win);
 
-void	ft_draw_minimap(t_data *data);
-void	ft_minimap_hook(void *param);
+int		ft_draw_minimap(t_data *data);
 int		ft_draw_player_to_minimap(t_data *data);
-void	draw_rays_on_minimap(t_data *data);
+void	ft_move_player(t_data *data);
+void	ft_rotate_player(t_data *data, char direction);
+
 
 /* Rendering */
 
 void	render(void *param);
+void	ft_draw_ray(t_data *data, int color);
+void	draw_ceiling_and_floor(t_data *data);
 
 /* Raycasting */
 
@@ -192,5 +200,7 @@ void	calc_wall(t_data *data);
 
 void	key_hook(mlx_key_data_t key_data, void *param);
 void	close_program(void *param);
+void	ft_move_hook(void *param);
+void	cursor_hook(double xpos, double ypos, void *param);
 
 #endif

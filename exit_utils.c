@@ -22,20 +22,37 @@ void	print_error(char *str)
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
+void	ft_free_data(t_data **info)
+{
+	if ((*info)->north_texture)
+		mlx_delete_texture((*info)->north_texture);
+	if ((*info)->south_texture)
+		mlx_delete_texture((*info)->south_texture);
+	if ((*info)->west_texture)
+		mlx_delete_texture((*info)->west_texture);
+	if ((*info)->east_texture)
+		mlx_delete_texture((*info)->east_texture);
+	if ((*info)->player.mini_p)
+		mlx_delete_texture((*info)->player.mini_p);
+	if ((*info)->map)
+		ft_free_array((*info)->map);
+	if (*info)
+	{
+		free(*info);
+		*info = NULL;
+	}
+}
+
 void	clean_exit(t_data *data, int status)
 {
 	if (!data)
 		exit(status);
 	if (data->img)
-	{
 		mlx_delete_image(data->mlx, data->img);
-		free(data->img);
-	}
 	if (data->mlx)
 	{
 		mlx_close_window(data->mlx);
 		mlx_terminate(data->mlx);
-		free(data->mlx);
 	}
 	ft_free_data(&data);
 	exit(status);

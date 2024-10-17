@@ -12,23 +12,16 @@
 
 #include "Cub3d.h"
 
-void	ft_free_data(t_data **info)
+void	ft_init_player(t_data *data)
 {
-	if ((*info)->north_texture)
-		mlx_delete_texture((*info)->north_texture);
-	if ((*info)->south_texture)
-		mlx_delete_texture((*info)->south_texture);
-	if ((*info)->west_texture)
-		mlx_delete_texture((*info)->west_texture);
-	if ((*info)->east_texture)
-		mlx_delete_texture((*info)->east_texture);
-	if ((*info)->map)
-		ft_free_array((*info)->map);
-	if (*info)
-	{
-		free(*info);
-		*info = NULL;
-	}
+	if (data->map[data->player_pos[0]][data->player_pos[1]] == 'N')
+		data->player.angle = 3 * PI / 2;
+	if (data->map[data->player_pos[0]][data->player_pos[1]] == 'S')
+		data->player.angle = PI / 2;
+	if (data->map[data->player_pos[0]][data->player_pos[1]] == 'W')
+		data->player.angle = PI;
+	if (data->map[data->player_pos[0]][data->player_pos[1]] == 'E')
+		data->player.angle = 0;
 }
 
 t_data	*ft_init_data(void)
@@ -94,6 +87,7 @@ t_data	*handle_args(int argc, char **argv, t_data *info)
 		return (NULL);
 	if (ft_parse_scene_description(info, argv[1]))
 		return (NULL);
+	ft_init_player(info);
 	printf("floor RGB: %d,%d,%d\nceiling RGB: %d,%d,%d\nmap W: %d, H: %d\n",\
 		info->floor_color[0], info->floor_color[1], info->floor_color[2], \
 		info->ceiling_color[0], info->ceiling_color[1], info->ceiling_color[2], \
