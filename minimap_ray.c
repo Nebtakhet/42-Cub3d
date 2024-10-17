@@ -64,7 +64,7 @@ void	ft_draw_ray(t_data *data, int color)
 	while (data->map[y][x] != '1')
 	{
 		mlx_put_pixel(data->img, x_draw, y_draw, color);
-		y += ft_y_ray(sin(data->player.angle), &y_draw);
-		x += ft_x_ray(cos(data->player.angle), &x_draw);
+		y += ft_y_ray(data->player.dir_y, &y_draw);
+		x += ft_x_ray(data->player.dir_x, &x_draw);
 	}
 }
