@@ -178,7 +178,7 @@ void	win_init(t_data *win);
 
 int		ft_draw_minimap(t_data *data);
 int		ft_draw_player_to_minimap(t_data *data);
-void	ft_move_player(t_data *data);
+void	ft_move_player(t_data *data, double dir_y, double dir_x);
 void	ft_rotate_player(t_data *data, char direction);
 
 
