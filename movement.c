@@ -33,90 +33,111 @@ void	ft_rotate_player(t_data *data, char direction)
 	data->player.moved = true;
 }
 
-void	ft_move_player_y(t_data *data, double dir_y, double *y_moved)
+void	ft_move_player_up(t_data *data, double direction)
 {
-	if ((data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
-		(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' \
-		&& *y_moved < 3)) && dir_y > 0)
-	{
-		*y_moved += dir_y;
-		//data->player.mini_player->instances[0].y += dir_y;
-		if (*y_moved >= 8)
-		{
-			data->player_pos[0] += 1;
-			data->player.mini_player->instances[0].y += 16;
-			*y_moved = -8;
-		}
-	}
-	else if ((data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
+	static double	y_moved = 0;
+	static double	pixels = 0;
+
+	if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
 			|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == \
-			'1' && *y_moved > -3)) && dir_y < 0)
+			'1' && y_moved > -3))
 	{
-		//data->player.mini_player->instances[0].y += dir_y;
-		*y_moved += dir_y;
-		if (*y_moved <= -8)
+		y_moved += direction;
+		pixels += direction;
+		if (pixels < -1)
+		{
+			data->player.mini_player->instances[0].y--;
+			pixels += 1;
+		}		
+		if (y_moved <= -8)
 		{
 			data->player_pos[0] -= 1;
-			data->player.mini_player->instances[0].y -= 16;
-			*y_moved = 8;
+			y_moved += 16;
 		}		
-	}	
+	}		
 }
 
-void	ft_move_player_x(t_data *data, double dir_x, double *x_moved)
+void	ft_move_player_down(t_data *data, double direction)
 {
-	if ((data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
-		(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
-		&& *x_moved < 3)) && dir_x > 0)
+	static double	y_moved = 0;
+	static double	pixels = 0;
+
+	if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
+			(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' \
+			&& y_moved < 3))
 	{
-		*x_moved += dir_x;
-		//data->player.mini_player->instances[0].x += dir_x;
-		if (*x_moved >= 8)
+		y_moved += direction;
+		pixels += direction;
+		if (pixels > 1)
 		{
-			data->player_pos[1] += 1;
-			data->player.mini_player->instances[0].x += 16;
-			*x_moved = -8;
-		}	
+			data->player.mini_player->instances[0].y++;
+			pixels -= 1;
+		}
+		if (y_moved >= 8)
+		{
+			data->player_pos[0] += 1;
+			y_moved -= 16;
+		}
 	}
-	else if ((data->map[data->player_pos[0]][data->player_pos[1] -1] != '1' \
+}
+
+void	ft_move_player_left(t_data *data, double direction)
+{
+	static double	x_moved = 0;
+	static double	pixels = 0;
+	
+	if (data->map[data->player_pos[0]][data->player_pos[1] -1] != '1' \
 			|| (data->map[data->player_pos[0]][data->player_pos[1] - 1] == \
-			'1' && *x_moved > -3)) && dir_x < 0)
+			'1' && x_moved > -3))
 	{
-		//data->player.mini_player->instances[0].x += dir_x;
-		*x_moved += dir_x;
-		if (*x_moved <= -8)
+		x_moved += direction;
+		pixels += direction;
+		if (pixels < -1)
+		{
+			data->player.mini_player->instances[0].x--;
+			pixels += 1;
+		}
+		if (x_moved <= -8)
 		{
 			data->player_pos[1] -= 1;
-			data->player.mini_player->instances[0].x -= 16;
-			*x_moved = 8;
+			x_moved += 16;
 		}		
 	}
 }
 
-void	ft_move_player(t_data *data)
+void	ft_move_player_right(t_data *data, double direction)
 {
-	static double	y = 0;
-	static double	x = 0;
+	static double	x_moved = 0;
+	static double	pixels = 0;
 
-	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+	if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
+		(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
+		&& x_moved < 3))
 	{
-		ft_move_player_y(data, data->player.dir_y, &y);
-		ft_move_player_x(data, data->player.dir_x, &x);
+		x_moved += direction;
+		pixels += direction;
+		if (pixels > 1)
+		{
+			data->player.mini_player->instances[0].x++;
+			pixels -= 1;
+		}
+		if (x_moved >= 8)
+		{
+			data->player_pos[1] += 1;
+			x_moved -= 16;
+		}
 	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-	{
-		ft_move_player_y(data, -data->player.dir_y, &y);
-		ft_move_player_x(data, -data->player.dir_x, &x);
-	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-	{
-		ft_move_player_y(data, -data->player.dir_x, &y);
-		ft_move_player_x(data, data->player.dir_y, &x);
-	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-	{
-		ft_move_player_y(data, data->player.dir_x, &y);
-		ft_move_player_x(data, -data->player.dir_y, &x);
-	}
-	data->player.moved = true;
+}
+
+void	ft_move_player(t_data *data, double dir_y, double dir_x)
+{
+	 if (dir_y < 0)
+	 	ft_move_player_up(data, dir_y);
+	else if (dir_y > 0)
+		ft_move_player_down(data, dir_y);
+	if (dir_x < 0)
+		ft_move_player_left(data, dir_x);
+	else if (dir_x > 0)
+		ft_move_player_right(data, dir_x);
+	data->player.moved = true;		
 }
