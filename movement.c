@@ -30,6 +30,7 @@ void	ft_rotate_player(t_data *data, char direction)
 		data->player.dir_x = cos(data->player.angle) * 5;
 		data->player.dir_y = sin(data->player.angle) * 5;
 	}
+	data->player.moved = true;
 }
 
 void	ft_move_player_y(t_data *data, int dir_y, int *y_moved)
@@ -85,7 +86,7 @@ void	ft_move_player_x(t_data *data, int dir_x, int *x_moved)
 			data->player_pos[1] -= 1;
 			*x_moved = 8;
 		}		
-	}	
+	}
 }
 
 void	ft_move_player(t_data *data)
@@ -113,4 +114,5 @@ void	ft_move_player(t_data *data)
 		ft_move_player_y(data, roundf(cos(data->player.angle)), &y);
 		ft_move_player_x(data, roundf(-sin(data->player.angle)), &x);
 	}
+	data->player.moved = true;
 }

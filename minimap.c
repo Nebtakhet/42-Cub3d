@@ -49,10 +49,10 @@ int	ft_draw_minimap(t_data *data)
 			if (data->map[y][x] == '1' && mlx_image_to_window(data->mlx, \
 				data->map_wall, x * 16 + 20, y * 16 + 20) == -1)
 				return (1);
-			if ((data->map[y][x] == '.' || ft_is_player(data->map[y][x])) && \
-				mlx_image_to_window(data->mlx, data->map_floor, x * 16 + 20, \
-									y * 16 + 20) == -1)
-				return (1);
+		//	if ((data->map[y][x] == '.' || ft_is_player(data->map[y][x])) && \
+		//		mlx_image_to_window(data->mlx, data->map_floor, x * 16 + 20, \
+		//							y * 16 + 20) == -1)
+		//		return (1);
 		}
 	}
 	return (0);

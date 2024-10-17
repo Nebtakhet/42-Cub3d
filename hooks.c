@@ -79,4 +79,10 @@ void	ft_move_hook(void *param)
 		ft_rotate_player(data, 'l');
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		ft_rotate_player(data, 'r');
-}	
+	if (data->player.moved)
+	{
+		draw_ceiling_and_floor(data);
+		ft_draw_ray(data, data->palette[12]);
+		data->player.moved = false;
+	}
+}

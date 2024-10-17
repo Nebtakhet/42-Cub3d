@@ -32,7 +32,8 @@ FILES 	= main.c \
 		render.c \
 		hooks.c \
 		exit_utils.c  \
-		movement.c
+		movement.c \
+		minimap_ray.c
 
 MLX42FLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 INCLUDES = -I$(SRC_DIR) -I./include

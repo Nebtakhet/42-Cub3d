@@ -189,6 +189,8 @@ void	ft_rotate_player(t_data *data, char direction);
 /* Rendering */
 
 void	render(void *param);
+void	ft_draw_ray(t_data *data, int color);
+void	draw_ceiling_and_floor(t_data *data);
 
 /* Hooks */
 
