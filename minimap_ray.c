@@ -12,9 +12,9 @@
 
 #include "Cub3d.h"
 
-int	ft_y_ray(int direction, int *y_draw)
+int	ft_y_ray(double direction, double *y_draw)
 {
-	static int	y_step = 0;
+	static double	y_step = 0;
 
 	y_step += direction;
 	*y_draw += direction;
@@ -31,9 +31,9 @@ int	ft_y_ray(int direction, int *y_draw)
 	return (0);
 }
 
-int	ft_x_ray(int direction, int *x_draw)
+int	ft_x_ray(double direction, double *x_draw)
 {
-	static int	x_step = 0;
+	static double	x_step = 0;
 
 	x_step += direction;
 	*x_draw += direction;
@@ -54,8 +54,8 @@ void	ft_draw_ray(t_data *data, int color)
 {
 	int x;
 	int	y;
-	int	x_draw;
-	int	y_draw;
+	double	x_draw;
+	double	y_draw;
 
 	x_draw = data->player.mini_player->instances[0].x + 8;
 	y_draw = data->player.mini_player->instances[0].y + 8;
@@ -64,7 +64,7 @@ void	ft_draw_ray(t_data *data, int color)
 	while (data->map[y][x] != '1')
 	{
 		mlx_put_pixel(data->img, x_draw, y_draw, color);
-		y += ft_y_ray(roundf(sin(data->player.angle)), &y_draw);
-		x += ft_x_ray(roundf(cos(data->player.angle)), &x_draw);
+		y += ft_y_ray(sin(data->player.angle), &y_draw);
+		x += ft_x_ray(cos(data->player.angle), &x_draw);
 	}
 }
