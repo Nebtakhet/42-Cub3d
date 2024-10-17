@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/10 15:30:42 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/17 13:05:51 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define ITER 69
 # define FRAME_WAIT 5
 # define PI 3.14159265358979323846
+# define FOV 1.04719755119659774615
+# define NUM_RAYS 100
+# define TILE_SIZE 64
 
 typedef struct s_img
 {
@@ -41,12 +44,6 @@ typedef struct s_cords
 	double	min;
 	double	max;
 }				t_cords;
-
-typedef struct s_complex
-{
-	double	r;
-	double	i;
-}				t_complex;
 
 typedef struct s_renderer
 {
@@ -79,7 +76,6 @@ typedef struct s_player
 {
 	mlx_texture_t	*mini_p;
 	mlx_image_t		*mini_player;
-	char			dir;
 	double			angle;
 	double			pos_x;
 	double			pos_y;
@@ -127,7 +123,6 @@ typedef struct s_data
 	u_int32_t		iter;
 	t_cords			x;
 	t_cords			y;
-	t_complex		complex;
 	u_int32_t		palette[ITER];
 	t_color			color;
 	t_renderer		renderer;
@@ -179,11 +174,19 @@ void	win_init(t_data *win);
 void	ft_draw_minimap(t_data *data);
 void	ft_minimap_hook(void *param);
 int		ft_draw_player_to_minimap(t_data *data);
-
+void	draw_rays_on_minimap(t_data *data);
 
 /* Rendering */
 
 void	render(void *param);
+
+/* Raycasting */
+
+void	raycast(t_data *data);
+void	init_ray(t_data *data);
+void	set_dda(t_data *data);
+void	perform_dda(t_data *data);
+void	calc_wall(t_data *data);
 
 /* Hooks */
 

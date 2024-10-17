@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:26:48 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/10 15:54:36 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:18:57 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,66 +18,6 @@ void	ft_minimap_hook(void *param)
 	static int	x = 0;
 	static int	y = 0;
 
-	// if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-	// {
-	// 	if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
-	// 		|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == '1' \
-	// 		&& y > -3))
-	// 	{
-	// 		data->player.mini_player->instances[0].y -= 1;
-	// 		y--;
-	// 		if (y == -8 && data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1')
-	// 		{
-	// 			data->player_pos[0] -= 1;
-	// 			y = 8;
-	// 		}
-	// 	}
-	// }
-	// if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-	// {
-	// 	if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
-	// 		(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' && \
-	// 		y < 3))
-	// 	{
-	// 		data->player.mini_player->instances[0].y += 1;
-	// 		y++;
-	// 		if (y == 8 && data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1')
-	// 		{
-	// 			data->player_pos[0] += 1;
-	// 			y = -8;
-	// 		}
-	// 	}
-	// }
-	// if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-	// {
-	// 	if (data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1' || \
-	// 		(data->map[data->player_pos[0]][data->player_pos[1] - 1] == '1' \
-	// 		&& x > -3))
-	// 	{
-	// 		data->player.mini_player->instances[0].x -= 1;
-	// 		x--;
-	// 		if (x == -8 && data->map[data->player_pos[0]][data->player_pos[1] - 1] != '1')
-	// 		{
-	// 			data->player_pos[1] -= 1;
-	// 			x = 8;
-	// 		}
-	// 	}
-	// }
-	// if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-	// {
-	// 	if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
-	// 		(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
-	// 		&& x < 3))
-	// 	{
-	// 		data->player.mini_player->instances[0].x += 1;
-	// 		x++;
-	// 		if (x == 8 && data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1')
-	// 		{
-	// 			data->player_pos[1] += 1;
-	// 			x = -8;
-	// 		}
-	// 	}
-	// }
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
 		if ((roundf(data->player.mini_player->instances[0].y + sin(data->player.angle)) > data->player.mini_player->instances[0].y))
@@ -374,8 +314,8 @@ void	ft_draw_minimap(t_data *data)
 
 	y = -1;
     img = mlx_new_image(data->mlx, data->map_width * 16, data->map_height * 16);
-  ft_memset(img->pixels, 200, img->width * img->height * sizeof(int32_t));
-    mlx_image_to_window(data->mlx, img, 20, 20);
+	ft_memset(img->pixels, 200, img->width * img->height * sizeof(int32_t));
+	mlx_image_to_window(data->mlx, img, 20, 20);
 	while (++y < data->map_height)
 	{
 		x = -1;
@@ -393,4 +333,5 @@ void	ft_draw_minimap(t_data *data)
 			}
 		}
 	}
+	
 }

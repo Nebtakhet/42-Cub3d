@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:22:01 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/08 20:51:49 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:02:03 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 	ft_draw_minimap(data);
 	ft_draw_player_to_minimap(data);
+	raycast(data);
 	mlx_loop_hook(data->mlx, &ft_minimap_hook, (void *)data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);

@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/10/10 14:12:20 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/10/15 19:34:46 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ FILES 	= main.c \
 		textures.c \
 		utils.c \
 		render.c \
+		raycast.c \
 		hooks.c \
 		exit_utils.c  \
 
@@ -66,7 +67,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)Cub3d.h | $(OBJ_DIR)
 
 fsanitize: $(MLX42) $(LIBFT)/libft.a $(OBJ_FILES)
 	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) \
-		$(MLX42FLAGS) -g -fsanitize=address -static-libsan -lm
+		$(MLX42FLAGS) -g -fsanitize=address -static-libasan -lm
 	
 clean:
 	make clean -C $(LIBFT)

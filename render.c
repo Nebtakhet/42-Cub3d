@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/09 12:43:01 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/17 13:45:05 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	calculate_img(t_data *data)
 		img.y = 0;
 		while (img.y < HEIGHT)
 		{
-			mlx_put_pixel(data->img, img.x, img.y, data->palette[12]);
+			mlx_put_pixel(data->img, img.x, img.y, 0x000000);
 			img.y++;
 		}
 		img.x++;
@@ -38,12 +38,6 @@ void	render(void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	if (data->renderer.frames < FRAME_WAIT)
-	{
-		data->renderer.frames++;
-		return ;
-	}
-	data->renderer.frames = 0;
 	if (data->renderer.changed)
 		calculate_img(data);
 	data->renderer.changed = false;
