@@ -22,6 +22,8 @@ void	ft_init_player(t_data *data)
 		data->player.angle = PI;
 	if (data->map[data->player_pos[0]][data->player_pos[1]] == 'E')
 		data->player.angle = 0;
+	data->player.dir_x = cos(data->player.angle);
+	data->player.dir_y = sin(data->player.angle);
 }
 
 t_data	*ft_init_data(void)

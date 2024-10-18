@@ -73,7 +73,7 @@ void	ft_move_hook(void *param)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 		ft_move_player(data, data->player.dir_y, data->player.dir_x);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-		ft_move_player(data, data->player.dir_x, -(data->player.dir_y));
+		ft_move_player(data, -(data->player.dir_x), data->player.dir_y);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 		ft_move_player(data, -(data->player.dir_y), -(data->player.dir_x));
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
