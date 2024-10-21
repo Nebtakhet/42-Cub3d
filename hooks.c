@@ -84,8 +84,7 @@ void	ft_move_hook(void *param)
 		ft_rotate_player(data, 'r');
 	if (data->player.moved)
 	{
-		draw_ceiling_and_floor(data);
-		ft_draw_ray(data, data->palette[12]);
+		data->renderer.changed = true;
 		data->player.moved = false;
 	}
 }

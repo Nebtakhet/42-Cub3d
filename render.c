@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/17 13:45:05 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/21 09:53:24 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,21 @@ pixel color in the image */
 void	calculate_img(t_data *data)
 {
 	t_img	img;
+	int		color;
 
 	img.x = 0;
 	while (img.x < WIDTH)
 	{
+		raycast(data, img.x);
+		if (data->ray.side == 0)
+			color = get_rgba(0, 255, 0, 255);
+		else
+			color = get_rgba(0, 0, 255, 255);
 		img.y = 0;
 		while (img.y < HEIGHT)
 		{
-			mlx_put_pixel(data->img, img.x, img.y, 0x000000);
+			if (img.y >= data->ray.draw_start && img.y <= data->ray.draw_end)
+				mlx_put_pixel(data->img, img.x, img.y, color);
 			img.y++;
 		}
 		img.x++;
@@ -39,6 +46,11 @@ void	render(void *param)
 
 	data = (t_data *)param;
 	if (data->renderer.changed)
+	{
+		draw_ceiling_and_floor(data);
+		raycast(data, 0);
 		calculate_img(data);
+		ft_draw_ray(data, data->palette[12]);
+	}
 	data->renderer.changed = false;
 }

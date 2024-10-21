@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvallin <nvallin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:20:31 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/07 15:20:32 by nvallin          ###   ########.fr       */
+/*   Updated: 2024/10/18 13:57:52 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ int	ft_parse_scene_description(t_data *info, char *file)
 	}
 	info->floor_rgba = get_rgba(info->floor_color[0], info->floor_color[1], \
 								info->floor_color[2], 255);
-	info->ceiling_rgba = get_rgba(info->ceiling_color[0], info->ceiling_color[1], \
-								info->ceiling_color[2], 255);
+	info->ceiling_rgba = get_rgba(info->ceiling_color[0], \
+						info->ceiling_color[1], info->ceiling_color[2], 255);
 	close(fd);
 	return (0);
 }
