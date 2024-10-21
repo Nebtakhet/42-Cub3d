@@ -3,8 +3,8 @@ SO ./textures/redbrick.png
 WE ./textures/greystone.png
 EA ./textures/mossy.png
 
-F 220,100,0
-C 255,30,0
+F 10,100,10
+C 10,30,10
 
 
 

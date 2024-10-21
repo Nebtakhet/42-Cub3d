@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:29:33 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/17 10:09:54 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/21 09:52:39 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ x and y to the player's direction x and y plus the player's plane x and y
 multiplied by the camera_x. It will set the ray's map_x and map_y to the
 player's position x and y. It will set the ray's delta distance x and y to the
 absolute value of 1 divided by the ray's direction x and y. */
-void	init_ray(t_data *data)
+void	init_ray(t_data *data, int x)
 {
 	ft_bzero(&data->ray, sizeof(t_ray));
-	data->ray.camera_x = 2 * data->ray.map_x / (double)WIDTH - 1;
+	data->ray.map_x = (int)data->player.pos_x;
+	data->ray.map_y = (int)data->player.pos_y;
+	data->ray.camera_x = 2 * x / (double)WIDTH - 1;
 	data->ray.ray_dir_x = data->player.dir_x + data->player.plane_x
 		* data->ray.camera_x;
 	data->ray.ray_dir_y = data->player.dir_y + data->player.plane_y
 		* data->ray.camera_x;
-	data->ray.map_x = (int)data->player.pos_x;
-	data->ray.map_y = (int)data->player.pos_y;
 	data->ray.delta_dist_x = fabs(1 / data->ray.ray_dir_x);
 	data->ray.delta_dist_y = fabs(1 / data->ray.ray_dir_y);
 }
@@ -94,6 +94,10 @@ void	perform_dda(t_data *data)
 			data->ray.map_y += data->ray.step_y;
 			data->ray.side = 1;
 		}
+		if (data->ray.map_y < 0 || data->ray.map_x < 0
+			|| data->ray.map_y >= data->map_height
+			|| data->ray.map_x >= data->map_width)
+			break ;
 		if (data->map[data->ray.map_y][data->ray.map_x] == '1')
 			break ;
 	}
@@ -138,17 +142,11 @@ void	calc_wall(t_data *data)
 	data->ray.wall_x -= floor(data->ray.wall_x);
 }
 
-void	raycast(t_data *data)
+void	raycast(t_data *data, int x)
 {
-	int		x;
-
-	x = 0;
-	while (x < WIDTH)
-	{
-		init_ray(data);
-		set_dda(data);
-		perform_dda(data);
-		calc_wall(data);
-		x++;
-	}
+	init_ray(data, x);
+	set_dda(data);
+	perform_dda(data);
+	calc_wall(data);
+	x++;
 }

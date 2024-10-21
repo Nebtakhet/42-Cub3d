@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvallin <nvallin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/14 17:55:09 by nvallin          ###   ########.fr       */
+/*   Updated: 2024/10/18 14:00:48 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_rotate_player(t_data *data, char direction)
 {
 	if (direction == 'l')
 	{
-		data->player.angle -= 0.1;
+		data->player.angle -= PI / 90;
 		if (data->player.angle < 0)
 			data->player.angle += 2 * PI;
 		data->player.dir_x = cos(data->player.angle);
@@ -24,7 +24,7 @@ void	ft_rotate_player(t_data *data, char direction)
 	}
 	if (direction == 'r')
 	{
-		data->player.angle += 0.1;
+		data->player.angle += PI / 90;
 		if (data->player.angle > 2 * PI)
 			data->player.angle -= 2 * PI;
 		data->player.dir_x = cos(data->player.angle);
@@ -48,13 +48,13 @@ void	ft_move_player_up(t_data *data, double direction)
 		{
 			data->player.mini_player->instances[0].y--;
 			pixels += 1;
-		}		
+		}
 		if (y_moved <= -8)
 		{
 			data->player_pos[0] -= 1;
 			y_moved += 16;
-		}		
-	}		
+		}
+	}
 }
 
 void	ft_move_player_down(t_data *data, double direction)
@@ -85,7 +85,7 @@ void	ft_move_player_left(t_data *data, double direction)
 {
 	static double	x_moved = 0;
 	static double	pixels = 0;
-	
+
 	if (data->map[data->player_pos[0]][data->player_pos[1] -1] != '1' \
 			|| (data->map[data->player_pos[0]][data->player_pos[1] - 1] == \
 			'1' && x_moved > -3))
@@ -101,7 +101,7 @@ void	ft_move_player_left(t_data *data, double direction)
 		{
 			data->player_pos[1] -= 1;
 			x_moved += 16;
-		}		
+		}
 	}
 }
 
@@ -131,13 +131,13 @@ void	ft_move_player_right(t_data *data, double direction)
 
 void	ft_move_player(t_data *data, double dir_y, double dir_x)
 {
-	 if (dir_y < 0)
-	 	ft_move_player_up(data, dir_y);
+	if (dir_y < 0)
+		ft_move_player_up(data, dir_y);
 	else if (dir_y > 0)
 		ft_move_player_down(data, dir_y);
 	if (dir_x < 0)
 		ft_move_player_left(data, dir_x);
 	else if (dir_x > 0)
 		ft_move_player_right(data, dir_x);
-	data->player.moved = true;		
+	data->player.moved = true;
 }
