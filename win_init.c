@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:08:12 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 20:04:22 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:10:18 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_ceiling_and_floor(t_data *data)
 		x = -1;
 		while (++x < WIDTH)
 			mlx_put_pixel(data->img, x, y, data->floor_rgba);
-	}	
+	}
 }
 
 /* Function to initialize the window. It will get the layout of the window, set
