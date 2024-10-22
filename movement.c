@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/18 14:00:48 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:15:52 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	ft_rotate_player(t_data *data, char direction)
 {
-	double	old_x;
-	double	old_y;
-
-	old_x = data->player.plane_x;
-	old_y = data->player.plane_y;
 	if (direction == 'l')
 	{
 		data->player.angle -= PI / 90;
