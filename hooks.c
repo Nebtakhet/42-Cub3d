@@ -84,7 +84,6 @@ void	ft_move_hook(void *param)
 		ft_rotate_player(data, 'r');
 	if (data->player.moved)
 	{
-		data->renderer.changed = true;
 		data->player.moved = false;
 		data->renderer.changed = true;
 	}

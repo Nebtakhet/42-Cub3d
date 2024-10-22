@@ -190,8 +190,8 @@ void	draw_ceiling_and_floor(t_data *data);
 
 /* Raycasting */
 
-void	raycast(t_data *data);
-void	init_ray(t_data *data);
+void	raycast(t_data *data, int x);
+void	init_ray(t_data *data, int x);
 void	set_dda(t_data *data);
 void	perform_dda(t_data *data);
 void	calc_wall(t_data *data);

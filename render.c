@@ -22,7 +22,7 @@ void	calculate_img(t_data *data)
 	img.x = 0;
 	while (img.x < WIDTH)
 	{
-		raycast(data);
+		raycast(data, img.x);
 		if (data->ray.side == 0)
 			color = get_rgba(0, 255, 0, 255);
 		else
@@ -49,7 +49,7 @@ void	render(void *param)
 	if (data->renderer.changed || ++frames > FRAME_WAIT)
 	{
 		draw_ceiling_and_floor(data);
-		raycast(data);
+		raycast(data, 0);
 		calculate_img(data);
 		ft_draw_ray(data, data->palette[12]);
 		frames = 0;
