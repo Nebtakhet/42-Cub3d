@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:29:33 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/22 13:01:52 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:18:18 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_ray(t_data *data)
 	ft_bzero(&data->ray, sizeof(t_ray));
 	data->ray.map_x = data->player_pos[1];
 	data->ray.map_y = data->player_pos[0];
-	data->ray.camera_x = 2 * x / (double)WIDTH - 1;
+	data->ray.camera_x = 2 * data->player.dir_x / (double)WIDTH - 1;
 	data->ray.ray_dir_x = data->player.dir_x + data->player.plane_x
 		* data->ray.camera_x;
 	data->ray.ray_dir_y = data->player.dir_y + data->player.plane_y
