@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/22 12:56:24 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:01:30 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 
 void	ft_rotate_player(t_data *data, char direction)
 {
+	double	old_x;
+	double	old_y;
+
+	old_x = data->player.plane_x;
+	old_y = data->player.plane_y;
 	if (direction == 'l')
 	{
 		data->player.angle -= PI / 90;
 		if (data->player.angle < 0)
 			data->player.angle += 2 * PI;
-		data->player.dir_x = cos(data->player.angle);
+		data->player.dir_x = cos(data->player.angle) ;
+		data->player.plane_x = cos(data->player.angle) - sin(data->player.angle);
 		data->player.dir_y = sin(data->player.angle);
+		data->player.plane_y = cos(data->player.angle) + sin(data->player.angle);
 	}
 	if (direction == 'r')
 	{
@@ -28,7 +35,9 @@ void	ft_rotate_player(t_data *data, char direction)
 		if (data->player.angle > 2 * PI)
 			data->player.angle -= 2 * PI;
 		data->player.dir_x = cos(data->player.angle);
+		data->player.plane_x = cos(data->player.angle) - sin(data->player.angle);
 		data->player.dir_y = sin(data->player.angle);
+		data->player.plane_y = cos(data->player.angle) + sin(data->player.angle);
 	}
 	data->player.moved = true;
 }
@@ -77,7 +86,7 @@ void	ft_move_player_up(t_data *data, double direction)
 				y_moved += 16;
 			}
 		}
-	}
+	}		
 }
 
 void	ft_move_player_down(t_data *data, double direction)
@@ -107,7 +116,11 @@ void	ft_move_player_left(t_data *data, double direction)
 {
 	static int		x_moved = 0;
 	static double	pixels = 0;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> parsing
 	if (!ft_is_player_near_wall(data, 'x', -1) || \
 		(ft_is_player_near_wall(data, 'x', -1) && x_moved > -5))
 	{

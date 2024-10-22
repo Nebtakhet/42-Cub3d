@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/21 17:40:19 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:02:49 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,14 @@ void	calculate_img(t_data *data)
 	{
 		raycast(data);
 		if (data->ray.side == 0)
-			color = 0x00FF00;
+			color = get_rgba(0, 255, 0, 255);
 		else
-			color = 0x0000FF;
+			color = get_rgba(0, 0, 255, 255);
 		img.y = 0;
 		while (img.y < HEIGHT)
 		{
 			if (img.y >= data->ray.draw_start && img.y <= data->ray.draw_end)
 				mlx_put_pixel(data->img, img.x, img.y, color);
-			else
-				mlx_put_pixel(data->img, img.x, img.y, 0x000000);
 			img.y++;
 		}
 		img.x++;
@@ -44,17 +42,17 @@ void	calculate_img(t_data *data)
 than the frame wait */
 void	render(void *param)
 {
-	t_data	*data;
-	int		frames;
+	static int	frames = 0;
+	t_data		*data;
 
 	data = (t_data *)param;
-	frames = 0;
-	ft_draw_ray(data, data->palette[12]);
-	if (data->renderer.changed || frames > FRAME_WAIT)
+	if (data->renderer.changed || ++frames > FRAME_WAIT)
 	{
-		ft_draw_ray(data, data->palette[12]);
+		draw_ceiling_and_floor(data);
 		raycast(data);
 		calculate_img(data);
+		ft_draw_ray(data, data->palette[12]);
+		frames = 0;
 	}
 	data->renderer.changed = false;
 }

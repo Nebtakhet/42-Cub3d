@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:29:33 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/21 17:37:27 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:01:52 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ absolute value of 1 divided by the ray's direction x and y. */
 void	init_ray(t_data *data)
 {
 	ft_bzero(&data->ray, sizeof(t_ray));
-	data->ray.map_x = (int)data->player.pos_x;
-	data->ray.map_y = (int)data->player.pos_y;
-	data->ray.camera_x = 2 * data->ray.map_x / (double)WIDTH - 1;
+	data->ray.map_x = data->player_pos[1];
+	data->ray.map_y = data->player_pos[0];
+	data->ray.camera_x = 2 * x / (double)WIDTH - 1;
 	data->ray.ray_dir_x = data->player.dir_x + data->player.plane_x
 		* data->ray.camera_x;
 	data->ray.ray_dir_y = data->player.dir_y + data->player.plane_y
@@ -48,25 +48,25 @@ void	set_dda(t_data *data)
 	if (data->ray.ray_dir_x < 0)
 	{
 		data->ray.step_x = -1;
-		data->ray.side_dist_x = (data->player.pos_x - data->ray.map_x)
+		data->ray.side_dist_x = (data->player_pos[1] - data->ray.map_x)
 			* data->ray.delta_dist_x;
 	}
 	else
 	{
 		data->ray.step_x = 1;
-		data->ray.side_dist_x = (data->ray.map_x + 1.0 - data->player.pos_x)
+		data->ray.side_dist_x = (data->ray.map_x + 1.0 - data->player_pos[1])
 			* data->ray.delta_dist_x;
 	}
 	if (data->ray.ray_dir_y < 0)
 	{
 		data->ray.step_y = -1;
-		data->ray.side_dist_y = (data->player.pos_y - data->ray.map_y)
+		data->ray.side_dist_y = (data->player_pos[0] - data->ray.map_y)
 			* data->ray.delta_dist_y;
 	}
 	else
 	{
 		data->ray.step_y = 1;
-		data->ray.side_dist_y = (data->ray.map_y + 1.0 - data->player.pos_y)
+		data->ray.side_dist_y = (data->ray.map_y + 1.0 - data->player_pos[0])
 			* data->ray.delta_dist_y;
 	}
 }
@@ -121,10 +121,10 @@ ray's direction x. It will subtract the floor of the wall x from the wall x. */
 void	calc_wall(t_data *data)
 {
 	if (data->ray.side == 0)
-		data->ray.perp_wall_dist = (data->ray.map_x - data->player.pos_x
+		data->ray.perp_wall_dist = (data->ray.map_x - data->player_pos[1]
 				+ (1 - data->ray.step_x) / 2) / data->ray.ray_dir_x;
 	else
-		data->ray.perp_wall_dist = (data->ray.map_y - data->player.pos_y
+		data->ray.perp_wall_dist = (data->ray.map_y - data->player_pos[0]
 				+ (1 - data->ray.step_y) / 2) / data->ray.ray_dir_y;
 	data->ray.line_height = (int)(HEIGHT / data->ray.perp_wall_dist);
 	data->ray.draw_start = -data->ray.line_height / 2 + HEIGHT / 2;
@@ -134,10 +134,10 @@ void	calc_wall(t_data *data)
 	if (data->ray.draw_end >= HEIGHT)
 		data->ray.draw_end = HEIGHT - 1;
 	if (data->ray.side == 0)
-		data->ray.wall_x = data->player.pos_y + data->ray.perp_wall_dist
+		data->ray.wall_x = data->player_pos[0] + data->ray.perp_wall_dist
 			* data->ray.ray_dir_y;
 	else
-		data->ray.wall_x = data->player.pos_x + data->ray.perp_wall_dist
+		data->ray.wall_x = data->player_pos[1] + data->ray.perp_wall_dist
 			* data->ray.ray_dir_x;
 	data->ray.wall_x -= floor(data->ray.wall_x);
 }
