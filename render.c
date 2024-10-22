@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/22 13:02:49 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:09:23 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	calculate_img(t_data *data)
 	}
 }
 
+
 /* Function to render the image. It will only render if the frames are greater
 than the frame wait */
 void	render(void *param)
@@ -49,7 +50,6 @@ void	render(void *param)
 	if (data->renderer.changed || ++frames > FRAME_WAIT)
 	{
 		draw_ceiling_and_floor(data);
-		raycast(data, 0);
 		calculate_img(data);
 		ft_draw_ray(data, data->palette[12]);
 		frames = 0;
