@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/21 17:40:57 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:56:24 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,98 +33,118 @@ void	ft_rotate_player(t_data *data, char direction)
 	data->player.moved = true;
 }
 
+int	ft_is_player_near_wall(t_data *data, char axis, int direction)
+{
+	int	y;
+	int	x;
+
+	y = data->player_pos[0];
+	x = data->player_pos[1];
+	if (axis == 'y')
+	{
+		if (direction > 0 && data->map[y + 1][x] == '1')
+			return (1);
+		if (direction < 0 && data->map[y - 1][x] == '1')
+			return (1);
+	}
+	if (axis == 'x')
+	{
+		if (direction > 0 && data->map[y][x + 1] == '1')
+			return (1);
+		if (direction < 0 && data->map[y][x - 1] == '1')
+			return (1);		
+	}
+	return (0);
+}
+
 void	ft_move_player_up(t_data *data, double direction)
 {
-	static double	y_moved = 0;
+	static int		y_moved = 0;
 	static double	pixels = 0;
 
-	if (data->map[data->player_pos[0] - 1][data->player_pos[1]] != '1' \
-			|| (data->map[data->player_pos[0] - 1][data->player_pos[1]] == \
-			'1' && y_moved > -3))
+	if (!ft_is_player_near_wall(data, 'y', -1) || \
+		(ft_is_player_near_wall(data, 'y', -1) && y_moved > -5))
 	{
-		y_moved += direction;
 		pixels += direction;
-		if (pixels < -1)
+		if (pixels <= -1)
 		{
 			data->player.mini_player->instances[0].y--;
+			data->player.pos_y--;
 			pixels += 1;
-		}
-		if (y_moved <= -8)
-		{
-			data->player_pos[0] -= 1;
-			y_moved += 16;
+			if (--y_moved < -8)
+			{
+				data->player_pos[0] -= 1;
+				y_moved += 16;
+			}
 		}
 	}
 }
 
 void	ft_move_player_down(t_data *data, double direction)
 {
-	static double	y_moved = 0;
+	static int		y_moved = 0;
 	static double	pixels = 0;
 
-	if (data->map[data->player_pos[0] + 1][data->player_pos[1]] != '1' || \
-			(data->map[data->player_pos[0] + 1][data->player_pos[1]] == '1' \
-			&& y_moved < 3))
+	if (!ft_is_player_near_wall(data, 'y', 1) || \
+		(ft_is_player_near_wall(data, 'y', 1) && y_moved < 5))
 	{
-		y_moved += direction;
 		pixels += direction;
-		if (pixels > 1)
+		if (pixels >= 1)
 		{
 			data->player.mini_player->instances[0].y++;
+			data->player.pos_y++;
 			pixels -= 1;
-		}
-		if (y_moved >= 8)
-		{
-			data->player_pos[0] += 1;
-			y_moved -= 16;
+			if (++y_moved > 8)
+			{
+				data->player_pos[0] += 1;
+				y_moved -= 16;
+			}
 		}
 	}
 }
 
 void	ft_move_player_left(t_data *data, double direction)
 {
-	static double	x_moved = 0;
+	static int		x_moved = 0;
 	static double	pixels = 0;
 
-	if (data->map[data->player_pos[0]][data->player_pos[1] -1] != '1' \
-			|| (data->map[data->player_pos[0]][data->player_pos[1] - 1] == \
-			'1' && x_moved > -3))
+	if (!ft_is_player_near_wall(data, 'x', -1) || \
+		(ft_is_player_near_wall(data, 'x', -1) && x_moved > -5))
 	{
-		x_moved += direction;
 		pixels += direction;
-		if (pixels < -1)
+		if (pixels <= -1)
 		{
 			data->player.mini_player->instances[0].x--;
+			data->player.pos_x--;
 			pixels += 1;
-		}
-		if (x_moved <= -8)
-		{
-			data->player_pos[1] -= 1;
-			x_moved += 16;
+			if (--x_moved < -8)
+			{
+				data->player_pos[1] -= 1;
+				x_moved += 16;
+			}
 		}
 	}
 }
 
 void	ft_move_player_right(t_data *data, double direction)
 {
-	static double	x_moved = 0;
+	static int		x_moved = 0;
 	static double	pixels = 0;
 
-	if (data->map[data->player_pos[0]][data->player_pos[1] + 1] != '1' || \
-		(data->map[data->player_pos[0]][data->player_pos[1] + 1] == '1' \
-		&& x_moved < 3))
+	if (!ft_is_player_near_wall(data, 'x', 1) || \
+		(ft_is_player_near_wall(data, 'x', 1) && x_moved < 5))
 	{
-		x_moved += direction;
 		pixels += direction;
-		if (pixels > 1)
+		if (pixels >= 1)
 		{
 			data->player.mini_player->instances[0].x++;
+			data->player.pos_x++;
 			pixels -= 1;
-		}
-		if (x_moved >= 8)
-		{
-			data->player_pos[1] += 1;
-			x_moved -= 16;
+			if (++x_moved > 8)
+			{
+				data->player_pos[1] += 1;
+				x_moved -= 16;
+			}
 		}
 	}
 }
