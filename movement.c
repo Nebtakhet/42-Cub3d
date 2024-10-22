@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/18 14:00:48 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:40:57 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,4 +140,5 @@ void	ft_move_player(t_data *data, double dir_y, double dir_x)
 	else if (dir_x > 0)
 		ft_move_player_right(data, dir_x);
 	data->player.moved = true;
+	data->renderer.changed = true;
 }

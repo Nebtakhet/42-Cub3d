@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:45:24 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 20:52:54 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:42:41 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void	ft_move_hook(void *param)
 		draw_ceiling_and_floor(data);
 		ft_draw_ray(data, data->palette[12]);
 		data->player.moved = false;
+		data->renderer.changed = true;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/21 09:53:04 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:37:00 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,8 +190,8 @@ void	draw_ceiling_and_floor(t_data *data);
 
 /* Raycasting */
 
-void	raycast(t_data *data, int x);
-void	init_ray(t_data *data, int x);
+void	raycast(t_data *data);
+void	init_ray(t_data *data);
 void	set_dda(t_data *data);
 void	perform_dda(t_data *data);
 void	calc_wall(t_data *data);
