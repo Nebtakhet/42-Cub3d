@@ -49,7 +49,6 @@ void	render(void *param)
 	if (data->renderer.changed || ++frames > FRAME_WAIT)
 	{
 		draw_ceiling_and_floor(data);
-		raycast(data, 0);
 		calculate_img(data);
 		ft_draw_ray(data, data->palette[12]);
 		frames = 0;
