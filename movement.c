@@ -14,13 +14,20 @@
 
 void	ft_rotate_player(t_data *data, char direction)
 {
+	double	old_x;
+	double	old_y;
+
+	old_x = data->player.plane_x;
+	old_y = data->player.plane_y;
 	if (direction == 'l')
 	{
 		data->player.angle -= PI / 90;
 		if (data->player.angle < 0)
 			data->player.angle += 2 * PI;
-		data->player.dir_x = cos(data->player.angle);
+		data->player.dir_x = cos(data->player.angle) ;
+		data->player.plane_x = cos(data->player.angle) - sin(data->player.angle);
 		data->player.dir_y = sin(data->player.angle);
+		data->player.plane_y = cos(data->player.angle) + sin(data->player.angle);
 	}
 	if (direction == 'r')
 	{
@@ -28,7 +35,9 @@ void	ft_rotate_player(t_data *data, char direction)
 		if (data->player.angle > 2 * PI)
 			data->player.angle -= 2 * PI;
 		data->player.dir_x = cos(data->player.angle);
+		data->player.plane_x = cos(data->player.angle) - sin(data->player.angle);
 		data->player.dir_y = sin(data->player.angle);
+		data->player.plane_y = cos(data->player.angle) + sin(data->player.angle);
 	}
 	data->player.moved = true;
 }

@@ -42,15 +42,17 @@ void	calculate_img(t_data *data)
 than the frame wait */
 void	render(void *param)
 {
-	t_data	*data;
+	static int	frames = 0;
+	t_data		*data;
 
 	data = (t_data *)param;
-	if (data->renderer.changed)
+	if (data->renderer.changed || ++frames > FRAME_WAIT)
 	{
 		draw_ceiling_and_floor(data);
 		raycast(data, 0);
 		calculate_img(data);
 		ft_draw_ray(data, data->palette[12]);
+		frames = 0;
 	}
 	data->renderer.changed = false;
 }
