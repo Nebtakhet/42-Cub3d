@@ -24,8 +24,10 @@ void	ft_init_player(t_data *data)
 		data->player.angle = 0;
 	data->player.dir_x = cos(data->player.angle);
 	data->player.dir_y = sin(data->player.angle);
-	data->player.plane_x = 0;
-	data->player.plane_y = 0.66;
+	data->player.plane_x = cos(data->player.angle) - sin(data->player.angle);
+	data->player.plane_y = cos(data->player.angle) + sin(data->player.angle);
+	data->player.pos_y = data->player_pos[0] + 0.5;
+	data->player.pos_x = data->player_pos[1] + 0.5;
 }
 
 t_data	*ft_init_data(void)

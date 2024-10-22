@@ -26,8 +26,6 @@ int	ft_draw_player_to_minimap(t_data *data)
 	if (mlx_image_to_window(data->mlx, data->player.mini_player, \
 		data->player_pos[1] * 16 + 20, data->player_pos[0] * 16 + 20) == -1)
 		return (1);
-	data->player.pos_y = data->player.mini_player->instances[0].y;
-	data->player.pos_x = data->player.mini_player->instances[0].x;	
 	ft_draw_ray(data, data->palette[12]);
 	return (0);
 }
