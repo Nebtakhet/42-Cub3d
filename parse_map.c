@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:59:55 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/08 14:34:22 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:51:31 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_get_map(t_data *info, char *map_str)
 }
 
 int	ft_check_map_end(char *map_str, int player_count)
-{	
+{
 	if (player_count == 0)
 	{
 		ft_parsing_error("no player found");
@@ -58,14 +58,14 @@ int	ft_check_map_end(char *map_str, int player_count)
 }
 
 int	ft_check_player(t_data *info, int *player_count, int x)
-{	
+{
 	*player_count += 1;
 	if (*player_count == 1)
 	{
 		info->player_pos[0] = info->map_height;
 		info->player_pos[1] = x;
 		return (0);
-	}	
+	}
 	if (*player_count > 1)
 		ft_parsing_error("multiple players found");
 	return (1);

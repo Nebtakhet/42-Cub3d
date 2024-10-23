@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 13:46:56 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/23 11:30:33 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:50:05 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	ft_x_ray(double direction, double *x_draw)
 
 void	ft_draw_ray(t_data *data, int color)
 {
-	int x;
-	int	y;
+	int		x;
+	int		y;
 	double	x_draw;
 	double	y_draw;
 	double	angle;

@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:26:48 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/18 13:44:07 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:49:36 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ int	ft_draw_minimap(t_data *data)
 			if (data->map[y][x] == '1' && mlx_image_to_window(data->mlx, \
 				data->map_wall, x * 16 + 20, y * 16 + 20) == -1)
 				return (1);
-		/*	if ((data->map[y][x] == '.' || ft_is_player(data->map[y][x])) && \
-				mlx_image_to_window(data->mlx, data->map_floor, x * 16 + 20, \
-									y * 16 + 20) == -1)
-				return (1);*/
 		}
 	}
 	return (0);

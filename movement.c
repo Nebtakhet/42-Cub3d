@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/23 12:38:39 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:51:05 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ void	ft_rotate_player(t_data *data, char direction)
 		data->player.angle -= PI / 90;
 		if (data->player.angle < 0)
 			data->player.angle += 2 * PI;
-		data->player.dir_x = cos(data->player.angle) ;
-		data->player.plane_x = cos(data->player.angle) - sin(data->player.angle);
+		data->player.dir_x = cos(data->player.angle);
 		data->player.dir_y = sin(data->player.angle);
-		data->player.plane_y = cos(data->player.angle) + sin(data->player.angle);
 		data->player.plane_x = -sin(data->player.angle) * 0.66;
 		data->player.plane_y = cos(data->player.angle) * 0.66;
 	}
@@ -32,9 +30,7 @@ void	ft_rotate_player(t_data *data, char direction)
 		if (data->player.angle > 2 * PI)
 			data->player.angle -= 2 * PI;
 		data->player.dir_x = cos(data->player.angle);
-		data->player.plane_x = cos(data->player.angle) - sin(data->player.angle);
 		data->player.dir_y = sin(data->player.angle);
-		data->player.plane_y = cos(data->player.angle) + sin(data->player.angle);
 		data->player.plane_x = -sin(data->player.angle) * 0.66;
 		data->player.plane_y = cos(data->player.angle) * 0.66;
 	}
@@ -60,7 +56,7 @@ int	ft_is_player_near_wall(t_data *data, char axis, int direction)
 		if (direction > 0 && data->map[y][x + 1] == '1')
 			return (1);
 		if (direction < 0 && data->map[y][x - 1] == '1')
-			return (1);		
+			return (1);
 	}
 	return (0);
 }
@@ -78,14 +74,14 @@ void	ft_move_player_up(t_data *data, double direction)
 		{
 			data->player.mini_player->instances[0].y--;
 			data->player.pos_y -= 0.0625;
-			pixels += 1;	
+			pixels += 1;
 			if (--y_moved < -8)
 			{
 				data->player_pos[0] -= 1;
 				y_moved += 16;
 			}
 		}
-	}		
+	}
 }
 
 void	ft_move_player_down(t_data *data, double direction)
@@ -115,7 +111,7 @@ void	ft_move_player_left(t_data *data, double direction)
 {
 	static int		x_moved = 0;
 	static double	pixels = 0;
-	
+
 	if (!ft_is_player_near_wall(data, 'x', -1) || \
 		(ft_is_player_near_wall(data, 'x', -1) && x_moved > -5))
 	{

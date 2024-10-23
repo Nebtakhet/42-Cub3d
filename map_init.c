@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:02:22 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/23 12:38:07 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:49:18 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_data	*handle_args(int argc, char **argv, t_data *info)
 	if (ft_parse_scene_description(info, argv[1]))
 		return (NULL);
 	ft_init_player(info);
-	printf("floor RGB: %d,%d,%d\nceiling RGB: %d,%d,%d\nmap W: %d, H: %d\n",\
+	printf("floor RGB: %d,%d,%d\nceiling RGB: %d,%d,%d\nmap W: %d, H: %d\n", \
 		info->floor_color[0], info->floor_color[1], info->floor_color[2], \
 		info->ceiling_color[0], info->ceiling_color[1], info->ceiling_color[2], \
 		info->map_width, info->map_height);
