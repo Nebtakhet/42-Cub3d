@@ -39,23 +39,23 @@ void	ft_rotate_player(t_data *data, char direction)
 
 int	ft_is_player_near_wall(t_data *data, char axis, int direction)
 {
-	int	y;
-	int	x;
+	double	y;
+	double	x;
 
-	y = data->player_pos[0];
-	x = data->player_pos[1];
+	y = data->player.pos_y;
+	x = data->player.pos_x;
 	if (axis == 'y')
 	{
-		if (direction > 0 && data->map[y + 1][x] == '1')
+		if (direction > 0 && data->map[(int)(y + 0.375)][(int)x] == '1')
 			return (1);
-		if (direction < 0 && data->map[y - 1][x] == '1')
+		if (direction < 0 && data->map[(int)(y - 0.375)][(int)x] == '1')
 			return (1);
 	}
 	if (axis == 'x')
 	{
-		if (direction > 0 && data->map[y][x + 1] == '1')
+		if (direction > 0 && data->map[(int)y][(int)(x + 0.375)] == '1')
 			return (1);
-		if (direction < 0 && data->map[y][x - 1] == '1')
+		if (direction < 0 && data->map[(int)y][(int)(x - 0.375)] == '1')
 			return (1);
 	}
 	return (0);
@@ -63,22 +63,22 @@ int	ft_is_player_near_wall(t_data *data, char axis, int direction)
 
 void	ft_move_player_up(t_data *data, double direction)
 {
-	static int		y_moved = 0;
+	static double	y_moved = 0;
 	static double	pixels = 0;
 
-	if (!ft_is_player_near_wall(data, 'y', -1) || \
-		(ft_is_player_near_wall(data, 'y', -1) && y_moved > -5))
+	if (!ft_is_player_near_wall(data, 'y', -1))
 	{
 		pixels += direction;
 		if (pixels <= -1)
 		{
 			data->player.mini_player->instances[0].y--;
 			data->player.pos_y -= 0.0625;
+			y_moved += 0.0625;
 			pixels += 1;
-			if (--y_moved < -8)
+			if (y_moved >= 0.5)
 			{
 				data->player_pos[0] -= 1;
-				y_moved += 16;
+				y_moved -= 1;
 			}
 		}
 	}
@@ -86,22 +86,22 @@ void	ft_move_player_up(t_data *data, double direction)
 
 void	ft_move_player_down(t_data *data, double direction)
 {
-	static int		y_moved = 0;
+	static double	y_moved = 0;
 	static double	pixels = 0;
 
-	if (!ft_is_player_near_wall(data, 'y', 1) || \
-		(ft_is_player_near_wall(data, 'y', 1) && y_moved < 5))
+	if (!ft_is_player_near_wall(data, 'y', 1))
 	{
 		pixels += direction;
 		if (pixels >= 1)
 		{
 			data->player.mini_player->instances[0].y++;
 			data->player.pos_y += 0.0625;
+			y_moved += 0.0625;
 			pixels -= 1;
-			if (++y_moved > 8)
+			if (y_moved >= 0.5)
 			{
 				data->player_pos[0] += 1;
-				y_moved -= 16;
+				y_moved -= 1;
 			}
 		}
 	}
@@ -109,22 +109,22 @@ void	ft_move_player_down(t_data *data, double direction)
 
 void	ft_move_player_left(t_data *data, double direction)
 {
-	static int		x_moved = 0;
+	static double	x_moved = 0;
 	static double	pixels = 0;
 
-	if (!ft_is_player_near_wall(data, 'x', -1) || \
-		(ft_is_player_near_wall(data, 'x', -1) && x_moved > -5))
+	if (!ft_is_player_near_wall(data, 'x', -1))
 	{
 		pixels += direction;
 		if (pixels <= -1)
 		{
 			data->player.mini_player->instances[0].x--;
 			data->player.pos_x -= 0.0625;
+			x_moved += 0.0625;
 			pixels += 1;
-			if (--x_moved < -8)
+			if (x_moved >= 0.5)
 			{
 				data->player_pos[1] -= 1;
-				x_moved += 16;
+				x_moved -= 1;
 			}
 		}
 	}
@@ -132,22 +132,22 @@ void	ft_move_player_left(t_data *data, double direction)
 
 void	ft_move_player_right(t_data *data, double direction)
 {
-	static int		x_moved = 0;
+	static double	x_moved = 0;
 	static double	pixels = 0;
 
-	if (!ft_is_player_near_wall(data, 'x', 1) || \
-		(ft_is_player_near_wall(data, 'x', 1) && x_moved < 5))
+	if (!ft_is_player_near_wall(data, 'x', 1))
 	{
 		pixels += direction;
 		if (pixels >= 1)
 		{
 			data->player.mini_player->instances[0].x++;
 			data->player.pos_x += 0.0625;
+			x_moved += 0.0625;
 			pixels -= 1;
-			if (++x_moved > 8)
+			if (x_moved >= 0.5)
 			{
 				data->player_pos[1] += 1;
-				x_moved -= 16;
+				x_moved -= 1;
 			}
 		}
 	}
