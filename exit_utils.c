@@ -6,11 +6,17 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:44:15 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/09 12:06:06 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:29:50 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
+
+void	error_exit(t_data *data, char *str, int status)
+{
+	print_error(str);
+	clean_exit(data, status);
+}
 
 void	print_error(char *str)
 {

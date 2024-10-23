@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/22 16:08:16 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:59:02 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ typedef struct s_mouse
 	int32_t	y;
 }				t_mouse;
 
+typedef struct s_texture
+{
+	mlx_image_t		*image;
+	u_int32_t		*data;
+	int				width;
+	int				height;
+	mlx_texture_t	*texture;
+}				t_texture;
+
 typedef struct s_player
 {
 	mlx_texture_t	*mini_p;
@@ -120,6 +129,7 @@ typedef struct s_data
 	mlx_image_t		*img;
 	t_player		player;
 	t_ray			ray;
+	t_texture		texture[4];
 	u_int32_t		iter;
 	t_cords			x;
 	t_cords			y;
@@ -133,10 +143,6 @@ typedef struct s_data
 	int				floor_rgba;
 	int				ceiling_rgba;
 	int				player_pos[2];
-	mlx_texture_t	*north_texture;
-	mlx_texture_t	*south_texture;
-	mlx_texture_t	*west_texture;
-	mlx_texture_t	*east_texture;
 	char			**map;
 	int				map_height;
 	int				map_width;
@@ -148,19 +154,23 @@ typedef struct s_data
 
 void	print_error(char *str);
 void	clean_exit(t_data *data, int status);
-int 	get_rgba(int r, int g, int b, int a);
+void	error_exit(t_data *data, char *str, int status);
+int		get_rgba(int r, int g, int b, int a);
 
 /* Initialization*/
 
 t_data	*handle_args(int argc, char **argv, t_data *info);
-
 int		ft_altoi(const char *str, int len);
 int		ft_get_floor_color(t_data *info, char *f_color);
 int		ft_get_ceiling_color(t_data *info, char *c_color);
+
+/* Wall Textures */
 int		ft_get_north_texture(t_data *info, char *line);
 int		ft_get_south_texture(t_data *info, char *line);
 int		ft_get_west_texture(t_data *info, char *line);
 int		ft_get_east_texture(t_data *info, char *line);
+void	init_textures(t_data *data);
+
 int		ft_parsing_error(char *message);
 int		ft_parse_scene_description(t_data *info, char *file);
 int		ft_get_map_str(int fd, char **map_str);
