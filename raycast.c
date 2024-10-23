@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:29:33 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/22 14:03:36 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:06:53 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,8 @@ void	calc_wall(t_data *data)
 
 void	raycast(t_data *data, int x)
 {
-	init_ray(data, x);
-	set_dda(data);
-	perform_dda(data);
-	calc_wall(data);
+		init_ray(data, x);
+		set_dda(data);
+		perform_dda(data);
+		calc_wall(data);
 }

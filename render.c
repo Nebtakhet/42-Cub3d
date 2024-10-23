@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/22 14:25:34 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:29:09 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	render(void *param)
 	if (data->renderer.changed || ++frames > FRAME_WAIT)
 	{
 		draw_ceiling_and_floor(data);
-		raycast(data, 0);
 		calculate_img(data);
 		ft_draw_ray(data, data->palette[12]);
 		frames = 0;
