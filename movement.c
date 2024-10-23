@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/23 11:36:14 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:38:39 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	ft_move_player_up(t_data *data, double direction)
 		if (pixels <= -1)
 		{
 			data->player.mini_player->instances[0].y--;
-			data->player.pos_y--;
-			pixels += 1;
+			data->player.pos_y -= 0.0625;
+			pixels += 1;	
 			if (--y_moved < -8)
 			{
 				data->player_pos[0] -= 1;
@@ -100,7 +100,7 @@ void	ft_move_player_down(t_data *data, double direction)
 		if (pixels >= 1)
 		{
 			data->player.mini_player->instances[0].y++;
-			data->player.pos_y++;
+			data->player.pos_y += 0.0625;
 			pixels -= 1;
 			if (++y_moved > 8)
 			{
@@ -123,7 +123,7 @@ void	ft_move_player_left(t_data *data, double direction)
 		if (pixels <= -1)
 		{
 			data->player.mini_player->instances[0].x--;
-			data->player.pos_x--;
+			data->player.pos_x -= 0.0625;
 			pixels += 1;
 			if (--x_moved < -8)
 			{
@@ -146,7 +146,7 @@ void	ft_move_player_right(t_data *data, double direction)
 		if (pixels >= 1)
 		{
 			data->player.mini_player->instances[0].x++;
-			data->player.pos_x++;
+			data->player.pos_x += 0.0625;
 			pixels -= 1;
 			if (++x_moved > 8)
 			{

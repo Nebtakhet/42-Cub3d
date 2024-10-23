@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:02:22 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/23 11:35:46 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:38:07 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_init_player(t_data *data)
 	data->player.dir_y = sin(data->player.angle);
 	data->player.plane_x = -sin(data->player.angle) * 0.66;
 	data->player.plane_y = cos(data->player.angle) * 0.66;
+	data->player.pos_y = data->player_pos[0] + 0.5;
+	data->player.pos_x = data->player_pos[1] + 0.5;
 }
 
 t_data	*ft_init_data(void)
