@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 13:46:56 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/22 15:01:39 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:30:33 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_draw_ray(t_data *data, int color)
 	double	y_draw;
 	double	angle;
 	double	dir_x;
-	double	dir_y;	
+	double	dir_y;
 
 	angle = data->player.angle - (FOV / 2);
 	while (angle < data->player.angle + (FOV / 2))

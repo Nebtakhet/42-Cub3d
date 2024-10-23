@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/22 13:16:46 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:36:14 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	ft_rotate_player(t_data *data, char direction)
 		data->player.plane_x = cos(data->player.angle) - sin(data->player.angle);
 		data->player.dir_y = sin(data->player.angle);
 		data->player.plane_y = cos(data->player.angle) + sin(data->player.angle);
+		data->player.plane_x = -sin(data->player.angle) * 0.66;
+		data->player.plane_y = cos(data->player.angle) * 0.66;
 	}
 	if (direction == 'r')
 	{
@@ -33,6 +35,8 @@ void	ft_rotate_player(t_data *data, char direction)
 		data->player.plane_x = cos(data->player.angle) - sin(data->player.angle);
 		data->player.dir_y = sin(data->player.angle);
 		data->player.plane_y = cos(data->player.angle) + sin(data->player.angle);
+		data->player.plane_x = -sin(data->player.angle) * 0.66;
+		data->player.plane_y = cos(data->player.angle) * 0.66;
 	}
 	data->player.moved = true;
 }
