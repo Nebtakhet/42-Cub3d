@@ -52,8 +52,8 @@ int	ft_x_ray(double direction, double *x_draw)
 
 void	ft_draw_ray(t_data *data, int color)
 {
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 	double	x_draw;
 	double	y_draw;
 	double	angle;
@@ -65,13 +65,17 @@ void	ft_draw_ray(t_data *data, int color)
 	{
 		x_draw = data->player.mini_player->instances[0].x + 8;
 		y_draw = data->player.mini_player->instances[0].y + 8;
-		x = data->player_pos[1];
-		y = data->player_pos[0];
+		x = data->player.pos_x;
+		y = data->player.pos_y;
 		dir_x = cos(angle);
 		dir_y = sin(angle);
-		while (data->map[y][x] != '1')
+		while (data->map[(int)y][(int)x] != '1')
 		{
-			mlx_put_pixel(data->img, x_draw, y_draw, color);
+			if (((dir_x > 0 && x - data->player.pos_x < 4) || \
+			(dir_x < 0 && data->player.pos_x - x < 4)) && \
+			((dir_y > 0 && y - data->player.pos_y < 4) || \
+			(dir_y < 0 && data->player.pos_y - y < 4)))
+				mlx_put_pixel(data->img, x_draw, y_draw, color);
 			y += ft_y_ray(dir_y, &y_draw);
 			x += ft_x_ray(dir_x, &x_draw);
 		}
