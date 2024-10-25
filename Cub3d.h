@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/17 13:05:51 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:08:16 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ typedef struct s_data
 	int				map_width;
 	mlx_image_t		*map_floor;
 	mlx_image_t		*map_wall;
+	mlx_image_t		*map_frame;
+	int				minimap_walls;
 }	t_data;
 
 /* Utils */
@@ -176,10 +178,12 @@ void	init_color_palette(t_data *win);
 void	get_layout(t_data *win);
 void	win_init(t_data *win);
 
-int		ft_draw_minimap(t_data *data);
+int		draw_minimap(t_data *data, int x, int y);
 int		ft_draw_player_to_minimap(t_data *data);
 void	ft_move_player(t_data *data, double dir_y, double dir_x);
 void	ft_rotate_player(t_data *data, char direction);
+void	ft_move_minimap_y(t_data *data, double direction);
+void	ft_move_minimap_x(t_data *data, double direction);
 
 
 /* Rendering */
@@ -190,8 +194,8 @@ void	draw_ceiling_and_floor(t_data *data);
 
 /* Raycasting */
 
-void	raycast(t_data *data);
-void	init_ray(t_data *data);
+void	raycast(t_data *data, int x);
+void	init_ray(t_data *data, int x);
 void	set_dda(t_data *data);
 void	perform_dda(t_data *data);
 void	calc_wall(t_data *data);

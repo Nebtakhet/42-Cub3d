@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:02:22 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/08 14:57:13 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:49:18 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	ft_init_player(t_data *data)
 		data->player.angle = 0;
 	data->player.dir_x = cos(data->player.angle);
 	data->player.dir_y = sin(data->player.angle);
+	data->player.plane_x = -sin(data->player.angle) * 0.66;
+	data->player.plane_y = cos(data->player.angle) * 0.66;
+	data->player.pos_y = data->player_pos[0] + 0.5;
+	data->player.pos_x = data->player_pos[1] + 0.5;
+	data->player.moved = false;
 }
 
 t_data	*ft_init_data(void)
@@ -45,6 +50,7 @@ t_data	*ft_init_data(void)
 	info->map = NULL;
 	info->map_width = 0;
 	info->map_height = 0;
+	info->minimap_walls = 0;
 	return (info);
 }
 
@@ -90,7 +96,7 @@ t_data	*handle_args(int argc, char **argv, t_data *info)
 	if (ft_parse_scene_description(info, argv[1]))
 		return (NULL);
 	ft_init_player(info);
-	printf("floor RGB: %d,%d,%d\nceiling RGB: %d,%d,%d\nmap W: %d, H: %d\n",\
+	printf("floor RGB: %d,%d,%d\nceiling RGB: %d,%d,%d\nmap W: %d, H: %d\n", \
 		info->floor_color[0], info->floor_color[1], info->floor_color[2], \
 		info->ceiling_color[0], info->ceiling_color[1], info->ceiling_color[2], \
 		info->map_width, info->map_height);
