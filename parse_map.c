@@ -22,10 +22,13 @@ int	ft_get_map(t_data *info, char *map_str)
 	while (info->map && ++i < info->map_height)
 	{
 		len = gnl_strchr_index(map_str, '\n');
+		if (len == -1)
+			len = ft_strlen(map_str);
 		info->map[i] = gnl_strldup(map_str, len);
 		if (!info->map[i])
 			break ;
-		map_str += (len + 1);
+		if (map_str[len] == '\n')
+			map_str += (len + 1);
 	}
 	if (i == info->map_height)
 	{
@@ -80,20 +83,19 @@ int	ft_check_map_content(t_data *info, char *map)
 	player = 0;
 	while (*map)
 	{
+		while (*map != '\n' && *map != '\0')
+		{
+			if (!ft_is_valid_content(*map) || (ft_is_player(*map++) && \
+				ft_check_player(info, &player, width)))
+				return (1);
+			width++;
+		}
 		if (width > info->map_width)
 			info->map_width = width;
-		if (!ft_is_valid_content(*map))
-			return (1);
-		if (*map == '\n')
-		{
-			width = -1;
-			info->map_height++;
-			if (*(map + 1) == '\n')
-				break ;
-		}
-		if (ft_is_player(*map++) && ft_check_player(info, &player, width))
-			return (1);
-		width++;
+		width = -1;
+		info->map_height++;
+		if (*map == '\n' && *++map == '\n')
+			break ;
 	}
 	if (ft_check_map_end(map, player))
 		return (1);

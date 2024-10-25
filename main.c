@@ -28,7 +28,10 @@ int	main(int argc, char **argv)
 //	mlx_scroll_hook(data->mlx, &scroll_hook, data);
 	mlx_close_hook(data->mlx, &close_program, data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
-	if (ft_draw_minimap(data) || ft_draw_player_to_minimap(data))
+	data->map_wall = mlx_texture_to_image(data->mlx, data->east_texture);
+	if (!data->map_wall || !mlx_resize_image(data->map_wall, 16, 16))
+		return (1);
+	if (ft_draw_minimap(data, 200, 200) || ft_draw_player_to_minimap(data))
 		return (1);
 	mlx_loop_hook(data->mlx, &render, data);
 	mlx_loop_hook(data->mlx, &ft_move_hook, (void *)data);

@@ -71,7 +71,7 @@ void	ft_move_player_up(t_data *data, double direction)
 		pixels -= direction / 1.25;
 		if (pixels >= 1)
 		{
-			data->player.mini_player->instances[0].y--;
+			ft_move_minimap_y(data, direction);
 			pixels -= 1;
 		}
 	}
@@ -87,7 +87,7 @@ void	ft_move_player_down(t_data *data, double direction)
 		pixels += direction / 1.25;
 		if (pixels >= 1)
 		{
-			data->player.mini_player->instances[0].y++;
+			ft_move_minimap_y(data, direction);
 			pixels -= 1;
 		}		
 	}
@@ -103,7 +103,7 @@ void	ft_move_player_left(t_data *data, double direction)
 		pixels -= direction / 1.25;
 		if (pixels >= 1)
 		{
-			data->player.mini_player->instances[0].x--;
+			ft_move_minimap_x(data, direction);
 			pixels -= 1;
 		}
 	}
@@ -119,7 +119,7 @@ void	ft_move_player_right(t_data *data, double direction)
 		pixels += direction / 1.25;			
 		if (pixels >= 1)
 		{
-			data->player.mini_player->instances[0].x++;
+			ft_move_minimap_x(data, direction);
 			pixels -= 1;
 		}	
 	}
