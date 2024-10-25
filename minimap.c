@@ -75,46 +75,40 @@ int	ft_draw_player_to_minimap(t_data *data)
 	return (0);
 }
 
-int	ft_draw_minimap(t_data *data, int x, int y)
+int	is_filled(char c, char filling)
 {
-	printf("%d\n", data->player_pos[0] + ((y - 200) / 16) + 1);
+	if (c == filling || ft_is_player(c))
+		return (1);
+	return (0);
+}
+
+int	draw_minimap(t_data *d, int x, int y)
+{
+	int	m_x;
+	int	m_y;
+
+	m_y = d->player_pos[0] + ((y - 200) / 16);
+	m_x = d->player_pos[1] + ((x - 200) / 16);
 	int	i = 0;
-	while (data->map[i] != NULL)
-		printf("%s\n", data->map[i++]);
-	if (!ft_is_player(data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16)]))
-		data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16)] = '0';	
-	if (data->map[data->player_pos[0] + ((y - 200) / 16) + 1][data->player_pos[1] + ((x - 200) / 16)] != '1' && data->map[data->player_pos[0] + ((y - 200) / 16) + 1][data->player_pos[1] + ((x - 200) / 16)] != '0' && \
-		!ft_is_player(data->map[data->player_pos[0] + ((y - 200) / 16) + 1][data->player_pos[1] + ((x - 200) / 16)]) && ft_draw_minimap(data, x, y + 16))
+	while (d->map[i] != NULL)
+		printf("%s\n", d->map[i++]);
+	if (!ft_is_player(d->map[m_y][m_x]) && d->map[m_y][m_x] != '1')
+		d->map[m_y][m_x] = '0';
+	else if (d->map[m_y][m_x] == '1')
+	{
+		d->minimap_walls++;
+		if (mlx_image_to_window(d->mlx, d->map_wall, x ,y) == -1)
+			return (1);
+		return (0);
+	}
+	if (!is_filled(d->map[m_y + 1][m_x], '0') && draw_minimap(d, x, y + 16))
 		return (1);
-	else if (data->map[data->player_pos[0] + ((y - 200) / 16) + 1][data->player_pos[1] + ((x - 200) / 16)] == '1' && mlx_image_to_window(data->mlx, \
-			data->map_wall, x , y + 16) == -1)
+	if (!is_filled(d->map[m_y - 1][m_x], '0') && draw_minimap(d, x, y - 16))
 		return (1);
-	if (data->map[data->player_pos[0] + ((y - 200) / 16) + 1][data->player_pos[1] + ((x - 200) / 16)] == '1')
-		data->minimap_walls++;
-	if (data->map[data->player_pos[0] + ((y - 200) / 16) - 1][data->player_pos[1] + ((x - 200) / 16)] != '1' && data->map[data->player_pos[0] + ((y - 200) / 16) - 1][data->player_pos[1] + ((x - 200) / 16)] != '0' && \
-		!ft_is_player(data->map[data->player_pos[0] + ((y - 200) / 16) - 1][data->player_pos[1] + ((x - 200) / 16)]) && ft_draw_minimap(data, x, y - 16))
+	if (!is_filled(d->map[m_y][m_x + 1], '0') && draw_minimap(d, x + 16, y))
 		return (1);
-	else if (data->map[data->player_pos[0] + ((y - 200) / 16) - 1][data->player_pos[1] + ((x - 200) / 16)] == '1' && mlx_image_to_window(data->mlx, \
-			data->map_wall, x, y - 16) == -1)
+	if (!is_filled(d->map[m_y][m_x - 1], '0') && draw_minimap(d, x - 16, y))
 		return (1);
-	if (data->map[data->player_pos[0] + ((y - 200) / 16) - 1][data->player_pos[1] + ((x - 200) / 16)] == '1')
-		data->minimap_walls++;
-	if (data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16) + 1] != '1' && data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16) + 1] != '0' && \
-		!ft_is_player(data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16) + 1]) && ft_draw_minimap(data, x + 16, y))
-		return (1);
-	else if (data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16) + 1] == '1' && mlx_image_to_window(data->mlx, \
-			data->map_wall, x + 16, y) == -1)
-		return (1);
-	if (data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16) + 1] == '1')
-		data->minimap_walls++;
-	if (data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16) - 1] != '1' && data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16) - 1] != '0' && \
-		!ft_is_player(data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16)] - 1) && ft_draw_minimap(data, x - 16, y))
-		return (1);
-	else if (data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16) - 1] == '1' && mlx_image_to_window(data->mlx, \
-			data->map_wall, x - 16, y) == -1)
-		return (1);
-	if (data->map[data->player_pos[0] + ((y - 200) / 16)][data->player_pos[1] + ((x - 200) / 16) - 1] == '1')
-		data->minimap_walls++;
 	return (0);
 }
 
