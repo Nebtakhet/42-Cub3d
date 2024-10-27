@@ -18,21 +18,21 @@ int	ft_draw_minimap_frame(t_data *data)
 	int			y;
 	mlx_image_t	*back;
 
-	back = mlx_new_image(data->mlx, 200, 200);
-	ft_memset(back->pixels, 124, 200 * 200 * sizeof(int32_t));
+	back = mlx_new_image(data->mlx, 320, 320);
+	ft_memset(back->pixels, 124, 320 * 320 * sizeof(int32_t));
 	mlx_image_to_window(data->mlx, back, 116, 116);
 	data->map_frame = mlx_texture_to_image(data->mlx, data->north_texture);
 	if (!data->map_frame || !mlx_resize_image(data->map_frame, 16, 16))
 		return (1);
 	y = 100;
 	x = 100;
-	while (y < 300)
+	while (y < 420)
 	{
 		if (mlx_image_to_window(data->mlx, data->map_frame, x, y) == -1)
 			return (1);
 		y += 16;
 	}
-	while (x < 300)
+	while (x < 420)
 	{
 		if (mlx_image_to_window(data->mlx, data->map_frame, x, y) == -1)
 			return (1);
@@ -67,7 +67,7 @@ int	ft_draw_player_to_minimap(t_data *data)
 	if (!mlx_resize_image(data->player.mini_player, 16, 16))
 		return (1);
 	if (mlx_image_to_window(data->mlx, data->player.mini_player, \
-		200, 200) == -1)
+		250, 250) == -1)
 		return (1);
 	ft_draw_ray(data, data->palette[12]);
 	ft_move_minimap_y(data, 0);
@@ -87,8 +87,8 @@ int	draw_minimap(t_data *d, int x, int y)
 	int	m_x;
 	int	m_y;
 
-	m_y = d->player_pos[0] + ((y - 200) / 16);
-	m_x = d->player_pos[1] + ((x - 200) / 16);
+	m_y = d->player_pos[0] + ((y - 250) / 16);
+	m_x = d->player_pos[1] + ((x - 250) / 16);
 	int	i = 0;
 	while (d->map[i] != NULL)
 		printf("%s\n", d->map[i++]);
@@ -124,9 +124,9 @@ void	ft_move_minimap_y(t_data *data, double direction)
 		else
 			data->map_wall->instances[i].y++;
 		if (data->map_wall->instances[i].y > 100 && \
-			data->map_wall->instances[i].y < 300 && \
+			data->map_wall->instances[i].y < 420 && \
 			data->map_wall->instances[i].x > 100 && \
-			data->map_wall->instances[i].x < 300)
+			data->map_wall->instances[i].x < 420)
 			data->map_wall->instances[i].enabled = true;
 		else
 			data->map_wall->instances[i].enabled = false;
@@ -146,9 +146,9 @@ void	ft_move_minimap_x(t_data *data, double direction)
 		else
 			data->map_wall->instances[i].x++;
 		if (data->map_wall->instances[i].y > 100 && \
-			data->map_wall->instances[i].y < 300 && \
+			data->map_wall->instances[i].y < 420 && \
 			data->map_wall->instances[i].x > 100 && \
-			data->map_wall->instances[i].x < 300)
+			data->map_wall->instances[i].x < 420)
 			data->map_wall->instances[i].enabled = true;
 		else
 			data->map_wall->instances[i].enabled = false;

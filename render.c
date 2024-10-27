@@ -12,34 +12,34 @@
 
 #include "Cub3d.h"
 
-// static int apply_lighting(int color, double lighting_factor)
-// {
-//     int r;
-// 	int g;
-// 	int b;
-// 	int a;
+static int apply_lighting(int color, double lighting_factor)
+{
+    int r;
+	int g;
+	int b;
+	int a;
 
-//     r = (color >> 24) & 0xFF;
-//     g = (color >> 16) & 0xFF;
-//     b = (color >> 8) & 0xFF;
-//     a = color & 0xFF;
-//     r = (int)(r * lighting_factor);
-//     g = (int)(g * lighting_factor);
-//     b = (int)(b * lighting_factor);
-//     if (r > 255)
-// 		r = 255;
-//     if (r < 0)
-// 		r = 0;
-//     if (g > 255)
-// 		g = 255;
-//     if (g < 0)
-// 		g = 0;
-//     if (b > 255)
-// 		b = 255;
-//     if (b < 0)
-// 		b = 0;
-//     return (get_rgba(r, g, b, a));
-// }
+    r = (color >> 24) & 0xFF;
+    g = (color >> 16) & 0xFF;
+    b = (color >> 8) & 0xFF;
+    a = color & 0xFF;
+    r = (int)(r * lighting_factor);
+    g = (int)(g * lighting_factor);
+    b = (int)(b * lighting_factor);
+    if (r > 255)
+		r = 255;
+    if (r < 0)
+		r = 0;
+    if (g > 255)
+		g = 255;
+    if (g < 0)
+		g = 0;
+    if (b > 255)
+		b = 255;
+    if (b < 0)
+		b = 0;
+    return (get_rgba(r, g, b, a));
+}
 
 /* Function to calculate the image to be rendered, placing the corresponding
 pixel color in the image */
@@ -49,6 +49,7 @@ void	calculate_img(t_data *data)
 	uint8_t		*clr;
 	uint32_t	color;
 	double		step;
+	double		lightning_factor;
 
 	img.x = 0;
 	while (img.x < WIDTH)
@@ -61,10 +62,10 @@ void	calculate_img(t_data *data)
 		{
 			data->ray.tex_y = (int)data->ray.tex_pos & 63;
 			data->ray.tex_pos += step;
+			lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 0.6);
 			clr = ((uint8_t *)&((uint32_t *)data->east_texture->pixels)[64 * data->ray.tex_y + (64 - data->ray.tex_x - 1)]);
 			color = get_rgba(clr[0], clr[1], clr[2], 255);
-			if (data->ray.side == 1)
-				color = (color >> 1) & 8355711;
+			color = apply_lighting(color, lightning_factor);
 			mlx_put_pixel(data->img, img.x, img.y, color);
 			img.y++;
 		}

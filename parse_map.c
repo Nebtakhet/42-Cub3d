@@ -92,7 +92,7 @@ int	ft_check_map_content(t_data *info, char *map)
 		}
 		if (width > info->map_width)
 			info->map_width = width;
-		width = -1;
+		width = 0;
 		info->map_height++;
 		if (*map == '\n' && *++map == '\n')
 			break ;
