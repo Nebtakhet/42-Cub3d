@@ -28,6 +28,7 @@ void	ft_init_player(t_data *data)
 	data->player.plane_y = cos(data->player.angle) * 0.66;
 	data->player.pos_y = data->player_pos[0] + 0.5;
 	data->player.pos_x = data->player_pos[1] + 0.5;
+	data->player.moved = false;
 }
 
 t_data	*ft_init_data(void)
@@ -49,6 +50,7 @@ t_data	*ft_init_data(void)
 	info->map = NULL;
 	info->map_width = 0;
 	info->map_height = 0;
+	info->minimap_walls = 0;
 	return (info);
 }
 

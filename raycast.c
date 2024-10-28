@@ -94,7 +94,7 @@ void	perform_dda(t_data *data)
 			data->ray.map_y += data->ray.step_y;
 			data->ray.side = 1;
 		}
-		if (data->ray.map_y < 0 || data->ray.map_x < 0
+		if (data->ray.map_y <= 0 || data->ray.map_x <= 0
 			|| data->ray.map_y >= data->map_height
 			|| data->ray.map_x >= data->map_width)
 			break ;
@@ -138,6 +138,11 @@ void	calc_wall(t_data *data)
 		data->ray.wall_x = data->player.pos_x + data->ray.perp_wall_dist
 			* data->ray.ray_dir_x;
 	data->ray.wall_x -= floor(data->ray.wall_x);
+	data->ray.tex_x = (int)(data->ray.wall_x * (double)64);
+	if (data->ray.side == 0 && data->ray.ray_dir_x > 0)
+		data->ray.tex_x = 64 - data->ray.tex_x - 1;
+	if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
+		data->ray.tex_x = 64 - data->ray.tex_x - 1;	
 }
 
 void	raycast(t_data *data, int x)

@@ -41,30 +41,32 @@ static int apply_lighting(int color, double lighting_factor)
     return (get_rgba(r, g, b, a));
 }
 
-
 /* Function to calculate the image to be rendered, placing the corresponding
 pixel color in the image */
 void	calculate_img(t_data *data)
 {
-	t_img	img;
-	int		color;
-	double	lightning_factor;
+	t_img		img;
+	uint8_t		*clr;
+	uint32_t	color;
+	double		step;
+	double		lightning_factor;
 
 	img.x = 0;
 	while (img.x < WIDTH)
 	{
 		raycast(data, img.x);
-		if (data->ray.side == 0)
-			color = get_rgba(0, 255, 0, 255);
-		else
-			color = get_rgba(0, 0, 255, 255);
-		lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 0.6);
-		color = apply_lighting(color, lightning_factor);
-		img.y = 0;
-		while (img.y < HEIGHT)
+		step = 1.0 * 64 / data->ray.line_height;
+		data->ray.tex_pos = (data->ray.draw_start - HEIGHT / 2 + data->ray.line_height / 2) * step;
+		img.y = data->ray.draw_start;
+		while (img.y < data->ray.draw_end)
 		{
-			if (img.y >= data->ray.draw_start && img.y <= data->ray.draw_end)
-				mlx_put_pixel(data->img, img.x, img.y, color);
+			data->ray.tex_y = (int)data->ray.tex_pos & 63;
+			data->ray.tex_pos += step;
+			lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 0.6);
+			clr = ((uint8_t *)&((uint32_t *)data->east_texture->pixels)[64 * data->ray.tex_y + (64 - data->ray.tex_x - 1)]);
+			color = get_rgba(clr[0], clr[1], clr[2], 255);
+			color = apply_lighting(color, lightning_factor);
+			mlx_put_pixel(data->img, img.x, img.y, color);
 			img.y++;
 		}
 		img.x++;

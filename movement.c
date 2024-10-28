@@ -63,93 +63,65 @@ int	ft_is_player_near_wall(t_data *data, char axis, int direction)
 
 void	ft_move_player_up(t_data *data, double direction)
 {
-	static double	y_moved = 0;
 	static double	pixels = 0;
 
 	if (!ft_is_player_near_wall(data, 'y', -1))
 	{
-		pixels += direction;
-		if (pixels <= -1)
+		data->player.pos_y += direction / 20.0;
+		pixels -= direction / 1.25;
+		if (pixels >= 1)
 		{
-			data->player.mini_player->instances[0].y--;
-			data->player.pos_y -= 0.0625;
-			y_moved += 0.0625;
-			pixels += 1;
-			if (y_moved >= 0.5)
-			{
-				data->player_pos[0] -= 1;
-				y_moved -= 1;
-			}
+			ft_move_minimap_y(data, direction);
+			pixels -= 1;
 		}
 	}
 }
 
 void	ft_move_player_down(t_data *data, double direction)
 {
-	static double	y_moved = 0;
 	static double	pixels = 0;
 
 	if (!ft_is_player_near_wall(data, 'y', 1))
 	{
-		pixels += direction;
+		data->player.pos_y += direction / 20.0;
+		pixels += direction / 1.25;
 		if (pixels >= 1)
 		{
-			data->player.mini_player->instances[0].y++;
-			data->player.pos_y += 0.0625;
-			y_moved += 0.0625;
+			ft_move_minimap_y(data, direction);
 			pixels -= 1;
-			if (y_moved >= 0.5)
-			{
-				data->player_pos[0] += 1;
-				y_moved -= 1;
-			}
-		}
+		}		
 	}
 }
 
 void	ft_move_player_left(t_data *data, double direction)
 {
-	static double	x_moved = 0;
 	static double	pixels = 0;
 
 	if (!ft_is_player_near_wall(data, 'x', -1))
 	{
-		pixels += direction;
-		if (pixels <= -1)
+		data->player.pos_x += direction / 20.0;
+		pixels -= direction / 1.25;
+		if (pixels >= 1)
 		{
-			data->player.mini_player->instances[0].x--;
-			data->player.pos_x -= 0.0625;
-			x_moved += 0.0625;
-			pixels += 1;
-			if (x_moved >= 0.5)
-			{
-				data->player_pos[1] -= 1;
-				x_moved -= 1;
-			}
+			ft_move_minimap_x(data, direction);
+			pixels -= 1;
 		}
 	}
 }
 
 void	ft_move_player_right(t_data *data, double direction)
 {
-	static double	x_moved = 0;
 	static double	pixels = 0;
 
 	if (!ft_is_player_near_wall(data, 'x', 1))
 	{
-		pixels += direction;
+		data->player.pos_x += direction / 20.0;
+		pixels += direction / 1.25;			
 		if (pixels >= 1)
 		{
-			data->player.mini_player->instances[0].x++;
-			data->player.pos_x += 0.0625;
-			x_moved += 0.0625;
+			ft_move_minimap_x(data, direction);
 			pixels -= 1;
-			if (x_moved >= 0.5)
-			{
-				data->player_pos[1] += 1;
-				x_moved -= 1;
-			}
-		}
+		}	
 	}
 }
 
