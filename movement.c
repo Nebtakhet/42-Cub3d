@@ -61,27 +61,21 @@ int	ft_is_player_near_wall(t_data *data, char axis, int direction)
 	return (0);
 }
 
-void	ft_move_player_up(t_data *data, double direction)
+void	ft_move_player_y(t_data *data, double direction)
 {
 	static double	pixels = 0;
 
-	if (!ft_is_player_near_wall(data, 'y', -1))
+	if (direction < 0 && !ft_is_player_near_wall(data, 'y', -1))
 	{
 		data->player.pos_y += direction / 20.0;
-		pixels -= direction / 1.25;
-		if (pixels >= 1)
+		pixels += direction / 1.25;
+		if (pixels <= -1)
 		{
 			ft_move_minimap_y(data, direction);
-			pixels -= 1;
+			pixels += 1;
 		}
 	}
-}
-
-void	ft_move_player_down(t_data *data, double direction)
-{
-	static double	pixels = 0;
-
-	if (!ft_is_player_near_wall(data, 'y', 1))
+	else if (direction > 0 && !ft_is_player_near_wall(data, 'y', 1))
 	{
 		data->player.pos_y += direction / 20.0;
 		pixels += direction / 1.25;
@@ -90,33 +84,27 @@ void	ft_move_player_down(t_data *data, double direction)
 			ft_move_minimap_y(data, direction);
 			pixels -= 1;
 		}		
-	}
+	}		
 }
 
-void	ft_move_player_left(t_data *data, double direction)
+void	ft_move_player_x(t_data *data, double direction)
 {
 	static double	pixels = 0;
 
-	if (!ft_is_player_near_wall(data, 'x', -1))
+	if (direction < 0 && !ft_is_player_near_wall(data, 'x', -1))
 	{
 		data->player.pos_x += direction / 20.0;
-		pixels -= direction / 1.25;
-		if (pixels >= 1)
+		pixels += direction / 1.25;
+		if (pixels <= -1)
 		{
 			ft_move_minimap_x(data, direction);
-			pixels -= 1;
+			pixels += 1;
 		}
 	}
-}
-
-void	ft_move_player_right(t_data *data, double direction)
-{
-	static double	pixels = 0;
-
-	if (!ft_is_player_near_wall(data, 'x', 1))
+	else if (direction > 0 && !ft_is_player_near_wall(data, 'x', 1))
 	{
 		data->player.pos_x += direction / 20.0;
-		pixels += direction / 1.25;			
+		pixels += direction / 1.25;
 		if (pixels >= 1)
 		{
 			ft_move_minimap_x(data, direction);
@@ -127,14 +115,8 @@ void	ft_move_player_right(t_data *data, double direction)
 
 void	ft_move_player(t_data *data, double dir_y, double dir_x)
 {
-	if (dir_y < 0)
-		ft_move_player_up(data, dir_y);
-	else if (dir_y > 0)
-		ft_move_player_down(data, dir_y);
-	if (dir_x < 0)
-		ft_move_player_left(data, dir_x);
-	else if (dir_x > 0)
-		ft_move_player_right(data, dir_x);
+	ft_move_player_y(data, dir_y);
+	ft_move_player_x(data, dir_x);
 	data->player.moved = true;
 	data->renderer.changed = true;
 }

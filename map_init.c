@@ -96,13 +96,5 @@ t_data	*handle_args(int argc, char **argv, t_data *info)
 	if (ft_parse_scene_description(info, argv[1]))
 		return (NULL);
 	ft_init_player(info);
-	printf("floor RGB: %d,%d,%d\nceiling RGB: %d,%d,%d\nmap W: %d, H: %d\n", \
-		info->floor_color[0], info->floor_color[1], info->floor_color[2], \
-		info->ceiling_color[0], info->ceiling_color[1], info->ceiling_color[2], \
-		info->map_width, info->map_height);
-	int	i = 0;
-	while (info->map[i] != NULL)
-		printf("%s\n", info->map[i++]);
-	//ft_free_data(&info);
 	return (info);
 }

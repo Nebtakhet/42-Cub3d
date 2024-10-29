@@ -121,9 +121,11 @@ ray's direction x. It will subtract the floor of the wall x from the wall x. */
 void	calc_wall(t_data *data)
 {
 	if (data->ray.side == 0)
-		data->ray.perp_wall_dist = data->ray.side_dist_x - data->ray.delta_dist_x;
+		data->ray.perp_wall_dist = data->ray.side_dist_x - \
+									data->ray.delta_dist_x;
 	else
-		data->ray.perp_wall_dist = data->ray.side_dist_y - data->ray.delta_dist_y;
+		data->ray.perp_wall_dist = data->ray.side_dist_y - \
+									data->ray.delta_dist_y;
 	data->ray.line_height = (int)(HEIGHT / data->ray.perp_wall_dist);
 	data->ray.draw_start = -data->ray.line_height / 2 + HEIGHT / 2;
 	if (data->ray.draw_start < 0)
@@ -142,7 +144,7 @@ void	calc_wall(t_data *data)
 	if (data->ray.side == 0 && data->ray.ray_dir_x > 0)
 		data->ray.tex_x = 64 - data->ray.tex_x - 1;
 	if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
-		data->ray.tex_x = 64 - data->ray.tex_x - 1;	
+		data->ray.tex_x = 64 - data->ray.tex_x - 1;
 }
 
 void	raycast(t_data *data, int x)
