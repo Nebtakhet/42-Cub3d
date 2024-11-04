@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:26:48 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/23 12:49:36 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/10/29 13:17:38 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ int	draw_minimap(t_data *d, int x, int y)
 
 	m_y = d->player_pos[0] + ((y - 250) / 16);
 	m_x = d->player_pos[1] + ((x - 250) / 16);
-	int	i = 0;
-	while (d->map[i] != NULL)
-		printf("%s\n", d->map[i++]);
-	if (!ft_is_player(d->map[m_y][m_x]) && d->map[m_y][m_x] != '1')
+//	int	i = 0;
+//	while (d->map[i] != NULL)
+//		printf("%s\n", d->map[i++]);
+	if (!ft_is_player(d->map[m_y][m_x]) && (d->map[m_y][m_x] != '1'))
 		d->map[m_y][m_x] = '0';
 	else if (d->map[m_y][m_x] == '1')
 	{

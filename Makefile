@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/10/15 19:34:46 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/10/30 22:43:30 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ FILES 	= main.c \
 		hooks.c \
 		exit_utils.c  \
 		movement.c \
-		minimap_ray.c
+		minimap_ray.c \
+		doors_bonus.c \
+		gun_bonus.c \
 
 MLX42FLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 INCLUDES = -I$(SRC_DIR) -I./include

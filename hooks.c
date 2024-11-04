@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:45:24 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/21 17:42:41 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/03 19:48:29 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ void	ft_move_hook(void *param)
 		ft_rotate_player(data, 'l');
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		ft_rotate_player(data, 'r');
+//	if (mlx_is_key_down(data->mlx, MLX_KEY_SPACE))
+//		ft_shoot(data);
+	else
+		data->renderer.frames = 0;
 	if (data->player.moved)
 	{
 		data->player.moved = false;

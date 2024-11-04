@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:02:22 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/23 12:49:18 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/03 22:33:34 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_data	*ft_init_data(void)
 	info->south_texture = NULL;
 	info->west_texture = NULL;
 	info->east_texture = NULL;
+	info->door_texture = NULL;
 	info->map = NULL;
 	info->map_width = 0;
 	info->map_height = 0;
@@ -103,6 +104,7 @@ t_data	*handle_args(int argc, char **argv, t_data *info)
 	int	i = 0;
 	while (info->map[i] != NULL)
 		printf("%s\n", info->map[i++]);
+	place_doors(info);
 	//ft_free_data(&info);
 	return (info);
 }

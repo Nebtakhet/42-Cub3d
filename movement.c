@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/23 12:51:05 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/03 22:50:29 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_move_player_down(t_data *data, double direction)
 		{
 			ft_move_minimap_y(data, direction);
 			pixels -= 1;
-		}		
+		}
 	}
 }
 
@@ -121,7 +121,7 @@ void	ft_move_player_right(t_data *data, double direction)
 		{
 			ft_move_minimap_x(data, direction);
 			pixels -= 1;
-		}	
+		}
 	}
 }
 

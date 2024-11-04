@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/23 13:08:20 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:35:22 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	calculate_img(t_data *data)
 		{
 			data->ray.tex_y = (int)data->ray.tex_pos & 63;
 			data->ray.tex_pos += step;
-			lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 0.6);
+			lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 1.6);
 			clr = ((uint8_t *)&((uint32_t *)data->east_texture->pixels)[64 * data->ray.tex_y + (64 - data->ray.tex_x - 1)]);
 			color = get_rgba(clr[0], clr[1], clr[2], 255);
 			color = apply_lighting(color, lightning_factor);
