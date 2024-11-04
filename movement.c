@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/04 10:40:49 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:53:38 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	ft_move_player_y(t_data *data, double direction)
 {
 	static double	pixels = 0;
 
-	if (direction < 0 && !ft_is_player_near_wall(data, 'y', -1))
+	if (direction < 0 && !ft_is_player_near_wall(data, 'y', -1
+			&& !ft_is_near_door(data, 'y', -1)))
 	{
 		data->player.pos_y += direction / 20.0;
 		pixels += direction / 1.25;
@@ -75,7 +76,8 @@ void	ft_move_player_y(t_data *data, double direction)
 			pixels += 1;
 		}
 	}
-	else if (direction > 0 && !ft_is_player_near_wall(data, 'y', 1))
+	else if (direction > 0 && !ft_is_player_near_wall(data, 'y', 1)
+			&& !ft_is_near_door(data, 'y', 1))
 	{
 		data->player.pos_y += direction / 20.0;
 		pixels += direction / 1.25;
@@ -83,15 +85,16 @@ void	ft_move_player_y(t_data *data, double direction)
 		{
 			ft_move_minimap_y(data, direction);
 			pixels -= 1;
-		}		
-	}		
+		}
+	}
 }
 
 void	ft_move_player_x(t_data *data, double direction)
 {
 	static double	pixels = 0;
 
-	if (direction < 0 && !ft_is_player_near_wall(data, 'x', -1))
+	if (direction < 0 && !ft_is_player_near_wall(data, 'x', -1)
+			&& !ft_is_near_door(data, 'x', -1))
 	{
 		data->player.pos_x += direction / 20.0;
 		pixels += direction / 1.25;
@@ -101,7 +104,8 @@ void	ft_move_player_x(t_data *data, double direction)
 			pixels += 1;
 		}
 	}
-	else if (direction > 0 && !ft_is_player_near_wall(data, 'x', 1))
+	else if (direction > 0 && !ft_is_player_near_wall(data, 'x', 1)
+			&& !ft_is_near_door(data, 'x', 1))
 	{
 		data->player.pos_x += direction / 20.0;
 		pixels += direction / 1.25;

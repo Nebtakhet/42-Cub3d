@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/04 10:32:57 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/04 13:01:03 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ void	load_frames(t_data *data);
 void	ft_shoot(void *param);
 void	place_doors(t_data *data);
 int		ft_get_door_texture(t_data *data);
-
+int		ft_is_near_door(t_data *data, char axis, int direction);
+void	door_interaction(t_data *data);
 
 #endif

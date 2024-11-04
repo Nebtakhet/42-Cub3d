@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:29:33 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/03 22:31:26 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/04 13:45:24 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void	perform_dda(t_data *data)
 			|| data->ray.map_y >= data->map_height
 			|| data->ray.map_x >= data->map_width)
 			break ;
-		if (data->map[data->ray.map_y][data->ray.map_x] == '1')
+		if (data->map[data->ray.map_y][data->ray.map_x] == '1'
+			|| data->map[data->ray.map_y][data->ray.map_x] == 'D')
 			break ;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvallin <nvallin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:20:56 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/07 15:20:58 by nvallin          ###   ########.fr       */
+/*   Updated: 2024/11/04 11:14:56 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	ft_is_player(char c)
 int	ft_is_valid_content(char c)
 {
 	if (c == '0' || c == '1' || c == ' ' || c == '\n' || \
-		c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		c == 'N' || c == 'S' || c == 'E' || c == 'W'
+		|| c == 'D')
 		return (1);
 	ft_parsing_error("invalid map content");
 	return (0);
