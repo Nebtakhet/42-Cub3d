@@ -32,16 +32,20 @@ int	ft_is_near_door(t_data *data, char axis, int direction)
 	x = data->player.pos_x;
 	if (axis == 'y')
 	{
-		if (direction > 0 && data->map[(int)(y + 0.375)][(int)x] == 'D')
+		if ((direction > 0 && data->map[(int)(y + 0.375)][(int)x] == 'D') || \
+			(direction > 0 && data->map[(int)(y + 0.375)][(int)x] == 'd'))
 			return (1);
-		if (direction < 0 && data->map[(int)(y - 0.375)][(int)x] == 'D')
+		if ((direction < 0 && data->map[(int)(y - 0.375)][(int)x] == 'D') || \
+			(direction < 0 && data->map[(int)(y - 0.375)][(int)x] == 'd'))
 			return (1);
 	}
 	if (axis == 'x')
 	{
-		if (direction > 0 && data->map[(int)y][(int)(x + 0.375)] == 'D')
+		if ((direction > 0 && data->map[(int)y][(int)(x + 0.375)] == 'D') || \
+			(direction > 0 && data->map[(int)y][(int)(x + 0.375)] == 'd'))
 			return (1);
-		if (direction < 0 && data->map[(int)y][(int)(x - 0.375)] == 'D')
+		if ((direction < 0 && data->map[(int)y][(int)(x - 0.375)] == 'D') || \
+			(direction < 0 && data->map[(int)y][(int)(x - 0.375)] == 'd'))
 			return (1);
 	}
 	return (0);
@@ -105,6 +109,9 @@ void	door_interaction(t_data *data)
 		{
 			data->map[door_y][door_x] = 'd';
 			printf("Door opened at (%d, %d)\n", door_x, door_y);
+			int	i = 0;
+			while (data->map[i] != NULL)
+				printf("%s\n", data->map[i++]);
 		}
 		else if (data->map[door_y][door_x] == 'd')
 		{
