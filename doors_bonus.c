@@ -32,24 +32,20 @@ int	ft_is_near_door(t_data *data, char axis, int direction)
 	x = data->player.pos_x;
 	if (axis == 'y')
 	{
-		if (direction > 0 && data->map[(int)(y + 0.5)][(int)x] == 'D')
+		if ((direction > 0 && data->map[(int)(y + 0.5)][(int)x] == 'D') || \
+			(direction < 0 && data->map[(int)(y - 0.5)][(int)x] == 'D'))
 			return (1);
-		if (direction > 0 && data->map[(int)(y + 0.5)][(int)x] == 'd')
-			return (2);
-		if (direction < 0 && data->map[(int)(y - 0.5)][(int)x] == 'D')
-			return (1);
-		if (direction < 0 && data->map[(int)(y - 0.5)][(int)x] == 'd')
+		if ((direction > 0 && data->map[(int)(y + 0.5)][(int)x] == 'd') || \
+			(direction < 0 && data->map[(int)(y - 0.5)][(int)x] == 'd'))
 			return (2);
 	}
 	if (axis == 'x')
 	{
-		if (direction > 0 && data->map[(int)y][(int)(x + 0.5)] == 'D')
+		if ((direction > 0 && data->map[(int)y][(int)(x + 0.5)] == 'D') || \
+			(direction < 0 && data->map[(int)y][(int)(x - 0.5)] == 'D'))
 			return (1);
-		if (direction > 0 && data->map[(int)y][(int)(x + 0.5)] == 'd')
-			return (2);
-		if (direction < 0 && data->map[(int)y][(int)(x - 0.5)] == 'D')
-			return (1);
-		if (direction < 0 && data->map[(int)y][(int)(x - 0.5)] == 'd')
+		if ((direction > 0 && data->map[(int)y][(int)(x + 0.5)] == 'd') || \
+			(direction < 0 && data->map[(int)y][(int)(x - 0.5)] == 'd'))
 			return (2);
 	}
 	return (0);
@@ -57,17 +53,19 @@ int	ft_is_near_door(t_data *data, char axis, int direction)
 
 static bool	valid_door_position(t_data *data, int x, int y)
 {
-
-	if (x > 0 && x < data->map_width - 1 && y > 0 && y < data->map_height - 1)
+	if (x > 0 && x < (int)ft_strlen(data->map[y]) && \
+		y > 0 && y < data->map_height - 1)
 	{
 		if ((data->map[y][x - 1] == '1' && data->map[y][x + 1] == '1') &&
-			(data->map[y - 1][x] == '0' && data->map[y + 1][x] == '0') &&
+			((data->map[y - 1][x] == '0' || data->map[y - 1][x] == '.') && \
+			(data->map[y + 1][x] == '0' || data->map[y + 1][x] == '.')) &&
 			(data->map[y - 1][x - 1] != '1' && data->map[y - 1][x + 1] != '1')
 			&& (data->map[y + 1][x - 1] != '1'
 			&& data->map[y + 1][x + 1] != '1'))
 			return (true);
 		if ((data->map[y - 1][x] == '1' && data->map[y + 1][x] == '1') &&
-			(data->map[y][x - 1] == '0' && data->map[y][x + 1] == '0') &&
+			((data->map[y][x - 1] == '0' || data->map[y][x - 1] == '.') && \
+			(data->map[y][x + 1] == '0' || data->map[y][x + 1] == '.')) &&
 			(data->map[y - 1][x - 1] != '1' && data->map[y - 1][x + 1] != '1')
 			&& (data->map[y + 1][x - 1] != '1'
 			&& data->map[y + 1][x + 1] != '1'))
@@ -85,11 +83,11 @@ void	place_doors(t_data *data)
 	while (y < data->map_height - 1)
 	{
 		x = 1;
-		while (x < data->map_width - 1)
+		while (x < (int)ft_strlen(data->map[y]))
 		{
 			if (valid_door_position(data, x, y))
 			{
-				data->map[y][x] = 'D';
+				data->map[y][x] = 'd';
 				printf("Door placed at (%d, %d)\n", x, y);
 			}
 			x++;
@@ -108,14 +106,10 @@ void	door_interaction(t_data *data)
 	{
 		door_y = (int)(data->player.pos_y + data->player.dir_y * 0.6);
 		door_x = (int)(data->player.pos_x + data->player.dir_x * 0.6);
-
 		if (data->map[door_y][door_x] == 'D')
 		{
 			data->map[door_y][door_x] = 'd';
 			printf("Door opened at (%d, %d)\n", door_x, door_y);
-			int	i = 0;
-			while (data->map[i] != NULL)
-				printf("%s\n", data->map[i++]);
 		}
 		else if (data->map[door_y][door_x] == 'd')
 		{
@@ -125,5 +119,3 @@ void	door_interaction(t_data *data)
 		data->renderer.changed = true;
 	}
 }
-
-

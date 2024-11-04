@@ -114,7 +114,6 @@ typedef struct t_ray
 	double		tex_pos;
 }				t_ray;
 
-
 typedef struct s_data
 {
 	mlx_t			*mlx;
@@ -147,6 +146,7 @@ typedef struct s_data
 	mlx_image_t		*map_frame;
 	mlx_image_t		*door_wall;
 	int				minimap_walls;
+	int				minimap_doors;
 	mlx_image_t		*gun[5];
 }	t_data;
 
@@ -183,6 +183,7 @@ void	init_color_palette(t_data *win);
 void	get_layout(t_data *win);
 void	win_init(t_data *win);
 
+int		ft_draw_minimap_frame(t_data *data);
 int		draw_minimap(t_data *data, int x, int y);
 int		ft_draw_player_to_minimap(t_data *data);
 void	ft_move_player(t_data *data, double dir_y, double dir_x);
@@ -210,7 +211,6 @@ void	key_hook(mlx_key_data_t key_data, void *param);
 void	close_program(void *param);
 void	ft_move_hook(void *param);
 void	cursor_hook(double xpos, double ypos, void *param);
-
 
 /* Animations */
 

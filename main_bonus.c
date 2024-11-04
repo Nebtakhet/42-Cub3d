@@ -27,17 +27,18 @@ int	main(int argc, char **argv)
 	mlx_cursor_hook(data->mlx, &cursor_hook, data);
 	mlx_close_hook(data->mlx, &close_program, data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
-	ft_get_door_texture(data);	
-	data->door_wall = mlx_texture_to_image(data->mlx, data->door_texture);
+	ft_get_door_texture(data);
+	place_doors(data);
 	data->map_wall = mlx_texture_to_image(data->mlx, data->east_texture);
 	if (!data->map_wall || !mlx_resize_image(data->map_wall, 16, 16))
 		return (1);
-	if (draw_minimap(data, 250, 250) || ft_draw_player_to_minimap(data))
-		return (1);	
-	place_doors(data);
+	if (ft_draw_minimap_frame(data) || draw_minimap(data, 250, 250) || \
+		ft_draw_player_to_minimap(data))
+		return (1);
+	printf("minidoors %d\n", data->minimap_doors);
 	int	i = 0;
 	while (data->map[i] != NULL)
-		printf("%s\n", data->map[i++]);	
+		printf("%s\n", data->map[i++]);
 	mlx_loop_hook(data->mlx, &render, data);
 	mlx_loop_hook(data->mlx, &ft_move_hook, (void *)data);
 	mlx_loop_hook(data->mlx, &ft_shoot, (void *)data);
