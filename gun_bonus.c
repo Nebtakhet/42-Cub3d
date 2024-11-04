@@ -51,7 +51,7 @@ static void	update_frame(t_data *data, int *frame)
 
 	x_offset = 0;
 	if (*frame == 1)
-		x_offset = -20;
+		x_offset = -60;
 	if (*frame >= 1)
 		data->gun[*frame - 1]->enabled = false;
 	if (mlx_image_to_window(data->mlx, data->gun[*frame],
@@ -71,7 +71,8 @@ void	ft_shoot(void *param)
 	data = (t_data *)param;
 	if (!data->gun[0])
 		load_frames(data);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_SPACE) && !shooting)
+	if ((mlx_is_key_down(data->mlx, MLX_KEY_SPACE) || \
+		mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_LEFT)) && !shooting)
 		start_shooting(&frame, &shooting);
 	if (shooting)
 		update_frame(data, &frame);

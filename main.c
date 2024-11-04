@@ -24,23 +24,8 @@ int	main(int argc, char **argv)
 	mlx_key_hook(data->mlx, &key_hook, data);
 	mlx_close_hook(data->mlx, &close_program, data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
-<<<<<<< HEAD
-	ft_get_door_texture(data);
-	data->map_wall = mlx_texture_to_image(data->mlx, data->east_texture);
-	data->door_wall = mlx_texture_to_image(data->mlx, data->door_texture);
-	if (!data->map_wall || !mlx_resize_image(data->map_wall, 16, 16))
-		return (1);
-	if (draw_minimap(data, 250, 250) || ft_draw_player_to_minimap(data))
-		return (1);
-	place_doors(data);
-	int	i = 0;
-	while (data->map[i] != NULL)
-		printf("%s\n", data->map[i++]);
-=======
->>>>>>> parsing
 	mlx_loop_hook(data->mlx, &render, data);
 	mlx_loop_hook(data->mlx, &ft_move_hook, (void *)data);
-	mlx_loop_hook(data->mlx, &ft_shoot, (void *)data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
 	return (0);

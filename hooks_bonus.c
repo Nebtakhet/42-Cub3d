@@ -82,6 +82,9 @@ void	ft_move_hook(void *param)
 		ft_rotate_player(data, 'l');
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		ft_rotate_player(data, 'r');
+	if (mlx_is_key_down(data->mlx, MLX_KEY_F) || \
+		mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_RIGHT))
+		door_interaction(data);	
 	if (data->player.moved)
 	{
 		data->player.moved = false;

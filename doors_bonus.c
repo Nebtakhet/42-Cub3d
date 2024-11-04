@@ -14,7 +14,7 @@
 
 int	ft_get_door_texture(t_data *data)
 {
-	data->door_texture = mlx_load_png("textures/door2.png");
+	data->door_texture = mlx_load_png("textures/eagle.png");
 	if (!data->door_texture)
 	{
 		write(2, "Error\ninvalid door texture\n", 27);
@@ -32,21 +32,25 @@ int	ft_is_near_door(t_data *data, char axis, int direction)
 	x = data->player.pos_x;
 	if (axis == 'y')
 	{
-		if ((direction > 0 && data->map[(int)(y + 0.375)][(int)x] == 'D') || \
-			(direction > 0 && data->map[(int)(y + 0.375)][(int)x] == 'd'))
+		if (direction > 0 && data->map[(int)(y + 0.5)][(int)x] == 'D')
 			return (1);
-		if ((direction < 0 && data->map[(int)(y - 0.375)][(int)x] == 'D') || \
-			(direction < 0 && data->map[(int)(y - 0.375)][(int)x] == 'd'))
+		if (direction > 0 && data->map[(int)(y + 0.5)][(int)x] == 'd')
+			return (2);
+		if (direction < 0 && data->map[(int)(y - 0.5)][(int)x] == 'D')
 			return (1);
+		if (direction < 0 && data->map[(int)(y - 0.5)][(int)x] == 'd')
+			return (2);
 	}
 	if (axis == 'x')
 	{
-		if ((direction > 0 && data->map[(int)y][(int)(x + 0.375)] == 'D') || \
-			(direction > 0 && data->map[(int)y][(int)(x + 0.375)] == 'd'))
+		if (direction > 0 && data->map[(int)y][(int)(x + 0.5)] == 'D')
 			return (1);
-		if ((direction < 0 && data->map[(int)y][(int)(x - 0.375)] == 'D') || \
-			(direction < 0 && data->map[(int)y][(int)(x - 0.375)] == 'd'))
+		if (direction > 0 && data->map[(int)y][(int)(x + 0.5)] == 'd')
+			return (2);
+		if (direction < 0 && data->map[(int)y][(int)(x - 0.5)] == 'D')
 			return (1);
+		if (direction < 0 && data->map[(int)y][(int)(x - 0.5)] == 'd')
+			return (2);
 	}
 	return (0);
 }
@@ -102,8 +106,8 @@ void	door_interaction(t_data *data)
 	if (ft_is_near_door(data, 'y', 1) || ft_is_near_door(data, 'y', -1)
 		|| ft_is_near_door(data, 'x', 1) || ft_is_near_door(data, 'x', -1))
 	{
-		door_y = (int)(data->player.pos_y + data->player.dir_y * 0.5);
-		door_x = (int)(data->player.pos_x + data->player.dir_x * 0.5);
+		door_y = (int)(data->player.pos_y + data->player.dir_y * 0.6);
+		door_x = (int)(data->player.pos_x + data->player.dir_x * 0.6);
 
 		if (data->map[door_y][door_x] == 'D')
 		{

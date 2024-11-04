@@ -48,9 +48,7 @@ int	get_color(t_data *data)
 //	double		lightning_factor;
 	uint32_t	*pixels;
 
-	if (data->map[data->ray.map_y][data->ray.map_x] == 'D')
-		pixels = (uint32_t *)data->door_texture->pixels;
-	else if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
+	if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
 		pixels = (uint32_t *)data->south_texture->pixels;
 	else if (data->ray.side == 1 && data->ray.ray_dir_y > 0)
 		pixels = (uint32_t *)data->north_texture->pixels;
