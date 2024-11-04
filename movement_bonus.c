@@ -69,7 +69,6 @@ void	ft_move_player_y(t_data *data, double direction)
 	{
 		data->player.pos_y += direction / 20.0;
 		pixels += direction / 1.25;
-		printf("%f\n", pixels);
 		if (pixels <= -1)
 		{
 			ft_move_minimap_y(data, direction);
