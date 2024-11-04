@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:02:22 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/03 22:33:34 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:40:21 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_data	*ft_init_data(void)
 	info->east_texture = NULL;
 	info->door_texture = NULL;
 	info->map = NULL;
+	info->player.mini_p = NULL;
 	info->map_width = 0;
 	info->map_height = 0;
 	info->minimap_walls = 0;
@@ -97,14 +98,5 @@ t_data	*handle_args(int argc, char **argv, t_data *info)
 	if (ft_parse_scene_description(info, argv[1]))
 		return (NULL);
 	ft_init_player(info);
-	printf("floor RGB: %d,%d,%d\nceiling RGB: %d,%d,%d\nmap W: %d, H: %d\n", \
-		info->floor_color[0], info->floor_color[1], info->floor_color[2], \
-		info->ceiling_color[0], info->ceiling_color[1], info->ceiling_color[2], \
-		info->map_width, info->map_height);
-	int	i = 0;
-	while (info->map[i] != NULL)
-		printf("%s\n", info->map[i++]);
-	place_doors(info);
-	//ft_free_data(&info);
 	return (info);
 }

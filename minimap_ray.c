@@ -57,28 +57,22 @@ void	ft_draw_ray(t_data *data, int color)
 	double	x_draw;
 	double	y_draw;
 	double	angle;
-	double	dir_x;
-	double	dir_y;
 
 	angle = data->player.angle - (FOV / 2);
 	while (angle < data->player.angle + (FOV / 2))
 	{
-		x_draw = data->player.mini_player->instances[0].x + 8;
-		y_draw = data->player.mini_player->instances[0].y + 8;
+		x_draw = 258;
+		y_draw = 258;
 		x = data->player.pos_x;
 		y = data->player.pos_y;
-		dir_x = cos(angle);
-		dir_y = sin(angle);
-		while (data->map[(int)y][(int)x] != '1')
+		while ((int)y > 0 && (int)y < data->map_height - 1 && (int)x > 0 && \
+			(int)x < data->map_width - 1 && data->map[(int)y][(int)x] != '1')
 		{
-			if (((dir_x > 0 && x - data->player.pos_x < 4) || \
-			(dir_x < 0 && data->player.pos_x - x < 4)) && \
-			((dir_y > 0 && y - data->player.pos_y < 4) || \
-			(dir_y < 0 && data->player.pos_y - y < 4)))
+			if (sqrt(pow((258 - x_draw), 2) + pow((258 - y_draw), 2)) < 64)
 				mlx_put_pixel(data->img, x_draw, y_draw, color);
-			y += ft_y_ray(dir_y, &y_draw);
-			x += ft_x_ray(dir_x, &x_draw);
+			y += ft_y_ray(sin(angle), &y_draw);
+			x += ft_x_ray(cos(angle), &x_draw);
 		}
-		angle += 0.01;
+		angle += 0.001;
 	}
 }

@@ -6,39 +6,61 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/04 10:35:22 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:41:02 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-static int apply_lighting(int color, double lighting_factor)
+static int	apply_lighting(int color, double lighting_factor)
 {
-    int r;
-	int g;
-	int b;
-	int a;
+	int	r;
+	int	g;
+	int	b;
+	int	a;
 
-    r = (color >> 24) & 0xFF;
-    g = (color >> 16) & 0xFF;
-    b = (color >> 8) & 0xFF;
-    a = color & 0xFF;
-    r = (int)(r * lighting_factor);
-    g = (int)(g * lighting_factor);
-    b = (int)(b * lighting_factor);
-    if (r > 255)
+	r = (color >> 24) & 0xFF;
+	g = (color >> 16) & 0xFF;
+	b = (color >> 8) & 0xFF;
+	a = color & 0xFF;
+	r = (int)(r * lighting_factor);
+	g = (int)(g * lighting_factor);
+	b = (int)(b * lighting_factor);
+	if (r > 255)
 		r = 255;
-    if (r < 0)
+	if (r < 0)
 		r = 0;
-    if (g > 255)
+	if (g > 255)
 		g = 255;
-    if (g < 0)
+	if (g < 0)
 		g = 0;
-    if (b > 255)
+	if (b > 255)
 		b = 255;
-    if (b < 0)
+	if (b < 0)
 		b = 0;
-    return (get_rgba(r, g, b, a));
+	return (get_rgba(r, g, b, a));
+}
+
+int	get_color(t_data *data)
+{
+	uint8_t		*clr;
+	uint32_t	color;
+	double		lightning_factor;
+	uint32_t	*pixels;
+
+	if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
+		pixels = (uint32_t *)data->south_texture->pixels;
+	else if (data->ray.side == 1 && data->ray.ray_dir_y > 0)
+		pixels = (uint32_t *)data->north_texture->pixels;
+	else if (data->ray.side == 0 && data->ray.ray_dir_x < 0)
+		pixels = (uint32_t *)data->east_texture->pixels;
+	else
+		pixels = (uint32_t *)data->west_texture->pixels;
+	clr = (uint8_t *)&pixels[64 * data->ray.tex_y + (64 - data->ray.tex_x - 1)];
+	color = get_rgba(clr[0], clr[1], clr[2], 255);
+	lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 0.5);
+	color = apply_lighting(color, lightning_factor);
+	return (color);
 }
 
 /* Function to calculate the image to be rendered, placing the corresponding
@@ -46,30 +68,24 @@ pixel color in the image */
 void	calculate_img(t_data *data)
 {
 	t_img		img;
-	uint8_t		*clr;
-	uint32_t	color;
 	double		step;
-	double		lightning_factor;
+	uint32_t	color;	
 
-	img.x = 0;
-	while (img.x < WIDTH)
+	img.x = -1;
+	while (++img.x < WIDTH)
 	{
 		raycast(data, img.x);
 		step = 1.0 * 64 / data->ray.line_height;
-		data->ray.tex_pos = (data->ray.draw_start - HEIGHT / 2 + data->ray.line_height / 2) * step;
-		img.y = data->ray.draw_start;
-		while (img.y < data->ray.draw_end)
+		data->ray.tex_pos = (data->ray.draw_start - HEIGHT / 2 + \
+							data->ray.line_height / 2) * step;
+		img.y = data->ray.draw_start - 1;
+		while (++img.y < data->ray.draw_end)
 		{
 			data->ray.tex_y = (int)data->ray.tex_pos & 63;
 			data->ray.tex_pos += step;
-			lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 1.6);
-			clr = ((uint8_t *)&((uint32_t *)data->east_texture->pixels)[64 * data->ray.tex_y + (64 - data->ray.tex_x - 1)]);
-			color = get_rgba(clr[0], clr[1], clr[2], 255);
-			color = apply_lighting(color, lightning_factor);
+			color = get_color(data);
 			mlx_put_pixel(data->img, img.x, img.y, color);
-			img.y++;
 		}
-		img.x++;
 	}
 }
 

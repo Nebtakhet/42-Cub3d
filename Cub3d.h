@@ -154,7 +154,8 @@ typedef struct s_data
 
 void	print_error(char *str);
 void	clean_exit(t_data *data, int status);
-int 	get_rgba(int r, int g, int b, int a);
+int		get_rgba(int r, int g, int b, int a);
+int		is_filled(char c, char filling);
 
 /* Initialization*/
 
@@ -188,7 +189,6 @@ void	ft_move_player(t_data *data, double dir_y, double dir_x);
 void	ft_rotate_player(t_data *data, char direction);
 void	ft_move_minimap_y(t_data *data, double direction);
 void	ft_move_minimap_x(t_data *data, double direction);
-
 
 /* Rendering */
 

@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 	mlx_set_mouse_pos(data->mlx, WIDTH / 2, HEIGHT / 2);
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	mlx_cursor_hook(data->mlx, &cursor_hook, data);
-//	mlx_scroll_hook(data->mlx, &scroll_hook, data);
 	mlx_close_hook(data->mlx, &close_program, data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
 	ft_get_door_texture(data);

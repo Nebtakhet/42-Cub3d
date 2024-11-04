@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= Cub3d
+NAME	= cub3d
 CC 		= cc
 
 FLAGS 	= -Wall -Wextra -Werror
@@ -29,6 +29,7 @@ FILES 	= main.c \
 		parsing.c \
 		textures.c \
 		utils.c \
+		utils2.c \
 		render.c \
 		raycast.c \
 		hooks.c \

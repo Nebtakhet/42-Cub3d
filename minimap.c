@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:26:48 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/29 13:17:38 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:40:36 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	ft_draw_minimap_frame(t_data *data)
 {
-	int			x;
-	int			y;
+	int			i;
 	mlx_image_t	*back;
 
 	back = mlx_new_image(data->mlx, 320, 320);
@@ -24,31 +23,20 @@ int	ft_draw_minimap_frame(t_data *data)
 	data->map_frame = mlx_texture_to_image(data->mlx, data->north_texture);
 	if (!data->map_frame || !mlx_resize_image(data->map_frame, 16, 16))
 		return (1);
-	y = 100;
-	x = 100;
-	while (y < 420)
+	i = 100;
+	while (i < 420)
 	{
-		if (mlx_image_to_window(data->mlx, data->map_frame, x, y) == -1)
+		if (mlx_image_to_window(data->mlx, data->map_frame, i, 100) == -1 || \
+			mlx_image_to_window(data->mlx, data->map_frame, 100, i) == -1)
 			return (1);
-		y += 16;
+		i += 16;
 	}
-	while (x < 420)
+	while (i >= 100)
 	{
-		if (mlx_image_to_window(data->mlx, data->map_frame, x, y) == -1)
+		if (mlx_image_to_window(data->mlx, data->map_frame, i, 420) == -1 || \
+			mlx_image_to_window(data->mlx, data->map_frame, 420, i) == -1)
 			return (1);
-		x += 16;	
-	}
-	while (y > 100)
-	{
-		if (mlx_image_to_window(data->mlx, data->map_frame, x, y) == -1)
-			return (1);
-		y -= 16;
-	}
-	while (x > 100)
-	{
-		if (mlx_image_to_window(data->mlx, data->map_frame, x, y) == -1)
-			return (1);
-		x -= 16;	
+		i -= 16;
 	}
 	return (0);
 }
@@ -75,13 +63,6 @@ int	ft_draw_player_to_minimap(t_data *data)
 	return (0);
 }
 
-int	is_filled(char c, char filling)
-{
-	if (c == filling || ft_is_player(c))
-		return (1);
-	return (0);
-}
-
 int	draw_minimap(t_data *d, int x, int y)
 {
 	int	m_x;
@@ -89,15 +70,12 @@ int	draw_minimap(t_data *d, int x, int y)
 
 	m_y = d->player_pos[0] + ((y - 250) / 16);
 	m_x = d->player_pos[1] + ((x - 250) / 16);
-//	int	i = 0;
-//	while (d->map[i] != NULL)
-//		printf("%s\n", d->map[i++]);
-	if (!ft_is_player(d->map[m_y][m_x]) && (d->map[m_y][m_x] != '1'))
+	if (!ft_is_player(d->map[m_y][m_x]) && d->map[m_y][m_x] != '1')
 		d->map[m_y][m_x] = '0';
 	else if (d->map[m_y][m_x] == '1')
 	{
 		d->minimap_walls++;
-		if (mlx_image_to_window(d->mlx, d->map_wall, x ,y) == -1)
+		if (mlx_image_to_window(d->mlx, d->map_wall, x, y) == -1)
 			return (1);
 		return (0);
 	}
