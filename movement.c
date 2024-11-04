@@ -61,65 +61,6 @@ int	ft_is_player_near_wall(t_data *data, char axis, int direction)
 	return (0);
 }
 
-<<<<<<< HEAD
-void	ft_move_player_y(t_data *data, double direction)
-{
-	static double	pixels = 0;
-
-	if (direction < 0 && !ft_is_player_near_wall(data, 'y', -1
-			&& !ft_is_near_door(data, 'y', -1)))
-	{
-		data->player.pos_y += direction / 20.0;
-		pixels += direction / 1.25;
-		if (pixels <= -1)
-		{
-			ft_move_minimap_y(data, direction);
-			pixels += 1;
-		}
-	}
-	else if (direction > 0 && !ft_is_player_near_wall(data, 'y', 1)
-			&& !ft_is_near_door(data, 'y', 1))
-	{
-		data->player.pos_y += direction / 20.0;
-		pixels += direction / 1.25;
-		if (pixels >= 1)
-		{
-			ft_move_minimap_y(data, direction);
-			pixels -= 1;
-		}
-	}
-}
-
-void	ft_move_player_x(t_data *data, double direction)
-{
-	static double	pixels = 0;
-
-	if (direction < 0 && !ft_is_player_near_wall(data, 'x', -1)
-			&& !ft_is_near_door(data, 'x', -1))
-	{
-		data->player.pos_x += direction / 20.0;
-		pixels += direction / 1.25;
-		if (pixels <= -1)
-		{
-			ft_move_minimap_x(data, direction);
-			pixels += 1;
-		}
-	}
-	else if (direction > 0 && !ft_is_player_near_wall(data, 'x', 1)
-			&& !ft_is_near_door(data, 'x', 1))
-	{
-		data->player.pos_x += direction / 20.0;
-		pixels += direction / 1.25;
-		if (pixels >= 1)
-		{
-			ft_move_minimap_x(data, direction);
-			pixels -= 1;
-		}
-	}
-}
-
-=======
->>>>>>> parsing
 void	ft_move_player(t_data *data, double dir_y, double dir_x)
 {
 	if (dir_y < 0)
