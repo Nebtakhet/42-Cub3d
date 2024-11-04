@@ -94,9 +94,9 @@ void	perform_dda(t_data *data)
 			data->ray.map_y += data->ray.step_y;
 			data->ray.side = 1;
 		}
-		if (data->ray.map_y <= 0 || data->ray.map_x <= 0
+		if (data->ray.map_y < 0 || data->ray.map_x < 0
 			|| data->ray.map_y >= data->map_height
-			|| data->ray.map_x >= data->map_width)
+			|| data->ray.map_x >= (int)ft_strlen(data->map[data->ray.map_y]))
 			break ;
 		if (data->map[data->ray.map_y][data->ray.map_x] == '1'
 			|| data->map[data->ray.map_y][data->ray.map_x] == 'D')
