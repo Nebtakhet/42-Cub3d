@@ -12,32 +12,6 @@
 
 #include "Cub3d.h"
 
-void	cursor_hook(double xpos, double ypos, void *param)
-{
-	t_data		*data;
-	int			x;
-	int			y;
-	static int	last_pos = -1;
-
-	(void)ypos;
-	if (last_pos == -1)
-		last_pos = xpos;
-	data = param;
-	if (xpos - last_pos > 40)
-	{
-		ft_rotate_player(data, 'r');
-		last_pos = xpos;
-	}
-	else if (xpos - last_pos < -40)
-	{
-		ft_rotate_player(data, 'l');
-		last_pos = xpos;
-	}
-	mlx_get_mouse_pos(data->mlx, &x, &y);
-	if (x < 100 || x > WIDTH - 100)
-		mlx_set_mouse_pos(data->mlx, WIDTH / 2, HEIGHT / 2);
-}
-
 void	key_hook(mlx_key_data_t key_data, void *param)
 {
 	t_data	*data;

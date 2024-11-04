@@ -14,7 +14,8 @@
 
 int	ft_flood_fill(t_data *info, int x, int y)
 {
-	if (y == 0 || y == info->map_height || x == 0 || info->map[y][x] == '\0')
+	if (y == 0 || y == info->map_height - 1 || x == 0 || \
+		info->map[y][x] == '\0')
 	{
 		ft_parsing_error("map not surrounded by walls");
 		return (1);
