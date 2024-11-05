@@ -14,7 +14,7 @@
 
 int	is_filled(char c, char filling)
 {
-	if (c == filling || ft_is_player(c))
+	if (c == filling || ft_is_player(c) || c == 'D')
 		return (1);
 	return (0);
 }

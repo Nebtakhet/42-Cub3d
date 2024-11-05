@@ -43,8 +43,13 @@ int	ft_draw_minimap_frame(t_data *data)
 
 int	ft_draw_player_to_minimap(t_data *data)
 {
-	if (ft_draw_minimap_frame(data))
-		return (1);
+	int	i;
+
+	i = 0;
+	while (i < 82)
+		mlx_set_instance_depth(&data->map_frame->instances[i++], 100);
+	while (i - 82 < data->minimap_doors)
+		mlx_set_instance_depth(&data->map_frame->instances[i++], 10);
 	data->player.mini_p = mlx_load_png("./textures/player1.png");
 	if (!data->player.mini_p)
 		return (1);
@@ -58,8 +63,8 @@ int	ft_draw_player_to_minimap(t_data *data)
 		250, 250) == -1)
 		return (1);
 	ft_draw_ray(data, data->palette[12]);
-	ft_move_minimap_y(data, 0);
-	ft_move_minimap_x(data, 0);
+	ft_move_minimap_y(data, 1);
+	ft_move_minimap_y(data, -1);	
 	return (0);
 }
 
@@ -70,14 +75,21 @@ int	draw_minimap(t_data *d, int x, int y)
 
 	m_y = d->player_pos[0] + ((y - 250) / 16);
 	m_x = d->player_pos[1] + ((x - 250) / 16);
-	if (!ft_is_player(d->map[m_y][m_x]) && d->map[m_y][m_x] != '1')
+	if (!ft_is_player(d->map[m_y][m_x]) && d->map[m_y][m_x] != '1' && \
+		d->map[m_y][m_x] != 'D' && d->map[m_y][m_x] != 'd')
 		d->map[m_y][m_x] = '0';
 	else if (d->map[m_y][m_x] == '1')
 	{
-		d->minimap_walls++;
 		if (mlx_image_to_window(d->mlx, d->map_wall, x, y) == -1)
 			return (1);
 		return (0);
+	}
+	else if (d->map[m_y][m_x] == 'd')
+	{
+		d->minimap_doors++;
+		d->map[m_y][m_x] = 'D';
+		if (mlx_image_to_window(d->mlx, d->map_frame, x, y) == -1)
+			return (1);
 	}
 	if (!is_filled(d->map[m_y + 1][m_x], '0') && draw_minimap(d, x, y + 16))
 		return (1);
@@ -90,17 +102,64 @@ int	draw_minimap(t_data *d, int x, int y)
 	return (0);
 }
 
+void	ft_move_minidoors_y(t_data *data, double direction)
+{
+	int	i;
+
+	i = 82;
+	while (i - 82 < data->minimap_doors)
+	{
+		if (direction > 0)
+			data->map_frame->instances[i].y -= 2;
+		else
+			data->map_frame->instances[i].y += 2;
+		if (data->map_frame->instances[i].y > 100 && \
+			data->map_frame->instances[i].y < 420 && \
+			data->map_frame->instances[i].x > 100 && \
+			data->map_frame->instances[i].x < 420 && \
+			data->map_frame->instances[i].z == 10)
+			data->map_frame->instances[i].enabled = true;
+		else
+			data->map_frame->instances[i].enabled = false;
+		i++;
+	}
+}
+
+void	ft_move_minidoors_x(t_data *data, double direction)
+{
+	int	i;
+
+	i = 82;
+	while (i - 82 < data->minimap_doors)
+	{
+		if (direction > 0)
+			data->map_frame->instances[i].x -= 2;
+		else
+			data->map_frame->instances[i].x += 2;
+		if (data->map_frame->instances[i].y > 100 && \
+			data->map_frame->instances[i].y < 420 && \
+			data->map_frame->instances[i].x > 100 && \
+			data->map_frame->instances[i].x < 420 && \
+			data->map_frame->instances[i].z == 10)
+			data->map_frame->instances[i].enabled = true;
+		else
+			data->map_frame->instances[i].enabled = false;
+		i++;
+	}
+}
+
 void	ft_move_minimap_y(t_data *data, double direction)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->minimap_walls)
+	ft_move_minidoors_y(data, direction);
+	while (i < (int)data->map_wall->count)
 	{
 		if (direction > 0)
-			data->map_wall->instances[i].y--;
+			data->map_wall->instances[i].y -= 2;
 		else
-			data->map_wall->instances[i].y++;
+			data->map_wall->instances[i].y += 2;
 		if (data->map_wall->instances[i].y > 100 && \
 			data->map_wall->instances[i].y < 420 && \
 			data->map_wall->instances[i].x > 100 && \
@@ -108,6 +167,7 @@ void	ft_move_minimap_y(t_data *data, double direction)
 			data->map_wall->instances[i].enabled = true;
 		else
 			data->map_wall->instances[i].enabled = false;
+		mlx_set_instance_depth(&data->map_wall->instances[i], 10);
 		i++;
 	}
 }
@@ -117,12 +177,13 @@ void	ft_move_minimap_x(t_data *data, double direction)
 	int	i;
 
 	i = 0;
-	while (i < data->minimap_walls)
+	ft_move_minidoors_x(data, direction);
+	while (i < (int)data->map_wall->count)
 	{
 		if (direction > 0)
-			data->map_wall->instances[i].x--;
+			data->map_wall->instances[i].x -= 2;
 		else
-			data->map_wall->instances[i].x++;
+			data->map_wall->instances[i].x += 2;
 		if (data->map_wall->instances[i].y > 100 && \
 			data->map_wall->instances[i].y < 420 && \
 			data->map_wall->instances[i].x > 100 && \

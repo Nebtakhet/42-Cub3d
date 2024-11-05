@@ -67,7 +67,8 @@ void	ft_draw_ray(t_data *data, int color)
 		y = data->player.pos_y;
 		while ((int)y > 0 && (int)y < data->map_height - 1 && (int)x > 0 && \
 			(int)x < (int)ft_strlen(data->map[(int)y]) - 1 && \
-			data->map[(int)y][(int)x] != '1')
+			data->map[(int)y][(int)x] != '1' && \
+			data->map[(int)y][(int)x] != 'D')
 		{
 			if (sqrt(pow((258 - x_draw), 2) + pow((258 - y_draw), 2)) < 64)
 				mlx_put_pixel(data->img, x_draw, y_draw, color);

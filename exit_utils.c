@@ -40,6 +40,8 @@ void	ft_free_data(t_data **info)
 		mlx_delete_texture((*info)->east_texture);
 	if ((*info)->player.mini_p)
 		mlx_delete_texture((*info)->player.mini_p);
+	if ((*info)->door_texture)
+		mlx_delete_texture((*info)->door_texture);
 	if ((*info)->map)
 		ft_free_array((*info)->map);
 	if (*info)
