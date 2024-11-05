@@ -52,7 +52,6 @@ t_data	*ft_init_data(void)
 	info->player.mini_p = NULL;
 	info->map_width = 0;
 	info->map_height = 0;
-	info->minimap_walls = 0;
 	info->minimap_doors = 0;
 	return (info);
 }

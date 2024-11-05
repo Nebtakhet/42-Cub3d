@@ -145,7 +145,6 @@ typedef struct s_data
 	mlx_image_t		*map_wall;
 	mlx_image_t		*map_frame;
 	mlx_image_t		*door_wall;
-	int				minimap_walls;
 	int				minimap_doors;
 	mlx_image_t		*gun[5];
 }	t_data;
@@ -214,7 +213,7 @@ void	cursor_hook(double xpos, double ypos, void *param);
 
 /* Animations */
 
-void	load_frames(t_data *data);
+int		load_frames(t_data *data);
 void	ft_shoot(void *param);
 void	place_doors(t_data *data);
 int		ft_get_door_texture(t_data *data);

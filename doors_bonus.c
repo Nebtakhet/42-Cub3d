@@ -53,7 +53,7 @@ int	ft_is_near_door(t_data *data, char axis, int direction)
 
 static bool	valid_door_position(t_data *data, int x, int y)
 {
-	if (x > 0 && x < (int)ft_strlen(data->map[y]) && \
+	if (x > 0 && x < (int)ft_strlen(data->map[y]) - 1 && \
 		y > 0 && y < data->map_height - 1)
 	{
 		if ((data->map[y][x - 1] == '1' && data->map[y][x + 1] == '1') &&
@@ -80,10 +80,10 @@ void	place_doors(t_data *data)
 	int	y;
 
 	y = 1;
-	while (y < data->map_height - 1)
+	while (y < data->map_height - 3)
 	{
 		x = 1;
-		while (x < (int)ft_strlen(data->map[y]))
+		while (x < (int)ft_strlen(data->map[y]) - 3)
 		{
 			if (valid_door_position(data, x, y))
 			{
@@ -94,6 +94,23 @@ void	place_doors(t_data *data)
 		}
 		y++;
 	}
+}
+
+int	find_door_instance(t_data *data)
+{
+	int	i;
+
+	i = 82;
+	while (i - 82 < data->minimap_doors)
+	{
+		if ((data->player.mini_player->instances[0].y + 8) + data->player.dir_y * 0.3 >= data->map_frame->instances[i].y
+			&& (data->player.mini_player->instances[0].y + 8) + data->player.dir_y * 0.3 <= data->map_frame->instances[i].y + 16
+			&& (data->player.mini_player->instances[0].x + 8) + data->player.dir_x * 0.3 >= data->map_frame->instances[i].x
+			&& (data->player.mini_player->instances[0].x + 8) + data->player.dir_x * 0.3 <= data->map_frame->instances[i].x + 16)
+			break ;
+		i++;
+	}
+	return (i);
 }
 
 void	door_interaction(t_data *data)
@@ -109,11 +126,16 @@ void	door_interaction(t_data *data)
 		if (data->map[door_y][door_x] == 'D')
 		{
 			data->map[door_y][door_x] = 'd';
+			data->map_frame->instances[find_door_instance(data)].enabled = false;
+			mlx_set_instance_depth(&data->map_frame->instances[find_door_instance(data)], 100);
 			printf("Door opened at (%d, %d)\n", door_x, door_y);
 		}
-		else if (data->map[door_y][door_x] == 'd')
+		else if (data->map[door_y][door_x] == 'd' && data->map\
+				[(int)data->player.pos_y][(int)data->player.pos_x] != 'd')
 		{
 			data->map[door_y][door_x] = 'D';
+			data->map_frame->instances[find_door_instance(data)].enabled = true;
+			mlx_set_instance_depth(&data->map_frame->instances[find_door_instance(data)], 10);
 			printf("Door closed at (%d, %d)\n", door_x, door_y);
 		}
 		data->renderer.changed = true;

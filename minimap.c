@@ -46,8 +46,10 @@ int	ft_draw_player_to_minimap(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < 83)
+	while (i < 82)
 		mlx_set_instance_depth(&data->map_frame->instances[i++], 100);
+	while (i - 82 < data->minimap_doors)
+		mlx_set_instance_depth(&data->map_frame->instances[i++], 10);
 	data->player.mini_p = mlx_load_png("./textures/player1.png");
 	if (!data->player.mini_p)
 		return (1);
@@ -61,8 +63,8 @@ int	ft_draw_player_to_minimap(t_data *data)
 		250, 250) == -1)
 		return (1);
 	ft_draw_ray(data, data->palette[12]);
-	ft_move_minimap_y(data, 0);
-	ft_move_minimap_x(data, 0);
+	ft_move_minimap_y(data, 1);
+	ft_move_minimap_y(data, -1);	
 	return (0);
 }
 
@@ -78,7 +80,6 @@ int	draw_minimap(t_data *d, int x, int y)
 		d->map[m_y][m_x] = '0';
 	else if (d->map[m_y][m_x] == '1')
 	{
-		d->minimap_walls++;
 		if (mlx_image_to_window(d->mlx, d->map_wall, x, y) == -1)
 			return (1);
 		return (0);
@@ -109,13 +110,14 @@ void	ft_move_minidoors_y(t_data *data, double direction)
 	while (i - 82 < data->minimap_doors)
 	{
 		if (direction > 0)
-			data->map_frame->instances[i].y--;
+			data->map_frame->instances[i].y -= 2;
 		else
-			data->map_frame->instances[i].y++;
+			data->map_frame->instances[i].y += 2;
 		if (data->map_frame->instances[i].y > 100 && \
 			data->map_frame->instances[i].y < 420 && \
 			data->map_frame->instances[i].x > 100 && \
-			data->map_frame->instances[i].x < 420)
+			data->map_frame->instances[i].x < 420 && \
+			data->map_frame->instances[i].z == 10)
 			data->map_frame->instances[i].enabled = true;
 		else
 			data->map_frame->instances[i].enabled = false;
@@ -131,13 +133,14 @@ void	ft_move_minidoors_x(t_data *data, double direction)
 	while (i - 82 < data->minimap_doors)
 	{
 		if (direction > 0)
-			data->map_frame->instances[i].x--;
+			data->map_frame->instances[i].x -= 2;
 		else
-			data->map_frame->instances[i].x++;
+			data->map_frame->instances[i].x += 2;
 		if (data->map_frame->instances[i].y > 100 && \
 			data->map_frame->instances[i].y < 420 && \
 			data->map_frame->instances[i].x > 100 && \
-			data->map_frame->instances[i].x < 420)
+			data->map_frame->instances[i].x < 420 && \
+			data->map_frame->instances[i].z == 10)
 			data->map_frame->instances[i].enabled = true;
 		else
 			data->map_frame->instances[i].enabled = false;
@@ -151,12 +154,12 @@ void	ft_move_minimap_y(t_data *data, double direction)
 
 	i = 0;
 	ft_move_minidoors_y(data, direction);
-	while (i < data->minimap_walls)
+	while (i < (int)data->map_wall->count)
 	{
 		if (direction > 0)
-			data->map_wall->instances[i].y--;
+			data->map_wall->instances[i].y -= 2;
 		else
-			data->map_wall->instances[i].y++;
+			data->map_wall->instances[i].y += 2;
 		if (data->map_wall->instances[i].y > 100 && \
 			data->map_wall->instances[i].y < 420 && \
 			data->map_wall->instances[i].x > 100 && \
@@ -175,12 +178,12 @@ void	ft_move_minimap_x(t_data *data, double direction)
 
 	i = 0;
 	ft_move_minidoors_x(data, direction);
-	while (i < data->minimap_walls)
+	while (i < (int)data->map_wall->count)
 	{
 		if (direction > 0)
-			data->map_wall->instances[i].x--;
+			data->map_wall->instances[i].x -= 2;
 		else
-			data->map_wall->instances[i].x++;
+			data->map_wall->instances[i].x += 2;
 		if (data->map_wall->instances[i].y > 100 && \
 			data->map_wall->instances[i].y < 420 && \
 			data->map_wall->instances[i].x > 100 && \
