@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/04 13:01:03 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:48:47 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct s_data
 	mlx_image_t		*door_wall;
 	int				minimap_walls;
 	mlx_image_t		*gun[5];
+	mlx_texture_t	*enemy;
 }	t_data;
 
 /* Utils */
@@ -211,7 +212,6 @@ void	close_program(void *param);
 void	ft_move_hook(void *param);
 void	cursor_hook(double xpos, double ypos, void *param);
 
-
 /* Animations */
 
 void	load_frames(t_data *data);
@@ -220,5 +220,10 @@ void	place_doors(t_data *data);
 int		ft_get_door_texture(t_data *data);
 int		ft_is_near_door(t_data *data, char axis, int direction);
 void	door_interaction(t_data *data);
+
+/* Enemies */
+int		get_enemy_texture(t_data *data);
+void	place_enemies(t_data *data);
+void	enemies_interaction(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/23 13:08:20 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:53:46 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	get_color(t_data *data)
 
 	if (data->map[data->ray.map_y][data->ray.map_x] == 'D')
 		pixels = (uint32_t *)data->door_texture->pixels;
+	else if (data->map[data->ray.map_y][data->ray.map_x] == 'X')
+		pixels = (uint32_t *)data->enemy->pixels;
 	else if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
 		pixels = (uint32_t *)data->south_texture->pixels;
 	else if (data->ray.side == 1 && data->ray.ray_dir_y > 0)

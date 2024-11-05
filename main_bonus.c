@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:22:01 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/21 09:43:11 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:52:37 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int argc, char **argv)
 	mlx_cursor_hook(data->mlx, &cursor_hook, data);
 	mlx_close_hook(data->mlx, &close_program, data);
 	mlx_image_to_window(data->mlx, data->img, 0, 0);
-	ft_get_door_texture(data);	
+	ft_get_door_texture(data);
+	get_enemy_texture(data);
 	data->door_wall = mlx_texture_to_image(data->mlx, data->door_texture);
 	data->map_wall = mlx_texture_to_image(data->mlx, data->east_texture);
 	if (!data->map_wall || !mlx_resize_image(data->map_wall, 16, 16))
@@ -35,6 +36,7 @@ int	main(int argc, char **argv)
 	if (draw_minimap(data, 250, 250) || ft_draw_player_to_minimap(data))
 		return (1);	
 	place_doors(data);
+	place_enemies(data);
 	int	i = 0;
 	while (data->map[i] != NULL)
 		printf("%s\n", data->map[i++]);	

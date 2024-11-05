@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 18:51:02 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/03 22:28:44 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:45:10 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ void	load_frames(t_data *data)
 	free(filename);
 }
 
-static void	start_shooting(int *frame, bool *shooting)
+static void	start_shooting(t_data *data, int *frame, bool *shooting)
 {
 	*shooting = true;
 	*frame = 1;
+	enemies_interaction(data);
 }
 
 static void	update_frame(t_data *data, int *frame)
@@ -73,7 +74,7 @@ void	ft_shoot(void *param)
 		load_frames(data);
 	if ((mlx_is_key_down(data->mlx, MLX_KEY_SPACE) || \
 		mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_LEFT)) && !shooting)
-		start_shooting(&frame, &shooting);
+		start_shooting(data, &frame, &shooting);
 	if (shooting)
 		update_frame(data, &frame);
 	else if (frame == 0)
