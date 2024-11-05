@@ -145,7 +145,6 @@ typedef struct s_data
 	mlx_image_t		*map_wall;
 	mlx_image_t		*map_frame;
 	mlx_image_t		*door_wall;
-	int				minimap_doors;
 	mlx_image_t		*gun[5];
 	mlx_texture_t	*enemy;
 }	t_data;

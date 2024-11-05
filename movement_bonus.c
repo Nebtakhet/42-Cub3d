@@ -34,7 +34,7 @@ void	ft_rotate_player(t_data *data, char direction)
 		data->player.plane_x = -sin(data->player.angle) * 0.66;
 		data->player.plane_y = cos(data->player.angle) * 0.66;
 	}
-	data->player.moved = true;
+	data->renderer.changed = true;
 }
 
 int	ft_is_player_near_wall(t_data *data, char axis, int direction)
@@ -121,6 +121,5 @@ void	ft_move_player(t_data *data, double dir_y, double dir_x)
 {
 	ft_move_player_y(data, dir_y);
 	ft_move_player_x(data, dir_x);
-	data->player.moved = true;
 	data->renderer.changed = true;
 }

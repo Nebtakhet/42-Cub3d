@@ -23,10 +23,10 @@ static int	update_frame(t_data *data, int frame, mlx_texture_t **gun)
 	if (!data->gun[frame])
 	{
 		print_error("Error converting gun texture to image");
-		mlx_delete_texture(*gun);	
+		mlx_delete_texture(*gun);
 		return (1);
 	}
-	mlx_resize_image(data->gun[frame], (*gun)->width * 6, (*gun)->height * 6);	
+	mlx_resize_image(data->gun[frame], (*gun)->width * 6, (*gun)->height * 6);
 	if (mlx_image_to_window(data->mlx, data->gun[frame],
 			WIDTH / 2 - data->gun[frame]->width / 2 + x_offset,
 			HEIGHT - data->gun[frame]->height) == -1)

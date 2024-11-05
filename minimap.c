@@ -48,7 +48,7 @@ int	ft_draw_player_to_minimap(t_data *data)
 	i = 0;
 	while (i < 82)
 		mlx_set_instance_depth(&data->map_frame->instances[i++], 100);
-	while (i - 82 < data->minimap_doors)
+	while (i < (int)data->map_frame->count)
 		mlx_set_instance_depth(&data->map_frame->instances[i++], 10);
 	data->player.mini_p = mlx_load_png("./textures/player1.png");
 	if (!data->player.mini_p)
@@ -64,7 +64,7 @@ int	ft_draw_player_to_minimap(t_data *data)
 		return (1);
 	ft_draw_ray(data, data->palette[12]);
 	ft_move_minimap_y(data, 1);
-	ft_move_minimap_y(data, -1);	
+	ft_move_minimap_y(data, -1);
 	return (0);
 }
 
@@ -78,26 +78,21 @@ int	draw_minimap(t_data *d, int x, int y)
 	if (!ft_is_player(d->map[m_y][m_x]) && d->map[m_y][m_x] != '1' && \
 		d->map[m_y][m_x] != 'D' && d->map[m_y][m_x] != 'd')
 		d->map[m_y][m_x] = '0';
-	else if (d->map[m_y][m_x] == '1')
-	{
-		if (mlx_image_to_window(d->mlx, d->map_wall, x, y) == -1)
-			return (1);
+	else if (d->map[m_y][m_x] == '1' && \
+			mlx_image_to_window(d->mlx, d->map_wall, x, y) == -1)
+		return (1);
+	if (d->map[m_y][m_x] == '1')
 		return (0);
-	}
-	else if (d->map[m_y][m_x] == 'd')
-	{
-		d->minimap_doors++;
+	if (d->map[m_y][m_x] == 'd' && \
+		mlx_image_to_window(d->mlx, d->map_frame, x, y) == -1)
+		return (1);
+	if (d->map[m_y][m_x] == 'd')
 		d->map[m_y][m_x] = 'D';
-		if (mlx_image_to_window(d->mlx, d->map_frame, x, y) == -1)
-			return (1);
-	}
-	if (!is_filled(d->map[m_y + 1][m_x], '0') && draw_minimap(d, x, y + 16))
-		return (1);
-	if (!is_filled(d->map[m_y - 1][m_x], '0') && draw_minimap(d, x, y - 16))
-		return (1);
-	if (!is_filled(d->map[m_y][m_x + 1], '0') && draw_minimap(d, x + 16, y))
-		return (1);
-	if (!is_filled(d->map[m_y][m_x - 1], '0') && draw_minimap(d, x - 16, y))
+	if ((!is_filled(d->map[m_y + 1][m_x], '0') && draw_minimap(d, x, y + 16)) \
+		|| (!is_filled(d->map[m_y - 1][m_x], '0') && \
+		draw_minimap(d, x, y - 16)) || (!is_filled(d->map[m_y][m_x + 1], '0') \
+		&& draw_minimap(d, x + 16, y)) || \
+		(!is_filled(d->map[m_y][m_x - 1], '0') && draw_minimap(d, x - 16, y)))
 		return (1);
 	return (0);
 }
@@ -107,7 +102,7 @@ void	ft_move_minidoors_y(t_data *data, double direction)
 	int	i;
 
 	i = 82;
-	while (i - 82 < data->minimap_doors)
+	while (i < (int)data->map_frame->count)
 	{
 		if (direction > 0)
 			data->map_frame->instances[i].y -= 2;
@@ -130,7 +125,7 @@ void	ft_move_minidoors_x(t_data *data, double direction)
 	int	i;
 
 	i = 82;
-	while (i - 82 < data->minimap_doors)
+	while (i < (int)data->map_frame->count)
 	{
 		if (direction > 0)
 			data->map_frame->instances[i].x -= 2;
