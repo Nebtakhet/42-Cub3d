@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:45:24 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 18:54:32 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:10:06 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	cursor_hook(double xpos, double ypos, void *param)
 
 void	key_hook(mlx_key_data_t key_data, void *param)
 {
-	t_data	*data;
+	t_data		*data;
 
 	data = (t_data *)param;
 	if (key_data.key == MLX_KEY_ESCAPE)
@@ -53,6 +53,8 @@ void	key_hook(mlx_key_data_t key_data, void *param)
 		
 	}*/
 	data->renderer.changed = true;
+	if (key_data.key == MLX_KEY_F && key_data.action == MLX_PRESS)
+		door_interaction(data);
 }
 
 /* Function to close the window and terminate the mlx instance */
@@ -71,7 +73,8 @@ void	close_program(void *param)
 
 void	ft_move_hook(void *param)
 {
-	t_data	*data;
+	t_data		*data;
+	static int	mouse_wait = 0;
 
 	data = param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
@@ -86,12 +89,12 @@ void	ft_move_hook(void *param)
 		ft_rotate_player(data, 'l');
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		ft_rotate_player(data, 'r');
-	if (mlx_is_key_down(data->mlx, MLX_KEY_F) || \
-		mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_RIGHT))
-		door_interaction(data);
-	if (data->player.moved)
+	if (mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_RIGHT) && mouse_wait == 0)
 	{
-		data->player.moved = false;
-		data->renderer.changed = true;
+		door_interaction(data);
+		mouse_wait = 1;
 	}
+	if (mouse_wait > 0 && ++mouse_wait > 4)
+		mouse_wait = 0;
+	data->renderer.changed = true;
 }

@@ -14,28 +14,27 @@
 
 int	ft_draw_minimap_frame(t_data *data)
 {
-	int			i;
-	mlx_image_t	*back;
+	int	i;
 
-	back = mlx_new_image(data->mlx, 320, 320);
-	ft_memset(back->pixels, 124, 320 * 320 * sizeof(int32_t));
-	mlx_image_to_window(data->mlx, back, 116, 116);
-	data->map_frame = mlx_texture_to_image(data->mlx, data->north_texture);
-	if (!data->map_frame || !mlx_resize_image(data->map_frame, 16, 16))
-		return (1);
 	i = 100;
 	while (i < 420)
 	{
 		if (mlx_image_to_window(data->mlx, data->map_frame, i, 100) == -1 || \
 			mlx_image_to_window(data->mlx, data->map_frame, 100, i) == -1)
+		{
+			perror("minimap frame");
 			return (1);
+		}
 		i += 16;
 	}
 	while (i >= 100)
 	{
 		if (mlx_image_to_window(data->mlx, data->map_frame, i, 420) == -1 || \
 			mlx_image_to_window(data->mlx, data->map_frame, 420, i) == -1)
+		{
+			perror("minimap frame");
 			return (1);
+		}
 		i -= 16;
 	}
 	return (0);
@@ -48,23 +47,24 @@ int	ft_draw_player_to_minimap(t_data *data)
 	i = 0;
 	while (i < 82)
 		mlx_set_instance_depth(&data->map_frame->instances[i++], 100);
-	while (i - 82 < data->minimap_doors)
+	while (i < (int)data->map_frame->count)
 		mlx_set_instance_depth(&data->map_frame->instances[i++], 10);
+	i = 0;
+	while (i < (int)data->map_wall->count)
+		mlx_set_instance_depth(&data->map_wall->instances[i++], 10);
 	data->player.mini_p = mlx_load_png("./textures/player1.png");
 	if (!data->player.mini_p)
 		return (1);
 	data->player.mini_player = \
 	mlx_texture_to_image(data->mlx, data->player.mini_p);
-	if (!data->player.mini_player)
-		return (1);
-	if (!mlx_resize_image(data->player.mini_player, 16, 16))
-		return (1);
-	if (mlx_image_to_window(data->mlx, data->player.mini_player, \
+	if (!data->player.mini_player || \
+		!mlx_resize_image(data->player.mini_player, 16, 16) || \
+		mlx_image_to_window(data->mlx, data->player.mini_player, \
 		250, 250) == -1)
 		return (1);
 	ft_draw_ray(data, data->palette[12]);
 	ft_move_minimap_y(data, 1);
-	ft_move_minimap_y(data, -1);	
+	ft_move_minimap_y(data, -1);
 	return (0);
 }
 
@@ -78,74 +78,23 @@ int	draw_minimap(t_data *d, int x, int y)
 	if (!ft_is_player(d->map[m_y][m_x]) && d->map[m_y][m_x] != '1' && \
 		d->map[m_y][m_x] != 'D' && d->map[m_y][m_x] != 'd')
 		d->map[m_y][m_x] = '0';
-	else if (d->map[m_y][m_x] == '1')
-	{
-		if (mlx_image_to_window(d->mlx, d->map_wall, x, y) == -1)
-			return (1);
+	else if (d->map[m_y][m_x] == '1' && \
+			mlx_image_to_window(d->mlx, d->map_wall, x, y) == -1)
+		return (1);
+	if (d->map[m_y][m_x] == '1')
 		return (0);
-	}
-	else if (d->map[m_y][m_x] == 'd')
-	{
-		d->minimap_doors++;
+	if (d->map[m_y][m_x] == 'd' && \
+		mlx_image_to_window(d->mlx, d->map_frame, x, y) == -1)
+		return (1);
+	if (d->map[m_y][m_x] == 'd')
 		d->map[m_y][m_x] = 'D';
-		if (mlx_image_to_window(d->mlx, d->map_frame, x, y) == -1)
-			return (1);
-	}
-	if (!is_filled(d->map[m_y + 1][m_x], '0') && draw_minimap(d, x, y + 16))
-		return (1);
-	if (!is_filled(d->map[m_y - 1][m_x], '0') && draw_minimap(d, x, y - 16))
-		return (1);
-	if (!is_filled(d->map[m_y][m_x + 1], '0') && draw_minimap(d, x + 16, y))
-		return (1);
-	if (!is_filled(d->map[m_y][m_x - 1], '0') && draw_minimap(d, x - 16, y))
+	if ((!is_filled(d->map[m_y + 1][m_x], '0') && draw_minimap(d, x, y + 16)) \
+		|| (!is_filled(d->map[m_y - 1][m_x], '0') && \
+		draw_minimap(d, x, y - 16)) || (!is_filled(d->map[m_y][m_x + 1], '0') \
+		&& draw_minimap(d, x + 16, y)) || \
+		(!is_filled(d->map[m_y][m_x - 1], '0') && draw_minimap(d, x - 16, y)))
 		return (1);
 	return (0);
-}
-
-void	ft_move_minidoors_y(t_data *data, double direction)
-{
-	int	i;
-
-	i = 82;
-	while (i - 82 < data->minimap_doors)
-	{
-		if (direction > 0)
-			data->map_frame->instances[i].y -= 2;
-		else
-			data->map_frame->instances[i].y += 2;
-		if (data->map_frame->instances[i].y > 100 && \
-			data->map_frame->instances[i].y < 420 && \
-			data->map_frame->instances[i].x > 100 && \
-			data->map_frame->instances[i].x < 420 && \
-			data->map_frame->instances[i].z == 10)
-			data->map_frame->instances[i].enabled = true;
-		else
-			data->map_frame->instances[i].enabled = false;
-		i++;
-	}
-}
-
-void	ft_move_minidoors_x(t_data *data, double direction)
-{
-	int	i;
-
-	i = 82;
-	while (i - 82 < data->minimap_doors)
-	{
-		if (direction > 0)
-			data->map_frame->instances[i].x -= 2;
-		else
-			data->map_frame->instances[i].x += 2;
-		if (data->map_frame->instances[i].y > 100 && \
-			data->map_frame->instances[i].y < 420 && \
-			data->map_frame->instances[i].x > 100 && \
-			data->map_frame->instances[i].x < 420 && \
-			data->map_frame->instances[i].z == 10)
-			data->map_frame->instances[i].enabled = true;
-		else
-			data->map_frame->instances[i].enabled = false;
-		i++;
-	}
 }
 
 void	ft_move_minimap_y(t_data *data, double direction)
@@ -167,7 +116,6 @@ void	ft_move_minimap_y(t_data *data, double direction)
 			data->map_wall->instances[i].enabled = true;
 		else
 			data->map_wall->instances[i].enabled = false;
-		mlx_set_instance_depth(&data->map_wall->instances[i], 10);
 		i++;
 	}
 }

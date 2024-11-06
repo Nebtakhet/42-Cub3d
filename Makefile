@@ -39,7 +39,7 @@ BONUS_FILES = main_bonus.c \
 			map_init.c \
 			win_init.c \
 			colors.c \
-			parse_map.c \
+			parse_map_bonus.c \
 			minimap.c \
 			parsing.c \
 			textures.c \

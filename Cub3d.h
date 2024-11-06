@@ -121,7 +121,6 @@ typedef struct s_data
 	mlx_image_t		*map_wall;
 	mlx_image_t		*map_frame;
 	mlx_image_t		*door_wall;
-	int				minimap_doors;
 	mlx_image_t		*gun[5];
 	mlx_texture_t	*enemy;
 	int				enemy_count;
@@ -134,6 +133,9 @@ void	print_error(char *str);
 void	clean_exit(t_data *data, int status);
 int		get_rgba(int r, int g, int b, int a);
 int		is_filled(char c, char filling);
+void	ft_move_minidoors_y(t_data *data, double direction);
+void	ft_move_minidoors_x(t_data *data, double direction);
+int		the_door(t_data *data);
 
 /* Initialization*/
 
@@ -164,6 +166,7 @@ void	get_layout(t_data *win);
 void	win_init(t_data *win);
 
 int		ft_draw_minimap_frame(t_data *data);
+int		ft_draw_minimap_background(t_data *data);
 int		draw_minimap(t_data *data, int x, int y);
 int		ft_draw_player_to_minimap(t_data *data);
 void	ft_move_player(t_data *data, double dir_y, double dir_x);

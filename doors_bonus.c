@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:14:56 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 14:28:44 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:09:36 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,60 +93,31 @@ void	place_doors(t_data *data)
 	}
 }
 
-int	find_door_instance(t_data *data)
-{
-	int	i;
-
-	i = 82;
-	while (i - 82 < data->minimap_doors)
-	{
-		if ((data->player.mini_player->instances[0].y + 8)
-			+ data->player.dir_y * 0.3 >= data->map_frame->instances[i].y
-			&& (data->player.mini_player->instances[0].y + 8)
-			+ data->player.dir_y * 0.3 <= data->map_frame->instances[i].y + 16
-			&& (data->player.mini_player->instances[0].x + 8)
-			+ data->player.dir_x * 0.3 >= data->map_frame->instances[i].x
-			&& (data->player.mini_player->instances[0].x + 8)
-			+ data->player.dir_x * 0.3 <= data->map_frame->instances[i].x + 16)
-			break ;
-		i++;
-	}
-	return (i);
-}
-
 void	door_interaction(t_data *data)
 {
 	int			door_y;
 	int			door_x;
-	static int	door_timer = 0;
 
-	if (door_timer <= 0)
+	if (ft_is_near_door(data, 'y', 1) || ft_is_near_door(data, 'y', -1)
+		|| ft_is_near_door(data, 'x', 1) || ft_is_near_door(data, 'x', -1))
 	{
-		if (ft_is_near_door(data, 'y', 1) || ft_is_near_door(data, 'y', -1)
-			|| ft_is_near_door(data, 'x', 1) || ft_is_near_door(data, 'x', -1))
+		door_y = (int)(data->player.pos_y + data->player.dir_y * 0.6);
+		door_x = (int)(data->player.pos_x + data->player.dir_x * 0.6);
+		if (data->map[door_y][door_x] == 'D')
 		{
-			door_y = (int)(data->player.pos_y + data->player.dir_y * 0.6);
-			door_x = (int)(data->player.pos_x + data->player.dir_x * 0.6);
-			if (data->map[door_y][door_x] == 'D')
-			{
-				data->map[door_y][door_x] = 'd';
-				data->map_frame->instances[find_door_instance(data)].enabled = false;
-				mlx_set_instance_depth(&data->map_frame->instances[find_door_instance(data)], 100);
-			}
-			else if (data->map[door_y][door_x] == 'd' && data->map\
-					[(int)data->player.pos_y][(int)data->player.pos_x] != 'd')
-			{
-				data->map[door_y][door_x] = 'D';
-				data->map_frame->instances[find_door_instance(data)].enabled = true;
-				mlx_set_instance_depth(&data->map_frame->instances[find_door_instance(data)], 10);
-			}
-			data->renderer.changed = true;
-			door_timer = 1;
+			data->map[door_y][door_x] = 'd';
+			data->map_frame->instances[the_door(data)].enabled = false;
+			mlx_set_instance_depth(&data->map_frame->instances[the_door(data)], \
+			100);
 		}
-	}
-	else
-	{
-		door_timer--;
+		else if (data->map[door_y][door_x] == 'd' && \
+			data->map[(int)data->player.pos_y][(int)data->player.pos_x] != 'd')
+		{
+			data->map[door_y][door_x] = 'D';
+			data->map_frame->instances[the_door(data)].enabled = true;
+			mlx_set_instance_depth(&data->map_frame->instances[the_door(data)], \
+			10);
+		}
 		data->renderer.changed = true;
 	}
 }

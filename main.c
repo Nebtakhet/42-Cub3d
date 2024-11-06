@@ -23,7 +23,11 @@ int	main(int argc, char **argv)
 	win_init(data);
 	mlx_key_hook(data->mlx, &key_hook, data);
 	mlx_close_hook(data->mlx, &close_program, data);
-	mlx_image_to_window(data->mlx, data->img, 0, 0);
+	if (mlx_image_to_window(data->mlx, data->img, 0, 0) == -1)
+	{
+		clean_exit(data, 1);
+		return (1);
+	}
 	mlx_loop_hook(data->mlx, &render, data);
 	mlx_loop_hook(data->mlx, &ft_move_hook, (void *)data);
 	mlx_loop(data->mlx);

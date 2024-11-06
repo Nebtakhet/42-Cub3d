@@ -12,6 +12,8 @@
 
 #include "Cub3d.h"
 
+/*Convert len amount of characters in a string to integer*/
+
 int	ft_altoi(const char *str, int len)
 {
 	size_t	result;
