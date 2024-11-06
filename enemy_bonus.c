@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:10:15 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 19:05:22 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:18:33 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	enemies_interaction(t_data *data)
 
 	enemy_y = (int)(data->player.pos_y + data->player.dir_y * 1.5);
 	enemy_x = (int)(data->player.pos_x + data->player.dir_x * 1.5);
-
 	if (data->map[enemy_y][enemy_x] == 'X')
 	{
 		data->map[enemy_y][enemy_x] = '0';
@@ -127,23 +126,25 @@ void	kill_count(t_data *data)
 {
 	char		*count;
 	char		*itoa;
-	
+
 	itoa = ft_itoa(data->enemy_count);
 	if (!itoa)
 		return ;
 	count = ft_strjoin(itoa, " enemies left");
 	if (!count)
 	{
-		free(itoa);		
+		free(itoa);
 		return ;
 	}
 	if (data->enemy_string)
 		mlx_delete_image(data->mlx, data->enemy_string);
 	data->enemy_string = mlx_put_string(data->mlx, count, WIDTH / 2, 30);
-	mlx_resize_image(data->enemy_string, data->enemy_string->width + 500 , data->enemy_string->height + 50);
+	mlx_resize_image(data->enemy_string, data->enemy_string->width
+		+ 500, data->enemy_string->height + 50);
 	data->renderer.changed = true;
 	if (!data->enemy_count)
-		mlx_resize_image(mlx_put_string(data->mlx, "YOU WIN!", WIDTH / 2.5, HEIGHT / 2.5), 500, 200);
+		mlx_resize_image(mlx_put_string(data->mlx, "YOU WIN!",
+				WIDTH / 2.5, HEIGHT / 2.5), 500, 200);
 	free(itoa);
 	free(count);
 }

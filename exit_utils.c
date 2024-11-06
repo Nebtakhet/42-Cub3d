@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:44:15 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 19:09:52 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:15:00 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_free_data(t_data **info)
 	if ((*info)->door_texture)
 		mlx_delete_texture((*info)->door_texture);
 	if ((*info)->enemy)
-		mlx_delete_texture((*info)->enemy);	
+		mlx_delete_texture((*info)->enemy);
 	if ((*info)->map)
 		ft_free_array((*info)->map);
 	if (*info)

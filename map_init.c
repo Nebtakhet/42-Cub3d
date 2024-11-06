@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:02:22 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 19:10:22 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:11:17 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_data	*ft_init_data(void)
 	info->player.mini_p = NULL;
 	info->map_width = 0;
 	info->map_height = 0;
-	info->minimap_doors = 0;
 	info->enemy_count = 0;
 	info->enemy_string = NULL;
 	return (info);
