@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/11/06 14:25:19 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/11/06 16:14:10 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)Cub3d.h | $(OBJ_DIR)
 
 fsanitize: $(MLX42) $(LIBFT)/libft.a $(OBJ_FILES)
 	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) \
-		$(MLX42FLAGS) -g -fsanitize=address -static-libasan -lm
+		$(MLX42FLAGS) -g -fsanitize=address -static-libsan -lm
 	
 clean:
 	make clean -C $(LIBFT)
