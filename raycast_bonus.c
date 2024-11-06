@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:29:33 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/05 16:53:57 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:16:31 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,12 +157,4 @@ void	calc_wall(t_data *data)
 		data->ray.tex_x = 64 - data->ray.tex_x - 1;
 	if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
 		data->ray.tex_x = 64 - data->ray.tex_x - 1;
-}
-
-void	raycast(t_data *data, int x)
-{
-	init_ray(data, x);
-	set_dda(data);
-	perform_dda(data);
-	calc_wall(data);
 }

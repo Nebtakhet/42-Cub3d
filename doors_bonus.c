@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:14:56 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/05 11:53:27 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:09:36 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ static bool	valid_door_position(t_data *data, int x, int y)
 	if (x > 0 && x < (int)ft_strlen(map[y]) - 1 && \
 		y > 0 && y < data->map_height - 1)
 	{
-		if ((map[y][x - 1] == '1' && map[y][x + 1] == '1' && (x < y_n && \
+		if (map[y][x - 1] == '1' && map[y][x + 1] == '1' && (x < y_n && \
 			map[y - 1][x] == '0' && (x < y_p && map[y + 1][x] == '0')) && \
-			(x - 1 < y_n && map[y - 1][x - 1] != '1' && x +	1 < y_n && \
+			(x - 1 < y_n && map[y - 1][x - 1] != '1' && x + 1 < y_n && \
 			map[y - 1][x + 1] != '1') && (x - 1 < y_p && map[y + 1][x - 1] != \
-			'1'	&& x + 1 < y_p && map[y + 1][x + 1] != '1')))
+			'1' && x + 1 < y_p && map[y + 1][x + 1] != '1'))
 			return (true);
 		if ((x < y_n && map[y - 1][x] == '1' && x < y_p && map[y + 1][x] == \
 			'1') && (map[y][x - 1] == '0' && map[y][x + 1] == '0') && (x - 1 < \
-			y_n && map[y - 1][x - 1] != '1' && x + 1 < y_n && map[y - 1][x + 1]\
-			!= '1')	&& (x - 1 < y_p && map[y + 1][x - 1] != '1' && x + 1 < y_p \
+			y_n && map[y - 1][x - 1] != '1' && x + 1 < y_n && map[y - 1][x + 1] \
+			!= '1') && (x - 1 < y_p && map[y + 1][x - 1] != '1' && x + 1 < y_p \
 			&& map[y + 1][x + 1] != '1'))
 			return (true);
 	}

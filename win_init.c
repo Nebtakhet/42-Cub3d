@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:08:12 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/10/23 12:53:05 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:03:46 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ to 1.0, the color of the palette to a greenish color and the frames to wait to
 5 */
 void	get_layout(t_data *data)
 {
-	data->zoom.factor = 1.0;
 	data->color.r_o = 9;
 	data->color.g_o = 15;
 	data->color.b_o = 8.5;

@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/05 16:53:46 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:27:29 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	render(void *param)
 		draw_ceiling_and_floor(data);
 		calculate_img(data);
 		ft_draw_ray(data, data->palette[12]);
+		kill_count(data);
 		frames = 0;
 	}
 	data->renderer.changed = false;

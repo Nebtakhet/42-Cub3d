@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/23 12:51:05 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:26:51 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,26 @@ int	ft_is_player_near_wall(t_data *data, char axis, int direction)
 {
 	double	y;
 	double	x;
+	char	c;
 
 	y = data->player.pos_y;
 	x = data->player.pos_x;
 	if (axis == 'y')
 	{
-		if ((direction > 0 && data->map[(int)(y + 0.375)][(int)x] == '1') || \
-			(direction > 0 && data->map[(int)(y + 0.375)][(int)x] == 'D'))
-			return (1);
-		if ((direction < 0 && data->map[(int)(y - 0.375)][(int)x] == '1') || \
-			(direction < 0 && data->map[(int)(y - 0.375)][(int)x] == 'D'))
-			return (1);
+		if (direction > 0)
+			c = data->map[(int)(y + 0.375)][(int)x];
+		else
+			c = data->map[(int)(y - 0.375)][(int)x];
 	}
 	if (axis == 'x')
 	{
-		if ((direction > 0 && data->map[(int)y][(int)(x + 0.375)] == '1') || \
-			(direction > 0 && data->map[(int)y][(int)(x + 0.375)] == 'D'))
-			return (1);
-		if ((direction < 0 && data->map[(int)y][(int)(x - 0.375)] == '1') || \
-			(direction < 0 && data->map[(int)y][(int)(x - 0.375)] == 'D'))
-			return (1);
+		if (direction > 0)
+			c = data->map[(int)y][(int)(x + 0.375)];
+		else
+			c = data->map[(int)y][(int)(x - 0.375)];
 	}
+	if (c == '1' || c == 'D' || c == 'X')
+		return (1);
 	return (0);
 }
 

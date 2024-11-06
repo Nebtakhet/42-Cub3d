@@ -6,46 +6,16 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/04 13:47:34 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:18:00 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-// static int	apply_lighting(int color, double lighting_factor)
-// {
-// 	int	r;
-// 	int	g;
-// 	int	b;
-// 	int	a;
-
-// 	r = (color >> 24) & 0xFF;
-// 	g = (color >> 16) & 0xFF;
-// 	b = (color >> 8) & 0xFF;
-// 	a = color & 0xFF;
-// 	r = (int)(r * lighting_factor);
-// 	g = (int)(g * lighting_factor);
-// 	b = (int)(b * lighting_factor);
-// 	if (r > 255)
-// 		r = 255;
-// 	if (r < 0)
-// 		r = 0;
-// 	if (g > 255)
-// 		g = 255;
-// 	if (g < 0)
-// 		g = 0;
-// 	if (b > 255)
-// 		b = 255;
-// 	if (b < 0)
-// 		b = 0;
-// 	return (get_rgba(r, g, b, a));
-// }
-
 int	get_color(t_data *data)
 {
 	uint8_t		*clr;
 	uint32_t	color;
-//	double		lightning_factor;
 	uint32_t	*pixels;
 
 	if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
@@ -58,8 +28,6 @@ int	get_color(t_data *data)
 		pixels = (uint32_t *)data->west_texture->pixels;
 	clr = (uint8_t *)&pixels[64 * data->ray.tex_y + (64 - data->ray.tex_x - 1)];
 	color = get_rgba(clr[0], clr[1], clr[2], 255);
-//	lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 0.5);
-//	color = apply_lighting(color, lightning_factor);
 	return (color);
 }
 

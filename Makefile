@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/11/05 16:47:38 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/11/06 19:17:39 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ BONUS_FILES = main_bonus.c \
 			doors_bonus.c \
 			gun_bonus.c \
 			enemy_bonus.c \
+			raycast_utils_bonus.c \
 
 MLX42FLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 INCLUDES = -I$(SRC_DIR) -I./include
@@ -96,7 +97,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)Cub3d.h | $(OBJ_DIR)
 
 fsanitize: $(MLX42) $(LIBFT)/libft.a $(OBJ_FILES)
 	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) \
-		$(MLX42FLAGS) -g -fsanitize=address -static-libasan -lm
+		$(MLX42FLAGS) -g -fsanitize=address -static-libsan -lm
 	
 clean:
 	make clean -C $(LIBFT)
