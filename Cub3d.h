@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 18:39:34 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:04:21 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ typedef struct s_img
 	double	y0;
 }				t_img;
 
-typedef struct s_cords
-{
-	double	min;
-	double	max;
-}				t_cords;
-
 typedef struct s_renderer
 {
 	int		frames;
@@ -57,20 +51,6 @@ typedef struct s_color
 	double		g_o;
 	double		b_o;
 }				t_color;
-
-typedef struct s_zoom
-{
-	double	x;
-	double	y;
-	double	factor;
-	double	level;
-}				t_zoom;
-
-typedef struct s_mouse
-{
-	int32_t	x;
-	int32_t	y;
-}				t_mouse;
 
 typedef struct s_player
 {
@@ -121,13 +101,9 @@ typedef struct s_data
 	t_player		player;
 	t_ray			ray;
 	u_int32_t		iter;
-	t_cords			x;
-	t_cords			y;
 	u_int32_t		palette[ITER];
 	t_color			color;
 	t_renderer		renderer;
-	t_zoom			zoom;
-	t_mouse			mouse;
 	int				floor_color[3];
 	int				ceiling_color[3];
 	int				floor_rgba;
