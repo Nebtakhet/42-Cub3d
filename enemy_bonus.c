@@ -25,13 +25,20 @@ int	get_enemy_texture(t_data *data)
 
 static bool	valid_enemy_position(t_data *data, int x, int y)
 {
-	if (x > 0 && x < data->map_width - 1 && y > 0 && y < data->map_height - 1)
+	if (y > 0 && y < data->map_height - 1 && x > 0 && \
+		x < (int)ft_strlen(data->map[y]) - 1 && \
+		!ft_is_player(data->map[y][x]))
 	{
 		if ((data->map[y][x - 1] == '0' && data->map[y][x + 1] == '0') &&
-			(data->map[y - 1][x] == '0' && data->map[y + 1][x] == '0') &&
-			(data->map[y - 1][x - 1] == '0' && data->map[y - 1][x + 1] == '0')
-			&& (data->map[y + 1][x - 1] == '0'
-			&& data->map[y + 1][x + 1] == '0'))
+			(x < (int)ft_strlen(data->map[y - 1]) && data->map[y - 1][x] \
+			== '0' && x < (int)ft_strlen(data->map[y + 1]) && \
+			data->map[y + 1][x] == '0') && (x - 1 < \
+			(int)ft_strlen(data->map[y - 1]) && data->map[y - 1][x - 1] == '0' \
+			&& x + 1 < (int)ft_strlen(data->map[y - 1]) && \
+			data->map[y - 1][x + 1] == '0')	&& (x - 1 < \
+			(int)ft_strlen(data->map[y + 1]) && data->map[y + 1][x - 1] == '0' \
+			&& x + 1 < (int)ft_strlen(data->map[y + 1]) && \
+			data->map[y + 1][x + 1] == '0'))
 			return (true);
 	}
 	return (false);

@@ -53,22 +53,27 @@ int	ft_is_near_door(t_data *data, char axis, int direction)
 
 static bool	valid_door_position(t_data *data, int x, int y)
 {
-	if (x > 0 && x < (int)ft_strlen(data->map[y]) - 1 && \
+	char	**map;
+	int		y_p;
+	int		y_n;
+
+	map = data->map;
+	y_p = ft_strlen(map[y + 1]) - 1;
+	y_n = ft_strlen(map[y - 1]) - 1;
+	if (x > 0 && x < (int)ft_strlen(map[y]) - 1 && \
 		y > 0 && y < data->map_height - 1)
 	{
-		if ((data->map[y][x - 1] == '1' && data->map[y][x + 1] == '1') &&
-			((data->map[y - 1][x] == '0' || data->map[y - 1][x] == '.') && \
-			(data->map[y + 1][x] == '0' || data->map[y + 1][x] == '.')) &&
-			(data->map[y - 1][x - 1] != '1' && data->map[y - 1][x + 1] != '1')
-			&& (data->map[y + 1][x - 1] != '1'
-			&& data->map[y + 1][x + 1] != '1'))
+		if ((map[y][x - 1] == '1' && map[y][x + 1] == '1' && (x < y_n && \
+			map[y - 1][x] == '0' && (x < y_p && map[y + 1][x] == '0')) && \
+			(x - 1 < y_n && map[y - 1][x - 1] != '1' && x +	1 < y_n && \
+			map[y - 1][x + 1] != '1') && (x - 1 < y_p && map[y + 1][x - 1] != \
+			'1'	&& x + 1 < y_p && map[y + 1][x + 1] != '1')))
 			return (true);
-		if ((data->map[y - 1][x] == '1' && data->map[y + 1][x] == '1') &&
-			((data->map[y][x - 1] == '0' || data->map[y][x - 1] == '.') && \
-			(data->map[y][x + 1] == '0' || data->map[y][x + 1] == '.')) &&
-			(data->map[y - 1][x - 1] != '1' && data->map[y - 1][x + 1] != '1')
-			&& (data->map[y + 1][x - 1] != '1'
-			&& data->map[y + 1][x + 1] != '1'))
+		if ((x < y_n && map[y - 1][x] == '1' && x < y_p && map[y + 1][x] == \
+			'1') && (map[y][x - 1] == '0' && map[y][x + 1] == '0') && (x - 1 < \
+			y_n && map[y - 1][x - 1] != '1' && x + 1 < y_n && map[y - 1][x + 1]\
+			!= '1')	&& (x - 1 < y_p && map[y + 1][x - 1] != '1' && x + 1 < y_p \
+			&& map[y + 1][x + 1] != '1'))
 			return (true);
 	}
 	return (false);
