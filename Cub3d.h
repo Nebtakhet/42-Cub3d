@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 14:52:57 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:39:34 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct s_data
 	mlx_image_t		*gun[5];
 	mlx_texture_t	*enemy;
 	int				enemy_count;
+	mlx_image_t		*enemy_string;
 }	t_data;
 
 /* Utils */
@@ -161,6 +162,8 @@ int		is_filled(char c, char filling);
 /* Initialization*/
 
 t_data	*handle_args(int argc, char **argv, t_data *info);
+void	ft_init_player(t_data *data);
+
 
 int		ft_altoi(const char *str, int len);
 int		ft_get_floor_color(t_data *info, char *f_color);
