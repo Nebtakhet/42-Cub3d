@@ -85,8 +85,11 @@ void	ft_shoot(void *param)
 	}
 	if (shooting)
 	{
-		data->gun[frame++]->enabled = false;
-		if (frame > 4)
+		if (frame != 0)
+			data->gun[frame]->enabled = false;
+		if (frame == 1)
+			data->gun[0]->enabled = false;
+		if (++frame > 4)
 		{
 			frame = 0;
 			shooting = false;

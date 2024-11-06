@@ -93,30 +93,6 @@ void	place_doors(t_data *data)
 	}
 }
 
-/*Function to find the correct instance of the door that the player is facing 
-towards in the minimap*/
-
-int	the_door(t_data *data)
-{
-	int	i;
-
-	i = 82;
-	while (i < (int)data->map_frame->count)
-	{
-		if ((data->player.mini_player->instances[0].y + 8) + \
-			data->player.dir_y / 0.1 >= data->map_frame->instances[i].y \
-			&& (data->player.mini_player->instances[0].y + 8) + \
-			data->player.dir_y / 0.1 <= data->map_frame->instances[i].y + 16 \
-			&& (data->player.mini_player->instances[0].x + 8) + \
-			data->player.dir_x / 0.1 >= data->map_frame->instances[i].x \
-			&& (data->player.mini_player->instances[0].x + 8) + \
-			data->player.dir_x / 0.1 <= data->map_frame->instances[i].x + 16)
-			break ;
-		i++;
-	}
-	return (i);
-}
-
 void	door_interaction(t_data *data)
 {
 	int			door_y;

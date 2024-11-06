@@ -48,11 +48,7 @@ int	get_color(t_data *data)
 	double		lightning_factor;
 	uint32_t	*pixels;
 
-	if (data->map[data->ray.map_y][data->ray.map_x] == 'D')
-		pixels = (uint32_t *)data->door_texture->pixels;
-	else if (data->map[data->ray.map_y][data->ray.map_x] == 'X')
-		pixels = (uint32_t *)data->enemy->pixels;
-	else if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
+	if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
 		pixels = (uint32_t *)data->south_texture->pixels;
 	else if (data->ray.side == 1 && data->ray.ray_dir_y > 0)
 		pixels = (uint32_t *)data->north_texture->pixels;
@@ -60,6 +56,10 @@ int	get_color(t_data *data)
 		pixels = (uint32_t *)data->east_texture->pixels;
 	else
 		pixels = (uint32_t *)data->west_texture->pixels;
+	if (data->map[data->ray.map_y][data->ray.map_x] == 'D')
+		pixels = (uint32_t *)data->door_texture->pixels;
+	else if (data->map[data->ray.map_y][data->ray.map_x] == 'X')
+		pixels = (uint32_t *)data->enemy->pixels;
 	clr = (uint8_t *)&pixels[64 * data->ray.tex_y + (64 - data->ray.tex_x - 1)];
 	color = get_rgba(clr[0], clr[1], clr[2], 255);
 	lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 0.5);

@@ -99,10 +99,15 @@ void	perform_dda(t_data *data)
 	while (1)
 	{
 		step_ray(data);
-		if (data->ray.map_y < 0 || data->ray.map_x < 0
-			|| data->ray.map_y >= data->map_height
-			|| data->ray.map_x >= (int)ft_strlen(data->map[data->ray.map_y]))
-			break ;
+		if (data->ray.map_y < 0)
+			data->ray.map_y = 0;
+		else if (data->ray.map_y > data->map_height - 1)
+			data->ray.map_y = data->map_height - 1;
+		if (data->ray.map_x < 0)
+			data->ray.map_x = 0;
+		else if (data->ray.map_x > \
+				(int)ft_strlen(data->map[data->ray.map_y]) - 1)
+			data->ray.map_x = (int)ft_strlen(data->map[data->ray.map_y]) - 1;
 		if (data->map[data->ray.map_y][data->ray.map_x] == '1'
 			|| data->map[data->ray.map_y][data->ray.map_x] == 'D'
 			|| data->map[data->ray.map_y][data->ray.map_x] == 'X')

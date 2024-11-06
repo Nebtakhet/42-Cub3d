@@ -39,14 +39,14 @@ BONUS_FILES = main_bonus.c \
 			map_init.c \
 			win_init.c \
 			colors.c \
-			parse_map.c \
+			parse_map_bonus.c \
 			minimap.c \
 			parsing.c \
 			textures.c \
 			utils.c \
 			utils2.c \
 			render_bonus.c \
-			raycast.c \
+			raycast_bonus.c \
 			hooks_bonus.c \
 			exit_utils.c  \
 			movement_bonus.c \
