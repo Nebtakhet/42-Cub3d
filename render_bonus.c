@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/05 16:53:46 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:46:40 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	get_color(t_data *data)
 		pixels = (uint32_t *)data->west_texture->pixels;
 	clr = (uint8_t *)&pixels[64 * data->ray.tex_y + (64 - data->ray.tex_x - 1)];
 	color = get_rgba(clr[0], clr[1], clr[2], 255);
-	lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 0.5);
+	lightning_factor = 1.0 / (1.0 + data->ray.perp_wall_dist * 1.5);
 	color = apply_lighting(color, lightning_factor);
 	return (color);
 }
@@ -106,6 +106,7 @@ void	render(void *param)
 		draw_ceiling_and_floor(data);
 		calculate_img(data);
 		ft_draw_ray(data, data->palette[12]);
+		kill_count(data);
 		frames = 0;
 	}
 	data->renderer.changed = false;

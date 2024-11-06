@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:14:56 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/05 11:53:27 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:28:44 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,14 @@ int	find_door_instance(t_data *data)
 	i = 82;
 	while (i - 82 < data->minimap_doors)
 	{
-		if ((data->player.mini_player->instances[0].y + 8) + data->player.dir_y * 0.3 >= data->map_frame->instances[i].y
-			&& (data->player.mini_player->instances[0].y + 8) + data->player.dir_y * 0.3 <= data->map_frame->instances[i].y + 16
-			&& (data->player.mini_player->instances[0].x + 8) + data->player.dir_x * 0.3 >= data->map_frame->instances[i].x
-			&& (data->player.mini_player->instances[0].x + 8) + data->player.dir_x * 0.3 <= data->map_frame->instances[i].x + 16)
+		if ((data->player.mini_player->instances[0].y + 8)
+			+ data->player.dir_y * 0.3 >= data->map_frame->instances[i].y
+			&& (data->player.mini_player->instances[0].y + 8)
+			+ data->player.dir_y * 0.3 <= data->map_frame->instances[i].y + 16
+			&& (data->player.mini_player->instances[0].x + 8)
+			+ data->player.dir_x * 0.3 >= data->map_frame->instances[i].x
+			&& (data->player.mini_player->instances[0].x + 8)
+			+ data->player.dir_x * 0.3 <= data->map_frame->instances[i].x + 16)
 			break ;
 		i++;
 	}
@@ -128,7 +132,6 @@ void	door_interaction(t_data *data)
 				data->map[door_y][door_x] = 'd';
 				data->map_frame->instances[find_door_instance(data)].enabled = false;
 				mlx_set_instance_depth(&data->map_frame->instances[find_door_instance(data)], 100);
-				printf("Door opened at (%d, %d)\n", door_x, door_y);
 			}
 			else if (data->map[door_y][door_x] == 'd' && data->map\
 					[(int)data->player.pos_y][(int)data->player.pos_x] != 'd')
@@ -136,7 +139,6 @@ void	door_interaction(t_data *data)
 				data->map[door_y][door_x] = 'D';
 				data->map_frame->instances[find_door_instance(data)].enabled = true;
 				mlx_set_instance_depth(&data->map_frame->instances[find_door_instance(data)], 10);
-				printf("Door closed at (%d, %d)\n", door_x, door_y);
 			}
 			data->renderer.changed = true;
 			door_timer = 1;

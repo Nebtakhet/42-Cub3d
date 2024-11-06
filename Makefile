@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/11/05 16:47:38 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/11/06 14:25:19 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ BONUS_FILES = main_bonus.c \
 			utils.c \
 			utils2.c \
 			render_bonus.c \
-			raycast.c \
+			raycast_bonus.c \
 			hooks_bonus.c \
 			exit_utils.c  \
 			movement_bonus.c \

@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/05 16:48:47 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:52:57 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct s_data
 	int				minimap_doors;
 	mlx_image_t		*gun[5];
 	mlx_texture_t	*enemy;
+	int				enemy_count;
 }	t_data;
 
 /* Utils */
@@ -225,5 +226,6 @@ void	door_interaction(t_data *data);
 int		get_enemy_texture(t_data *data);
 void	place_enemies(t_data *data);
 void	enemies_interaction(t_data *data);
+void	kill_count(t_data *data);
 
 #endif
