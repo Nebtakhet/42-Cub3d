@@ -97,16 +97,14 @@ int	the_door(t_data *data)
 
 int	ft_draw_minimap_background(t_data *data)
 {
-	mlx_image_t	*back;
-
-	back = mlx_new_image(data->mlx, 320, 320);
-	if (back == NULL)
+	data->map_background = mlx_new_image(data->mlx, 320, 320);
+	if (data->map_background == NULL)
 	{
 		perror("minimap background");
 		return (1);
 	}
-	ft_memset(back->pixels, 124, 320 * 320 * sizeof(int32_t));
-	if (mlx_image_to_window(data->mlx, back, 116, 116) == -1)
+	ft_memset(data->map_background->pixels, 124, 320 * 320 * sizeof(int32_t));
+	if (mlx_image_to_window(data->mlx, data->map_background, 116, 116) == -1)
 	{
 		perror("minimap background");
 		return (1);

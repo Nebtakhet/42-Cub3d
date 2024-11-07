@@ -117,11 +117,10 @@ typedef struct s_data
 	char			**map;
 	int				map_height;
 	int				map_width;
-	mlx_image_t		*map_floor;
 	mlx_image_t		*map_wall;
 	mlx_image_t		*map_frame;
-	mlx_image_t		*door_wall;
 	mlx_image_t		*gun[5];
+	mlx_image_t		*map_background;
 	mlx_texture_t	*enemy;
 	int				enemy_count;
 	mlx_image_t		*enemy_string;
