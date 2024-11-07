@@ -14,7 +14,7 @@
 
 int	get_enemy_texture(t_data *data)
 {
-	data->enemy = mlx_load_png("textures/enemy2.png");
+	data->enemy = mlx_load_png("textures/creeper.png");
 	if (!data->enemy)
 	{
 		write(2, "Error\ninvalid enemy texture\n", 28);
