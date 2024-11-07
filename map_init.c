@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:02:22 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/07 09:43:42 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:27:29 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_data	*ft_init_data(void)
 	info->map_height = 0;
 	info->enemy_count = 0;
 	info->enemy_string = NULL;
+	info->you_win = NULL;
 	return (info);
 }
 

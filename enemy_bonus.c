@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:10:15 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 19:18:33 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:33:29 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,7 @@ void	kill_count(t_data *data)
 	mlx_resize_image(data->enemy_string, data->enemy_string->width
 		+ 500, data->enemy_string->height + 50);
 	data->renderer.changed = true;
-	if (!data->enemy_count)
-		mlx_resize_image(mlx_put_string(data->mlx, "YOU WIN!",
-				WIDTH / 2.5, HEIGHT / 2.5), 500, 200);
+	you_win(data);
 	free(itoa);
 	free(count);
 }

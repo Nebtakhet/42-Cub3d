@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:22:01 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/07 12:26:12 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:22:13 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_init_textures(t_data *data)
 	return (0);
 }
 
-void	init_game(t_program_data *prog_data, t_data *data)
+/*void	init_game(t_program_data *prog_data, t_data *data)
 {
 	handle_args(prog_data->argc, prog_data->argv, data);
 	win_init(data);
@@ -65,31 +65,34 @@ void	init_game(t_program_data *prog_data, t_data *data)
 		clean_exit(data, 1);
 	}
 	place_enemies(data);
-}
+}*/
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_data          *data;
-    t_program_data  *prog_data;
+	t_data	*data;
 
-    data = malloc(sizeof(t_data));
-    if (!data)
-        return (1);
-    prog_data = malloc(sizeof(t_program_data));
-    if (!prog_data)
-    {
-        free(data);
-        return (1);
-    }
-    prog_data->data = data;
-    prog_data->argc = argc;
-    prog_data->argv = argv;
-    data->prog_data = prog_data;
-    init_game(prog_data, data);
-    hooks_n_loops(data);
-    mlx_terminate(data->mlx);
-    free(prog_data);
-    free(data);
-    return (0);
+	data = NULL;
+	data = handle_args(argc, argv, data);
+	if (!data)
+		return (1);
+	win_init(data);
+	if (mlx_image_to_window(data->mlx, data->img, 0, 0) == -1 || \
+		ft_init_textures(data) || ft_draw_minimap_background(data) || \
+		ft_draw_minimap_frame(data))
+		clean_exit(data, 1);
+	if (draw_minimap(data, 250, 250))
+	{
+		perror("draw_minimap");
+		clean_exit(data, 1);
+	}
+	if (ft_draw_player_to_minimap(data))
+	{
+		perror("ft_draw_player_to_minimap");
+		clean_exit(data, 1);
+	}
+	place_enemies(data);
+	hooks_n_loops(data);
+	mlx_terminate(data->mlx);
+	return (0);
 }
 

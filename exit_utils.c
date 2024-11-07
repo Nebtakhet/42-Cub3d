@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:44:15 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/07 12:31:03 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:08:49 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,12 @@ void	ft_free_data(t_data **info)
 /* Function to delete the textures and images and close the window */
 void	clean_data(t_data *data)
 {
-	int	i;
-
-	i = 0;
 	if (data->img)
 		mlx_delete_image(data->mlx, data->img);
 	if (data->map_wall)
 		mlx_delete_image(data->mlx, data->map_wall);
 	if (data->map_frame)
 		mlx_delete_image(data->mlx, data->map_frame);
-	if (data->door_wall)
-		mlx_delete_image(data->mlx, data->door_wall);
-	while (data->gun[i])
-		mlx_delete_image(data->mlx, data->gun[i++]);
 	if (data->mlx)
 	{
 		mlx_close_window(data->mlx);

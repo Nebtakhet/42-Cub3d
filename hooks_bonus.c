@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:45:24 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/07 12:29:10 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:32:53 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,12 @@ void	key_hook(mlx_key_data_t key_data, void *param)
 	}
 	if (key_data.key == MLX_KEY_R && key_data.action == MLX_PRESS)
 	{
-		clean_data(data);
-		init_game(data->prog_data, data);
+		if (data->you_win)
+			mlx_delete_image(data->mlx, data->you_win);
+		ft_init_player(data);
+		place_enemies(data);
+		draw_minimap(data, 250, 250);
+		place_doors(data);
 	}
 	if (key_data.key == MLX_KEY_F && key_data.action == MLX_PRESS)
 		door_interaction(data);

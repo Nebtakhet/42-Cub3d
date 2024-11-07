@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/07 12:28:29 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:25:30 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,14 +127,14 @@ typedef struct s_data
 	char			**map;
 	int				map_height;
 	int				map_width;
-	mlx_image_t		*map_floor;
 	mlx_image_t		*map_wall;
 	mlx_image_t		*map_frame;
-	mlx_image_t		*door_wall;
 	mlx_image_t		*gun[5];
+	mlx_image_t		*map_background;
 	mlx_texture_t	*enemy;
 	int				enemy_count;
 	mlx_image_t		*enemy_string;
+	mlx_image_t		*you_win;
 }				t_data;
 
 /* Utils */
@@ -151,7 +151,7 @@ int		the_door(t_data *data);
 
 /* Initialization*/
 
-void	init_game(t_program_data *prog_data, t_data *data);
+void	init_game(t_data *data);
 t_data	*handle_args(int argc, char **argv, t_data *info);
 void	ft_init_player(t_data *data);
 
@@ -221,5 +221,7 @@ int		get_enemy_texture(t_data *data);
 void	place_enemies(t_data *data);
 void	enemies_interaction(t_data *data);
 void	kill_count(t_data *data);
+void	you_win(t_data *data);
+
 
 #endif
