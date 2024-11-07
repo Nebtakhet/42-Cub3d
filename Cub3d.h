@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 19:04:21 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:28:29 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,18 @@ typedef struct t_ray
 	double		tex_pos;
 }				t_ray;
 
+typedef struct s_data t_data;
+
+typedef struct s_program_data
+{
+	t_data	*data;
+	int		argc;
+	char	**argv;
+}				t_program_data;
+
 typedef struct s_data
 {
+	t_program_data	*prog_data;
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	t_player		player;
@@ -125,11 +135,13 @@ typedef struct s_data
 	mlx_texture_t	*enemy;
 	int				enemy_count;
 	mlx_image_t		*enemy_string;
-}	t_data;
+}				t_data;
 
 /* Utils */
 
 void	print_error(char *str);
+void	clean_data(t_data *data);
+void	error_exit(t_data *data, char *str, int status);
 void	clean_exit(t_data *data, int status);
 int		get_rgba(int r, int g, int b, int a);
 int		is_filled(char c, char filling);
@@ -139,6 +151,7 @@ int		the_door(t_data *data);
 
 /* Initialization*/
 
+void	init_game(t_program_data *prog_data, t_data *data);
 t_data	*handle_args(int argc, char **argv, t_data *info);
 void	ft_init_player(t_data *data);
 

@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:45:24 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 19:10:06 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:29:10 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ void	key_hook(mlx_key_data_t key_data, void *param)
 		clean_exit(data, 0);
 		mlx_close_window(data->mlx);
 	}
-/*	if (key_data.key == MLX_KEY_R)
-	{		
-		
-	}*/
-	data->renderer.changed = true;
+	if (key_data.key == MLX_KEY_R && key_data.action == MLX_PRESS)
+	{
+		clean_data(data);
+		init_game(data->prog_data, data);
+	}
 	if (key_data.key == MLX_KEY_F && key_data.action == MLX_PRESS)
 		door_interaction(data);
+	data->renderer.changed = true;
 }
 
 /* Function to close the window and terminate the mlx instance */
