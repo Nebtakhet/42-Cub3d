@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvallin <nvallin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:05:23 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/29 15:05:41 by nvallin          ###   ########.fr       */
+/*   Updated: 2024/11/07 09:48:56 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ int	ft_draw_minimap_background(t_data *data)
 	data->map_background = mlx_new_image(data->mlx, 320, 320);
 	if (data->map_background == NULL)
 	{
-		perror("minimap background");
+		print_error("minimap background");
 		return (1);
 	}
 	ft_memset(data->map_background->pixels, 124, 320 * 320 * sizeof(int32_t));
 	if (mlx_image_to_window(data->mlx, data->map_background, 116, 116) == -1)
 	{
-		perror("minimap background");
+		print_error("minimap background");
 		return (1);
 	}
 	return (0);

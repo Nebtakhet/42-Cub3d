@@ -6,18 +6,20 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:44:15 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 19:15:00 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:08:49 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
+/* Function to print error message and exit the program */
 void	error_exit(t_data *data, char *str, int status)
 {
 	print_error(str);
 	clean_exit(data, status);
 }
 
+/* Function to print error message in stderr */
 void	print_error(char *str)
 {
 	if (str)
@@ -28,6 +30,7 @@ void	print_error(char *str)
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
+/* Function to free the map array, textures and data */
 void	ft_free_data(t_data **info)
 {
 	if ((*info)->north_texture)
@@ -53,17 +56,28 @@ void	ft_free_data(t_data **info)
 	}
 }
 
-void	clean_exit(t_data *data, int status)
+/* Function to delete the textures and images and close the window */
+void	clean_data(t_data *data)
 {
-	if (!data)
-		exit(status);
 	if (data->img)
 		mlx_delete_image(data->mlx, data->img);
+	if (data->map_wall)
+		mlx_delete_image(data->mlx, data->map_wall);
+	if (data->map_frame)
+		mlx_delete_image(data->mlx, data->map_frame);
 	if (data->mlx)
 	{
 		mlx_close_window(data->mlx);
 		mlx_terminate(data->mlx);
 	}
 	ft_free_data(&data);
+}
+
+/* Function to free the array */
+void	clean_exit(t_data *data, int status)
+{
+	if (!data)
+		exit(status);
+	clean_data(data);
 	exit(status);
 }
