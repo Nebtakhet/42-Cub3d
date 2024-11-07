@@ -94,8 +94,6 @@ typedef struct t_ray
 	double		tex_pos;
 }				t_ray;
 
-typedef struct s_data t_data;
-
 typedef struct s_program_data
 {
 	t_data	*data;
@@ -222,6 +220,5 @@ void	place_enemies(t_data *data);
 void	enemies_interaction(t_data *data);
 void	kill_count(t_data *data);
 void	you_win(t_data *data);
-
 
 #endif

@@ -38,6 +38,29 @@ void	cursor_hook(double xpos, double ypos, void *param)
 		mlx_set_mouse_pos(data->mlx, WIDTH / 2, HEIGHT / 2);
 }
 
+void	redraw_minimap(t_data *data)
+{
+	data->map_wall = mlx_texture_to_image(data->mlx, data->east_texture);
+	if (!data->map_wall || !mlx_resize_image(data->map_wall, 16, 16))
+	{
+		print_error("reset game, error getting minimap wall");
+		clean_exit(data, 1);
+	}
+	data->map_frame = mlx_texture_to_image(data->mlx, data->north_texture);
+	if (!data->map_frame || !mlx_resize_image(data->map_frame, 16, 16))
+	{
+		print_error("reset game, error getting minimap frame");
+		clean_exit(data, 1);
+	}
+	if (ft_flood_fill(data, data->player_pos[1], data->player_pos[0]) || \
+		ft_draw_minimap_background(data) || ft_draw_minimap_frame(data) || \
+		draw_minimap(data, 250, 250) || ft_draw_player_to_minimap(data))
+	{
+		print_error("reset game, error while redrawing minimap");
+		clean_exit(data, 1);
+	}
+}
+
 void	key_hook(mlx_key_data_t key_data, void *param)
 {
 	t_data		*data;
@@ -52,10 +75,14 @@ void	key_hook(mlx_key_data_t key_data, void *param)
 	{
 		if (data->you_win)
 			mlx_delete_image(data->mlx, data->you_win);
+		mlx_delete_image(data->mlx, data->map_wall);
+		mlx_delete_image(data->mlx, data->map_frame);
+		mlx_delete_image(data->mlx, data->player.mini_player);
+		mlx_delete_image(data->mlx, data->map_background);
 		ft_init_player(data);
-		place_enemies(data);
-		draw_minimap(data, 250, 250);
 		place_doors(data);
+		redraw_minimap(data);
+		place_enemies(data);
 	}
 	if (key_data.key == MLX_KEY_F && key_data.action == MLX_PRESS)
 		door_interaction(data);

@@ -109,5 +109,6 @@ int	ft_draw_minimap_background(t_data *data)
 		print_error("minimap background");
 		return (1);
 	}
+	mlx_set_instance_depth(&data->map_background->instances[0], 1);
 	return (0);
 }

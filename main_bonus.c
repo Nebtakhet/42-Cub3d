@@ -95,4 +95,3 @@ int	main(int argc, char **argv)
 	mlx_terminate(data->mlx);
 	return (0);
 }
-

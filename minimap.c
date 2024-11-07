@@ -52,7 +52,8 @@ int	ft_draw_player_to_minimap(t_data *data)
 	i = 0;
 	while (i < (int)data->map_wall->count)
 		mlx_set_instance_depth(&data->map_wall->instances[i++], 10);
-	data->player.mini_p = mlx_load_png("./textures/player1.png");
+	if (!data->player.mini_p)
+		data->player.mini_p = mlx_load_png("./textures/player1.png");
 	if (!data->player.mini_p)
 		return (1);
 	data->player.mini_player = \
