@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:29:33 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 19:16:31 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:10:25 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
 /* Function to initialize the ray. It will set the camera_x to the value of the
 ray's map_x divided by the width of the window. It will set the ray direction
@@ -71,6 +71,12 @@ void	set_dda(t_data *data)
 	}
 }
 
+/* Function to step the ray. It will increment the side distance x by the delta
+distance x if the side distance x is less than the side distance y. It will
+increment the map x by the step x and set the side to 0. It will increment the
+side distance y by the delta distance y if the side distance y is less than the
+side distance x. It will increment the map y by the step y and set the side to
+1. */
 void	step_ray(t_data *data)
 {
 	if (data->ray.side_dist_x < data->ray.side_dist_y)

@@ -6,12 +6,13 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:14:56 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 19:09:36 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:22:32 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
+/* Function to load the door texture into the data struct */
 int	ft_get_door_texture(t_data *data)
 {
 	data->door_texture = mlx_load_png("textures/eagle.png");
@@ -23,7 +24,9 @@ int	ft_get_door_texture(t_data *data)
 	return (0);
 }
 
-int	ft_is_near_door(t_data *data, char axis, int direction)
+/* Function to check if the player is near a door, and if so, identifies whether
+ it is a closed or open door */
+static int	ft_is_near_door(t_data *data, char axis, int direction)
 {
 	double	y;
 	double	x;
@@ -51,6 +54,7 @@ int	ft_is_near_door(t_data *data, char axis, int direction)
 	return (0);
 }
 
+/* Function to check if the door can be placed in the given position */
 static bool	valid_door_position(t_data *data, int x, int y)
 {
 	char	**map;
@@ -79,6 +83,7 @@ static bool	valid_door_position(t_data *data, int x, int y)
 	return (false);
 }
 
+/* Function to place the doors in the map */
 void	place_doors(t_data *data)
 {
 	int	x;
@@ -98,6 +103,8 @@ void	place_doors(t_data *data)
 	}
 }
 
+/* Function to interact with the doors. If the player is near a door, it will
+ open or close it, depending on its current state */
 void	door_interaction(t_data *data)
 {
 	int			door_y;

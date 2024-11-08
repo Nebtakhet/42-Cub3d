@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:44:15 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/07 15:08:49 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:07:46 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /* Function to print error message and exit the program */
 void	error_exit(t_data *data, char *str, int status)

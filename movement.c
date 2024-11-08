@@ -6,12 +6,15 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:54:53 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/04 12:53:38 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:29:31 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
+/* Function to calculate the rotation of the player. If the direction is 'l',
+the player rotates to the left, and if the direction is 'r', the player rotates
+to the right. Then calculates the new direction of the player. */
 void	ft_rotate_player(t_data *data, char direction)
 {
 	if (direction == 'l')
@@ -37,30 +40,10 @@ void	ft_rotate_player(t_data *data, char direction)
 	data->player.moved = true;
 }
 
-int	ft_is_player_near_wall(t_data *data, char axis, int direction)
-{
-	double	y;
-	double	x;
-
-	y = data->player.pos_y;
-	x = data->player.pos_x;
-	if (axis == 'y')
-	{
-		if (direction > 0 && data->map[(int)(y + 0.375)][(int)x] == '1')
-			return (1);
-		if (direction < 0 && data->map[(int)(y - 0.375)][(int)x] == '1')
-			return (1);
-	}
-	if (axis == 'x')
-	{
-		if (direction > 0 && data->map[(int)y][(int)(x + 0.375)] == '1')
-			return (1);
-		if (direction < 0 && data->map[(int)y][(int)(x - 0.375)] == '1')
-			return (1);
-	}
-	return (0);
-}
-
+/* Function to move the player in the y direction. If the direction is negative
+and the player is not near a wall, the player moves in the negative y direction.
+If the direction is positive and the player is not near a wall, the player moves
+in the positive y direction. */
 void	ft_move_player(t_data *data, double dir_y, double dir_x)
 {
 	if (dir_y < 0)

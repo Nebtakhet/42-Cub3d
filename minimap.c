@@ -6,12 +6,13 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:26:48 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/04 10:40:36 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:10:17 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
+/* Function to draw the minimap frame */
 int	ft_draw_minimap_frame(t_data *data)
 {
 	int	i;
@@ -40,6 +41,7 @@ int	ft_draw_minimap_frame(t_data *data)
 	return (0);
 }
 
+/* Function to draw the player on the minimap */
 int	ft_draw_player_to_minimap(t_data *data)
 {
 	int	i;
@@ -69,6 +71,7 @@ int	ft_draw_player_to_minimap(t_data *data)
 	return (0);
 }
 
+/* Function to draw the minimap in the game window */
 int	draw_minimap(t_data *d, int x, int y)
 {
 	int	m_x;
@@ -98,6 +101,7 @@ int	draw_minimap(t_data *d, int x, int y)
 	return (0);
 }
 
+/* Function to change the minimap when moving in the y direction */
 void	ft_move_minimap_y(t_data *data, double direction)
 {
 	int	i;
@@ -121,6 +125,7 @@ void	ft_move_minimap_y(t_data *data, double direction)
 	}
 }
 
+/* Function to change the minimap when moving in the x direction */
 void	ft_move_minimap_x(t_data *data, double direction)
 {
 	int	i;

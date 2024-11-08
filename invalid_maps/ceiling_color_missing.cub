@@ -3,7 +3,12 @@ SO ./textures/redbrick.png
 WE ./textures/greystone.png
 EA ./textures/mossy.png
 
+<<<<<<< HEAD:invalid_maps/ceiling_color_missing.cub
 F 220,100,0
+=======
+F 10,10,10
+C 10,30,10
+>>>>>>> graphic:scene.cub
 
 
 

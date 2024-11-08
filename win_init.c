@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:08:12 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 19:03:46 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:20:32 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /* Function to initialize the color palette. It will create a gradient of colors
 from black to white */
@@ -47,6 +47,8 @@ void	get_layout(t_data *data)
 	data->renderer.changed = true;
 }
 
+/* Function to draw the ceiling and the floor. It will draw the ceiling and the
+floor with the colors set in the data struct */
 void	draw_ceiling_and_floor(t_data *data)
 {
 	int	x;

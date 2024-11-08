@@ -6,12 +6,13 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:45:24 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/07 15:32:53 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:09:58 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
+/* Function to handle the cursor movement */
 void	cursor_hook(double xpos, double ypos, void *param)
 {
 	t_data		*data;
@@ -38,6 +39,8 @@ void	cursor_hook(double xpos, double ypos, void *param)
 		mlx_set_mouse_pos(data->mlx, WIDTH / 2, HEIGHT / 2);
 }
 
+/* Function to redraw the minimap, including the walls, frame and
+mini player */
 void	redraw_minimap(t_data *data)
 {
 	data->map_wall = mlx_texture_to_image(data->mlx, data->east_texture);
@@ -61,6 +64,9 @@ void	redraw_minimap(t_data *data)
 	}
 }
 
+/* Function to handle the key presses. If the escape key is pressed, the
+program is terminated. If the 'R' key is pressed, the game is reset. If the
+'F' key is pressed, the door interaction function is called */
 void	key_hook(mlx_key_data_t key_data, void *param)
 {
 	t_data		*data;
@@ -104,6 +110,9 @@ void	close_program(void *param)
 	exit(EXIT_SUCCESS);
 }
 
+/* Function to move the player and rotate the player when the keys are
+pressed, and to interact with the doors when the right mouse button is
+pressed */
 void	ft_move_hook(void *param)
 {
 	t_data		*data;

@@ -6,12 +6,14 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 18:51:02 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/05 16:45:10 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:08:09 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
+/* Function to update the gun frame. The gun is drawn in the center of the
+screen and the frame is updated every time the player shoots. */
 static int	update_frame(t_data *data, int frame, mlx_texture_t **gun)
 {
 	int	x_offset;
@@ -41,6 +43,7 @@ static int	update_frame(t_data *data, int frame, mlx_texture_t **gun)
 	return (0);
 }
 
+/* Function to load the gun frames into the data struct */
 int	load_frames(t_data *data)
 {
 	int				i;
@@ -70,6 +73,9 @@ int	load_frames(t_data *data)
 	return (0);
 }
 
+/* Function to animate the gun when the space bar or left mouse button is
+pressed. The gun is drawn in the center of the screen and the frame is updated
+every time the player shoots. */
 void	ft_shoot(void *param)
 {
 	static int	frame = 0;

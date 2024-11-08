@@ -6,12 +6,13 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:20:44 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/03 22:45:25 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:09:08 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
+/* Function to load the north texture into the data struct */
 int	ft_get_north_texture(t_data *info, char *line)
 {
 	int	i;
@@ -29,6 +30,7 @@ int	ft_get_north_texture(t_data *info, char *line)
 	return (0);
 }
 
+/* Function to load the south texture into the data struct */
 int	ft_get_south_texture(t_data *info, char *line)
 {
 	int	i;
@@ -46,6 +48,7 @@ int	ft_get_south_texture(t_data *info, char *line)
 	return (0);
 }
 
+/* Function to load the west texture into the data struct */
 int	ft_get_west_texture(t_data *info, char *line)
 {
 	int	i;
@@ -63,6 +66,7 @@ int	ft_get_west_texture(t_data *info, char *line)
 	return (0);
 }
 
+/* Function to load the east texture into the data struct */
 int	ft_get_east_texture(t_data *info, char *line)
 {
 	int	i;

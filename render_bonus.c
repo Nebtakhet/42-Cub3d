@@ -6,12 +6,14 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/06 17:27:29 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:10:35 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
+/* Function to apply the lighting to the color according to the distance of the
+wall */
 static int	apply_lighting(int color, double lighting_factor)
 {
 	int	r;
@@ -41,7 +43,10 @@ static int	apply_lighting(int color, double lighting_factor)
 	return (get_rgba(r, g, b, a));
 }
 
-int	get_color(t_data *data)
+/* Function to get the color of the corresponding texture. It will return the
+color of the texture according to the side of the wall and the direction of the
+ray */
+static int	get_color(t_data *data)
 {
 	uint8_t		*clr;
 	uint32_t	color;
@@ -69,7 +74,7 @@ int	get_color(t_data *data)
 
 /* Function to calculate the image to be rendered, placing the corresponding
 pixel color in the image */
-void	calculate_img(t_data *data)
+static void	calculate_img(t_data *data)
 {
 	t_img		img;
 	double		step;
