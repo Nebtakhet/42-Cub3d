@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/11/08 13:40:47 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/11/08 14:27:52 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CC 			= cc
 FLAGS 		= -Wall -Wextra -Werror
 MLX42 		= ./MLX42/build/libmlx42.a
 
-SRC_DIR 	= ./
+SRC_DIR 	= ./sources
+BONUS_DIR	= ./bonus
 OBJ_DIR		= ./obj/
 LIBFT		= ./libft/
 
@@ -57,13 +58,13 @@ BONUS_FILES = main_bonus.c \
 			raycast_utils_bonus.c \
 			enemy_utils_bonus.c \
 
-MLX42FLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+MLX42FLAGS = -Iincludes -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
-INCLUDES = -I$(SRC_DIR) -I./include
+INCLUDES = -I$(SRC_DIR) -I./includes 
 		
-OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
+OBJ_FILES = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
-BONUS_OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(BONUS_FILES:.c=.o))
+BONUS_OBJ_FILES = $(addprefix $(OBJ_DIR), $(BONUS_FILES:.c=.o))
 
 all: $(NAME)
 
@@ -96,9 +97,14 @@ bonus: .bonus
 	@touch .bonus
 	@echo "\033[32m Cub3d_bonus has been built successfully!\033[0m"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)cub3d.h  $(SRC_DIR)cub3d_bonus.h| $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)/%.c $(SRC_DIR)/cub3d.h | $(OBJ_DIR)
 	@echo "Compiling $< to $@"
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJ_DIR)%_bonus.o: $(BONUS_DIR)/%_bonus.c $(BONUS_DIR)/cub3d_bonus.h | $(OBJ_DIR)
+	@echo "Compiling $< to $@"
+	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
+
 
 fsanitize: $(MLX42) $(LIBFT)/libft.a $(OBJ_FILES)
 	@ $(CC) $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIBFT) -lft $(MLX42) \

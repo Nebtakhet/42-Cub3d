@@ -6,21 +6,21 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/08 13:31:25 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:29:09 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
-# include "./libft/libft.h"
+# include ".././libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
 # include <stdlib.h>
 # include <string.h>
-# include "MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 # define HEIGHT 1440
 # define WIDTH 1920
