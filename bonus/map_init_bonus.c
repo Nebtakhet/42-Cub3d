@@ -52,6 +52,7 @@ t_data	*ft_init_data(void)
 	info->door_texture = NULL;
 	info->map = NULL;
 	info->player.mini_p = NULL;
+	info->enemy = NULL;
 	info->map_width = 0;
 	info->map_height = 0;
 	info->enemy_count = 0;
