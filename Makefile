@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/11/08 13:13:27 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/11/08 13:40:47 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,10 +87,13 @@ $(NAME): $(MLX42) $(LIBFT)/libft.a $(OBJ_FILES)
 		$(MLX42FLAGS) -lm
 	@echo "\033[32m Cub3d has been built successfully!\033[0m"
 
-bonus: $(MLX42) $(LIBFT)/libft.a $(BONUS_OBJ_FILES) 
+bonus: .bonus
+
+.bonus: $(MLX42) $(LIBFT)/libft.a $(BONUS_OBJ_FILES) 
 	@echo "Compiling Cub3d_bonus..."
 	@ $(CC) $(FLAGS) -o $(BONUS_NAME) $(BONUS_OBJ_FILES) -L$(LIBFT) -lft $(MLX42) \
 		$(MLX42FLAGS) -lm
+	@touch .bonus
 	@echo "\033[32m Cub3d_bonus has been built successfully!\033[0m"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)cub3d.h  $(SRC_DIR)cub3d_bonus.h| $(OBJ_DIR)
@@ -107,9 +110,12 @@ clean:
 	
 fclean: clean
 	make fclean -C $(LIBFT)
+	rm -f .bonus
 	rm -f $(NAME)
 	rm -f $(BONUS_NAME)
 
 re: fclean $(NAME)
+
+rebonus: fclean bonus
 
 .PHONY: all clean fclean re bonus
