@@ -36,21 +36,21 @@ FILES		= main.c \
 			movement.c
 
 BONUS_FILES = main_bonus.c \
-			map_init.c \
-			win_init.c \
-			colors.c \
+			map_init_bonus.c \
+			win_init_bonus.c \
+			colors_bonus.c \
 			parse_map_bonus.c \
-			minimap.c \
-			parsing.c \
-			textures.c \
-			utils.c \
-			utils2.c \
+			minimap_bonus.c \
+			parsing_bonus.c \
+			textures_bonus.c \
+			utils_bonus.c \
+			utils2_bonus.c \
 			render_bonus.c \
 			raycast_bonus.c \
 			hooks_bonus.c \
-			exit_utils.c  \
+			exit_utils_bonus.c  \
 			movement_bonus.c \
-			minimap_ray.c \
+			minimap_ray_bonus.c \
 			doors_bonus.c \
 			gun_bonus.c \
 			enemy_bonus.c \
