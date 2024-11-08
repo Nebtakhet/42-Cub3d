@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:20:31 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/08 11:56:57 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:08:55 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /* Function to fill the map with dots, and check that the map is surrounded by
 walls */

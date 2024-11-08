@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:20:44 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/08 11:44:12 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:09:08 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /* Function to load the north texture into the data struct */
 int	ft_get_north_texture(t_data *info, char *line)

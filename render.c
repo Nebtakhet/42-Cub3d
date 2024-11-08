@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:24:13 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/08 11:55:19 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:09:03 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /* Function get the color of the corresponding texture. It will return the color
 of the texture according to the side of the wall and the direction of the ray */

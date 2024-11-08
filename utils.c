@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:20:56 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/08 11:45:01 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:09:12 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /* Convert len amount of characters in a string to integer */
 int	ft_altoi(const char *str, int len)

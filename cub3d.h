@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/08 11:10:27 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:33:01 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@
 # include <string.h>
 # include "MLX42/include/MLX42/MLX42.h"
 
-# define HEIGHT 1920
+# define HEIGHT 1440
 # define WIDTH 1920
 # define ITER 69
 # define FRAME_WAIT 5
 # define PI 3.14159265358979323846
-# define FOV 1.04719755119659774615
-# define NUM_RAYS 100
-# define TILE_SIZE 64
 
 typedef struct s_img
 {
@@ -128,18 +125,18 @@ void	clean_data(t_data *data);
 void	error_exit(t_data *data, char *str, int status);
 void	clean_exit(t_data *data, int status);
 int		get_rgba(int r, int g, int b, int a);
+void	ft_free_data(t_data **info);
+void	ft_free_array(char **arr);
 int		is_filled(char c, char filling);
+int		ft_altoi(const char *str, int len);
 void	ft_move_minidoors_y(t_data *data, double direction);
 void	ft_move_minidoors_x(t_data *data, double direction);
 int		the_door(t_data *data);
 
 /* Initialization*/
 
-void	init_game(t_data *data);
 t_data	*handle_args(int argc, char **argv, t_data *info);
 void	ft_init_player(t_data *data);
-
-int		ft_altoi(const char *str, int len);
 int		ft_get_floor_color(t_data *info, char *f_color);
 int		ft_get_ceiling_color(t_data *info, char *c_color);
 int		ft_get_north_texture(t_data *info, char *line);
@@ -154,13 +151,9 @@ void	ft_find_player(t_data *info);
 int		ft_is_player(char c);
 int		ft_is_valid_content(char c);
 int		ft_flood_fill(t_data *info, int x, int y);
-void	ft_free_data(t_data **info);
-void	ft_free_array(char **arr);
-
 void	init_color_palette(t_data *win);
 void	get_layout(t_data *win);
 void	win_init(t_data *win);
-
 int		ft_draw_minimap_frame(t_data *data);
 int		ft_draw_minimap_background(t_data *data);
 int		draw_minimap(t_data *data, int x, int y);
@@ -179,10 +172,6 @@ void	draw_ceiling_and_floor(t_data *data);
 /* Raycasting */
 
 void	raycast(t_data *data, int x);
-void	init_ray(t_data *data, int x);
-void	set_dda(t_data *data);
-void	perform_dda(t_data *data);
-void	calc_wall(t_data *data);
 
 /* Hooks */
 

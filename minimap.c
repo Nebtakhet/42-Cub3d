@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:26:48 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/08 11:32:47 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:10:17 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
 /* Function to draw the minimap frame */
 int	ft_draw_minimap_frame(t_data *data)

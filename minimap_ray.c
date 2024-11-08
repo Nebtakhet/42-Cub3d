@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 13:46:56 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/08 11:51:43 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:10:13 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
 /* Function to calculate the y position of the ray */
 static int	ft_y_ray(double direction, double *y_draw)

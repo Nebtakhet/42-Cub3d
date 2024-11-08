@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:45:24 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/08 11:29:02 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:09:58 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
 /* Function to handle the cursor movement */
 void	cursor_hook(double xpos, double ypos, void *param)

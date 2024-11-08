@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:59:55 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/08 11:53:25 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:08:50 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /* Function to allocate memory for the map array and copy the map string into
 the array */

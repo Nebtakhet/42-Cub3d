@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 18:51:02 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/08 11:26:38 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:08:09 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
 /* Function to update the gun frame. The gun is drawn in the center of the
 screen and the frame is updated every time the player shoots. */

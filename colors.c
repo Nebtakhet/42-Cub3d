@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:27 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/08 11:47:27 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:07:51 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /* 'Encodes' four individual bytes into an int. */
 int	get_rgba(int r, int g, int b, int a)

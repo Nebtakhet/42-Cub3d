@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:05:23 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/08 11:45:29 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:09:18 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /*Helper function for drawing the minimap with floodfill*/
 int	is_filled(char c, char filling)

@@ -6,7 +6,7 @@
 #    By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:35:06 by cesasanc          #+#    #+#              #
-#    Updated: 2024/11/08 11:09:16 by cesasanc         ###   ########.fr        #
+#    Updated: 2024/11/08 13:13:27 by cesasanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ BONUS_FILES = main_bonus.c \
 			enemy_utils_bonus.c \
 
 MLX42FLAGS = -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+
 INCLUDES = -I$(SRC_DIR) -I./include
 		
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
@@ -92,7 +93,7 @@ bonus: $(MLX42) $(LIBFT)/libft.a $(BONUS_OBJ_FILES)
 		$(MLX42FLAGS) -lm
 	@echo "\033[32m Cub3d_bonus has been built successfully!\033[0m"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)Cub3d.h | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)cub3d.h  $(SRC_DIR)cub3d_bonus.h| $(OBJ_DIR)
 	@echo "Compiling $< to $@"
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 

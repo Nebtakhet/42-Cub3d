@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:29:33 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/08 11:58:24 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:07:35 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /* Function to initialize the ray. It will set the camera_x to the value of the
 ray's map_x divided by the width of the window. It will set the ray direction
@@ -18,7 +18,7 @@ x and y to the player's direction x and y plus the player's plane x and y
 multiplied by the camera_x. It will set the ray's map_x and map_y to the
 player's position x and y. It will set the ray's delta distance x and y to the
 absolute value of 1 divided by the ray's direction x and y. */
-void	init_ray(t_data *data, int x)
+static void	init_ray(t_data *data, int x)
 {
 	ft_bzero(&data->ray, sizeof(t_ray));
 	data->ray.map_x = (int)data->player.pos_x;
@@ -43,7 +43,7 @@ player's position y minus the ray's map y multiplied by the ray's delta
 distance y if the ray direction y is less than 0, otherwise it will set it to
 the ray's map y plus 1 minus the player's position y multiplied by the ray's
 delta distance y. */
-void	set_dda(t_data *data)
+static void	set_dda(t_data *data)
 {
 	if (data->ray.ray_dir_x < 0)
 	{
@@ -78,7 +78,7 @@ set the side to 0. It will increment the side distance y by the delta distance y
 if the side distance y is less than the side distance x. It will increment the
 map y by the step y and set the side to 1. If the map at the ray's map y and x
 is equal to 1, it will break the loop. */
-void	perform_dda(t_data *data)
+static void	perform_dda(t_data *data)
 {
 	while (1)
 	{
@@ -119,7 +119,7 @@ equal to the height, it will set it to the height minus 1. If the ray's side is
 wall distance multiplied by the ray's direction y, otherwise it will set it to
 the player's position x plus the perpendicular wall distance multiplied by the
 ray's direction x. It will subtract the floor of the wall x from the wall x. */
-void	calc_wall(t_data *data)
+static void	calc_wall(t_data *data)
 {
 	if (data->ray.side == 0)
 		data->ray.perp_wall_dist = data->ray.side_dist_x - \

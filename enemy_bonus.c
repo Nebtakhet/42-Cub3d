@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:10:15 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/08 11:24:03 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:09:46 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
 /* Function to load the enemy texture into the data struct */
 int	get_enemy_texture(t_data *data)

@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:29:33 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/08 11:41:24 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:10:25 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
 /* Function to initialize the ray. It will set the camera_x to the value of the
 ray's map_x divided by the width of the window. It will set the ray direction

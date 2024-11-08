@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:14:56 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/08 11:57:17 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:22:32 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d_bonus.h"
 
 /* Function to load the door texture into the data struct */
 int	ft_get_door_texture(t_data *data)
@@ -26,7 +26,7 @@ int	ft_get_door_texture(t_data *data)
 
 /* Function to check if the player is near a door, and if so, identifies whether
  it is a closed or open door */
-int	ft_is_near_door(t_data *data, char axis, int direction)
+static int	ft_is_near_door(t_data *data, char axis, int direction)
 {
 	double	y;
 	double	x;

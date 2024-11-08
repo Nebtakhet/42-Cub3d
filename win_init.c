@@ -6,11 +6,11 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:08:12 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/08 11:56:20 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:20:32 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3d.h"
+#include "cub3d.h"
 
 /* Function to initialize the color palette. It will create a gradient of colors
 from black to white */
