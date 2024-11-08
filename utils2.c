@@ -6,14 +6,13 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:05:23 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/07 09:48:56 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:45:29 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
 /*Helper function for drawing the minimap with floodfill*/
-
 int	is_filled(char c, char filling)
 {
 	if (c == filling || ft_is_player(c) || c == 'D')
@@ -22,7 +21,6 @@ int	is_filled(char c, char filling)
 }
 
 /*Function to move the door images on the minimap in the y axis*/
-
 void	ft_move_minidoors_y(t_data *data, double direction)
 {
 	int	i;
@@ -73,7 +71,6 @@ void	ft_move_minidoors_x(t_data *data, double direction)
 
 /*Function to find the correct instance of the door that the player is facing 
 towards in the minimap*/
-
 int	the_door(t_data *data)
 {
 	int	i;
@@ -95,6 +92,7 @@ int	the_door(t_data *data)
 	return (i);
 }
 
+/*Function to draw the minimap background*/
 int	ft_draw_minimap_background(t_data *data)
 {
 	data->map_background = mlx_new_image(data->mlx, 320, 320);

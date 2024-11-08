@@ -6,13 +6,14 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 13:46:56 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/23 12:50:05 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:51:43 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-int	ft_y_ray(double direction, double *y_draw)
+/* Function to calculate the y position of the ray */
+static int	ft_y_ray(double direction, double *y_draw)
 {
 	static double	y_step = 0;
 
@@ -31,7 +32,8 @@ int	ft_y_ray(double direction, double *y_draw)
 	return (0);
 }
 
-int	ft_x_ray(double direction, double *x_draw)
+/* Function to calculate the x position of the ray */
+static int	ft_x_ray(double direction, double *x_draw)
 {
 	static double	x_step = 0;
 
@@ -50,6 +52,7 @@ int	ft_x_ray(double direction, double *x_draw)
 	return (0);
 }
 
+/* Function to draw the rays on the minimap */
 void	ft_draw_ray(t_data *data, int color)
 {
 	double	x;

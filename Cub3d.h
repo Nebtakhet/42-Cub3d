@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:21:25 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/07 15:25:30 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:10:27 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ typedef struct s_img
 {
 	int		x;
 	int		y;
-	double	x0;
-	double	y0;
 }				t_img;
 
 typedef struct s_renderer
@@ -64,9 +62,6 @@ typedef struct s_player
 	double			plane_x;
 	double			plane_y;
 	bool			moved;
-	int				move_x;
-	int				move_y;
-	int				rotate;
 }				t_player;
 
 typedef struct t_ray
@@ -94,21 +89,12 @@ typedef struct t_ray
 	double		tex_pos;
 }				t_ray;
 
-typedef struct s_program_data
-{
-	t_data	*data;
-	int		argc;
-	char	**argv;
-}				t_program_data;
-
 typedef struct s_data
 {
-	t_program_data	*prog_data;
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	t_player		player;
 	t_ray			ray;
-	u_int32_t		iter;
 	u_int32_t		palette[ITER];
 	t_color			color;
 	t_renderer		renderer;

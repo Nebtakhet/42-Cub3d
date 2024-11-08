@@ -6,13 +6,15 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:59:55 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/23 12:51:31 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:52:59 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-int	ft_get_map(t_data *info, char *map_str)
+/* Function to allocate memory for the map array and copy the map string into
+the array */
+static int	ft_get_map(t_data *info, char *map_str)
 {
 	int	i;
 	int	len;
@@ -41,7 +43,10 @@ int	ft_get_map(t_data *info, char *map_str)
 	return (1);
 }
 
-int	ft_check_map_end(char *map_str, int player_count)
+/* Function to check if the map content is valid. If the map is not the last
+element in the file, the function returns 1. If the map is the last element in
+the file, but no player is found, the function returns 1. */
+static int	ft_check_map_end(char *map_str, int player_count)
 {
 	if (player_count == 0)
 	{
@@ -61,7 +66,10 @@ int	ft_check_map_end(char *map_str, int player_count)
 	return (1);
 }
 
-int	ft_check_player(t_data *info, int *player_count, int x)
+/* Function to check if the amount of players in the map is valid. If the amount
+of players is 1, the player position is saved in the data struct. If the amount
+of players is more than 1, the function returns 1. */
+static int	ft_check_player(t_data *info, int *player_count, int x)
 {
 	*player_count += 1;
 	if (*player_count == 1)
@@ -75,7 +83,9 @@ int	ft_check_player(t_data *info, int *player_count, int x)
 	return (1);
 }
 
-int	ft_check_map_content(t_data *info, char *map)
+/* Function to check if the map content is valid. If the map content is not
+valid, the function returns 1. */
+static int	ft_check_map_content(t_data *info, char *map)
 {
 	int	player;
 	int	width;
@@ -103,6 +113,7 @@ int	ft_check_map_content(t_data *info, char *map)
 	return (0);
 }
 
+/* Function to parse the map from the map string */
 int	ft_parse_map(t_data *info, int fd, char **line)
 {
 	char	*map_str;

@@ -6,12 +6,13 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:45:24 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/04 12:59:09 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:29:31 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
+/* Function to handle the escape key press event */
 void	key_hook(mlx_key_data_t key_data, void *param)
 {
 	t_data	*data;
@@ -39,6 +40,8 @@ void	close_program(void *param)
 	exit(EXIT_SUCCESS);
 }
 
+/* Function to move the player and rotate the player when the keys are
+pressed */
 void	ft_move_hook(void *param)
 {
 	t_data	*data;

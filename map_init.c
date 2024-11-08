@@ -6,12 +6,13 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:02:22 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/07 15:27:29 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:31:00 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
+/* Function to initialize the player struct */
 void	ft_init_player(t_data *data)
 {
 	if (data->map[data->player_pos[0]][data->player_pos[1]] == 'N')
@@ -31,6 +32,7 @@ void	ft_init_player(t_data *data)
 	data->player.moved = false;
 }
 
+/* Function to initialize the data struct */
 t_data	*ft_init_data(void)
 {
 	t_data	*info;
@@ -58,6 +60,7 @@ t_data	*ft_init_data(void)
 	return (info);
 }
 
+/* Function to get the map string from the scene description file */
 int	ft_get_map_str(int fd, char **map_str)
 {
 	char	*line;
@@ -82,6 +85,7 @@ int	ft_get_map_str(int fd, char **map_str)
 	return (0);
 }
 
+/* Function to parse the map from the scene description file */
 t_data	*handle_args(int argc, char **argv, t_data *info)
 {
 	if (argc != 2)

@@ -6,18 +6,19 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:19:27 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/23 12:48:24 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:47:27 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-// 'Encodes' four individual bytes into an int.
+/* 'Encodes' four individual bytes into an int. */
 int	get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
+/* Function to initialize the color of the floor from the parsed string */
 int	ft_get_floor_color(t_data *info, char *f_color)
 {
 	int	i;
@@ -47,6 +48,7 @@ int	ft_get_floor_color(t_data *info, char *f_color)
 	return (1);
 }
 
+/* Function to initialize the color of the ceiling from the parsed string */
 int	ft_get_ceiling_color(t_data *info, char *c_color)
 {
 	int	i;

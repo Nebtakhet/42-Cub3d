@@ -6,12 +6,14 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:20:31 by nvallin           #+#    #+#             */
-/*   Updated: 2024/10/18 13:57:52 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:56:57 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
+/* Function to fill the map with dots, and check that the map is surrounded by
+walls */
 int	ft_flood_fill(t_data *info, int x, int y)
 {
 	if (y == 0 || y == info->map_height - 1 || x == 0 || \
@@ -37,6 +39,8 @@ int	ft_flood_fill(t_data *info, int x, int y)
 	return (0);
 }
 
+/* Function to find the player's position in the map and save it in the data
+struct */
 void	ft_find_player(t_data *info)
 {
 	int	x;
@@ -59,7 +63,8 @@ void	ft_find_player(t_data *info)
 	info->player_pos[1] = x;
 }
 
-int	ft_get_elements(t_data *info, char *line, int *elements)
+/* Function to get the elements needed for the scene description file */
+static int	ft_get_elements(t_data *info, char *line, int *elements)
 {
 	if ((!ft_strncmp(line, "F ", 2) && \
 		!ft_get_floor_color(info, line + 1)) || \
@@ -81,10 +86,9 @@ int	ft_get_elements(t_data *info, char *line, int *elements)
 	return (1);
 }
 
-/*Check that scene description file contains only the info needed and
-	that they're in the right order*/
-
-int	ft_parse_colors_and_textures(t_data *info, int fd)
+/* Check that scene description file contains only the info needed and
+	that they're in the right order */
+static int	ft_parse_colors_and_textures(t_data *info, int fd)
 {
 	char	*line;
 	int		elements;
@@ -112,6 +116,8 @@ int	ft_parse_colors_and_textures(t_data *info, int fd)
 	return (1);
 }
 
+/* Function to parse the scene description file. It updates the data struct
+with the colors and textures from the file */
 int	ft_parse_scene_description(t_data *info, char *file)
 {
 	int	fd;

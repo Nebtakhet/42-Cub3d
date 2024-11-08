@@ -6,14 +6,13 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:20:56 by nvallin           #+#    #+#             */
-/*   Updated: 2024/11/04 11:14:56 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:45:01 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-/*Convert len amount of characters in a string to integer*/
-
+/* Convert len amount of characters in a string to integer */
 int	ft_altoi(const char *str, int len)
 {
 	size_t	result;
@@ -41,6 +40,7 @@ int	ft_altoi(const char *str, int len)
 	return (result * sign);
 }
 
+/* Function to free a 2D array */
 void	ft_free_array(char **arr)
 {
 	int	i;
@@ -66,6 +66,7 @@ void	ft_free_array(char **arr)
 	}
 }
 
+/* Function to print parsing error message */
 int	ft_parsing_error(char *message)
 {
 	write(2, "Error\ninvalid scene description\n", 32);
@@ -77,6 +78,7 @@ int	ft_parsing_error(char *message)
 	return (1);
 }
 
+/* Function to check if character is a player */
 int	ft_is_player(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
@@ -84,6 +86,7 @@ int	ft_is_player(char c)
 	return (0);
 }
 
+/* Function to check if content of the map is valid */
 int	ft_is_valid_content(char c)
 {
 	if (c == '0' || c == '1' || c == ' ' || c == '\n' || \

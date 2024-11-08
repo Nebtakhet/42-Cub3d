@@ -6,7 +6,7 @@
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:29:33 by cesasanc          #+#    #+#             */
-/*   Updated: 2024/11/04 13:45:24 by cesasanc         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:58:24 by cesasanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ void	calc_wall(t_data *data)
 		data->ray.tex_x = 64 - data->ray.tex_x - 1;
 }
 
+/* Function to execute the raycasting. It will initialize the ray, set the DDA,
+perform the DDA and calculate the wall. */
 void	raycast(t_data *data, int x)
 {
 	init_ray(data, x);
