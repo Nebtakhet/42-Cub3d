@@ -94,16 +94,8 @@ typedef struct t_ray
 	double		tex_pos;
 }				t_ray;
 
-typedef struct s_program_data
-{
-	t_data	*data;
-	int		argc;
-	char	**argv;
-}				t_program_data;
-
 typedef struct s_data
 {
-	t_program_data	*prog_data;
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	t_player		player;

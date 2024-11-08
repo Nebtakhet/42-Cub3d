@@ -75,6 +75,7 @@ void	key_hook(mlx_key_data_t key_data, void *param)
 	{
 		if (data->you_win)
 			mlx_delete_image(data->mlx, data->you_win);
+		data->you_win = NULL;
 		mlx_delete_image(data->mlx, data->map_wall);
 		mlx_delete_image(data->mlx, data->map_frame);
 		mlx_delete_image(data->mlx, data->player.mini_player);
