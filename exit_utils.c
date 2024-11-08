@@ -41,7 +41,6 @@ void	ft_free_data(t_data **info)
 		mlx_delete_texture((*info)->west_texture);
 	if ((*info)->east_texture)
 		mlx_delete_texture((*info)->east_texture);
-	if ((*info)->player.mini_p)
 	if ((*info)->map)
 		ft_free_array((*info)->map);
 	if (*info)

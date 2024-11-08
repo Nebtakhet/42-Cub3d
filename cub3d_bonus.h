@@ -134,7 +134,6 @@ int		ft_altoi(const char *str, int len);
 void	ft_free_data(t_data **info);
 void	ft_free_array(char **arr);
 
-
 /* Initialization*/
 
 t_data	*handle_args(int argc, char **argv, t_data *info);

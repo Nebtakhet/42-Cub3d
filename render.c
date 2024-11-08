@@ -12,8 +12,9 @@
 
 #include "cub3d.h"
 
-/* Function get the color of the corresponding texture. It will return the color
-of the texture according to the side of the wall and the direction of the ray */
+/* Function get the color of the corresponding texture. It will return 
+the color of the texture according to the side of the wall and the 
+direction of the ray */
 static int	get_color(t_data *data)
 {
 	uint8_t		*clr;
