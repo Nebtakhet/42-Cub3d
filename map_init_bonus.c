@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                   :+:      :+:    :+:   */
+/*   map_init_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -49,9 +49,14 @@ t_data	*ft_init_data(void)
 	info->south_texture = NULL;
 	info->west_texture = NULL;
 	info->east_texture = NULL;
+	info->door_texture = NULL;
 	info->map = NULL;
+	info->player.mini_p = NULL;
 	info->map_width = 0;
 	info->map_height = 0;
+	info->enemy_count = 0;
+	info->enemy_string = NULL;
+	info->you_win = NULL;
 	return (info);
 }
 

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cesasanc <cesasanc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 /* Function to fill the map with dots, and check that the map is surrounded by
 walls */
@@ -22,7 +22,7 @@ int	ft_flood_fill(t_data *info, int x, int y)
 		ft_parsing_error("map not surrounded by walls");
 		return (1);
 	}
-	if (!ft_is_player(info->map[y][x]))
+	if (!ft_is_player(info->map[y][x]) && info->map[y][x] != 'd')
 		info->map[y][x] = '.';
 	if (info->map[y + 1][x] != '1' && info->map[y + 1][x] != '.' && \
 		!ft_is_player(info->map[y + 1][x]) && ft_flood_fill(info, x, y + 1))
